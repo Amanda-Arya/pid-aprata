@@ -1,0 +1,8 @@
+a.nav-link {
+  padding: 4px 16px;
+}
+
+a.nav-link:hover {
+  background-color: #00ADEE;
+  color: white;
+}

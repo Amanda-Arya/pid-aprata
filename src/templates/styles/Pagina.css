@@ -1,0 +1,6 @@
+#pageContent {
+  width: 70%;
+  margin: 0px auto;
+  padding: 15px;
+  height: calc(100vh - 110px);
+}
