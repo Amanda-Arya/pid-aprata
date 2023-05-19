@@ -38,6 +38,9 @@ export default function Menu() {
                     Empresa
                   </NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link as={Link} to="/relatorioAprendiz">
+                  Relatório do Aprendiz
+                </Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

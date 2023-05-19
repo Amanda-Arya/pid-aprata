@@ -8,6 +8,10 @@ import TabelaCadastroEmpresas from "../formularios/TabelaCadastroEmpresas";
 import listaCursos from "../dados/cursos";
 import { useState } from "react";
 import listaEmpresas from "../dados/empresas";
+import listaAlunos from "../dados/alunos";
+import TabelaRelatorioAprendizes from "../formularios/TabelaRelatorioAprendizes";
+import RelatorioAprendiz from "../formularios/RelatorioAprendiz";
+import { useParams } from "react-router-dom";
 
 function PaginaCadastroCurso(props) {
   const obj = { texto1: "Cadastro", texto2: "Curso" };
@@ -90,4 +94,24 @@ function PaginaInicial(props) {
   );
 }
 
-export { PaginaCadastroCurso, Pagina404, PaginaCadastroEmpresa, PaginaInicial };
+function PaginaRelatorioAprendiz(props) {
+  const { codigo } = useParams();
+
+  return (
+    <Pagina>
+      { codigo ? (
+        <RelatorioAprendiz dados={listaAlunos[codigo-1]} />
+      ) : (
+        <TabelaRelatorioAprendizes alunos={listaAlunos} />
+      )}
+    </Pagina>
+  );
+}
+
+export {
+  PaginaCadastroCurso,
+  Pagina404,
+  PaginaCadastroEmpresa,
+  PaginaInicial,
+  PaginaRelatorioAprendiz,
+};
