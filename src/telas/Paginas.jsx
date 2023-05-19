@@ -11,7 +11,7 @@ import listaEmpresas from "../dados/empresas";
 import listaAlunos from "../dados/alunos";
 import TabelaRelatorioAprendizes from "../formularios/TabelaRelatorioAprendizes";
 import RelatorioAprendiz from "../formularios/RelatorioAprendiz";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function PaginaCadastroCurso(props) {
   const obj = { texto1: "Cadastro", texto2: "Curso" };
@@ -95,12 +95,17 @@ function PaginaInicial(props) {
 }
 
 function PaginaRelatorioAprendiz(props) {
-  const { codigo } = useParams();
+  const { aprendizId } = useParams();
+  const navigate = useNavigate();
+
+  function alternarTelas() {
+    navigate(-1);
+  }
 
   return (
     <Pagina>
-      { codigo ? (
-        <RelatorioAprendiz dados={listaAlunos[codigo-1]} />
+      {aprendizId ? (
+        <RelatorioAprendiz dados={listaAlunos[aprendizId-1]} chamarTabela={alternarTelas}/>
       ) : (
         <TabelaRelatorioAprendizes alunos={listaAlunos} />
       )}

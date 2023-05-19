@@ -15,7 +15,7 @@ export default function RelatorioAprendiz(props) {
       />
       <Container className="mt-3">
         <Form>
-          <MenuAcao />
+          <MenuAcao chamarTabela={props.chamarTabela} />
           <Container
             className="bg-light p-3 d-flex justify-content-between"
             style={{ borderRadius: "0.375rem" }}

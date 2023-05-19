@@ -4,9 +4,8 @@ import {
   Pagina404,
   PaginaCadastroEmpresa,
   PaginaInicial,
-  PaginaRelatorioAprendiz
+  PaginaRelatorioAprendiz,
 } from "./telas/Paginas";
-// import RelatorioAprendiz from "./formularios/RelatorioAprendiz";
 
 function App() {
   return (
@@ -14,10 +13,27 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<PaginaInicial />} />
-          <Route exact path="/cadastroCurso" element={<PaginaCadastroCurso />} />
-          <Route exact path="/cadastroEmpresa" element={<PaginaCadastroEmpresa />} />
-          <Route exact path="/relatorioAprendiz" element={<PaginaRelatorioAprendiz />} />
-          <Route path="/relatorioAprendiz/:codigo" element={<PaginaRelatorioAprendiz />} />
+          <Route
+            exact
+            path="cadastro-curso"
+            element={<PaginaCadastroCurso />}
+          />
+          <Route
+            exact
+            path="cadastro-empresa"
+            element={<PaginaCadastroEmpresa />}
+          />
+          <Route
+            exact
+            path="relatorio-aprendiz"
+            element={<PaginaRelatorioAprendiz />}
+          >
+            <Route
+              path=":aprendizId"
+              element={<PaginaRelatorioAprendiz />}
+            ></Route>
+          </Route>
+
           <Route path="*" element={<Pagina404 />} />
         </Routes>
       </BrowserRouter>

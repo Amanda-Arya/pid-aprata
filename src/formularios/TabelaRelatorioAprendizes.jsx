@@ -58,7 +58,7 @@ export default function TabelaRelatorioAprendizes(props) {
                   <td>{aluno.nome}</td>
                   <td>{aluno.dtNascimento}</td>
                   <td>
-                    <Link to={`/relatorioAprendiz/${aluno.codigo}`}>
+                    <Link to={`${aluno.codigo}`}>
                       <AiOutlineFileSearch
                         size={20}
                         title={"Ver relatório de " + aluno.nome}
