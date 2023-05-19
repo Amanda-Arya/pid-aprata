@@ -1,5 +1,4 @@
 import { Form, Table, Row, Col } from "react-bootstrap";
-// import MenuTabela from "../templates/MenuTabela";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container, Button } from "react-bootstrap";
 import { AiOutlineFileSearch } from "react-icons/ai";
@@ -14,7 +13,6 @@ export default function TabelaRelatorioAprendizes(props) {
         texto2={"Selecionar aluno"}
       />
       <Container className="mt-3">
-        {/* <MenuTabela chamarCadastro={props.chamarCadastro} /> */}
         <div
           className="d-flex justify-content-between w-100 mb-3"
           style={{ height: "40px" }}
