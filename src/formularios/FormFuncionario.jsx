@@ -42,7 +42,27 @@ export default function FormFuncionario(props) {
           onReset={resetSubmit}
         >
           <MenuAcao chamarTabela={props.chamarTabela} />
+
           <Row className="my-3">
+            <Col>
+              <Form.Group controlId="nome">
+                <Form.Label>Nome</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="nome"
+                  // value={inputs.nome || ""}
+                  onChange={handleChange}
+                  placeholder="Rodrigo Nascimento"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Nome é obrigatório.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
             <Col>
               <Form.Group controlId="cpf">
                 <Form.Label>CPF</Form.Label>
@@ -61,42 +81,6 @@ export default function FormFuncionario(props) {
             </Col>
 
             <Col>
-              <Form.Group controlId="nome">
-                <Form.Label>Nome</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="nome"
-                  // value={inputs.nome || ""}
-                  onChange={handleChange}
-                  placeholder="Rodrigo Nascimento"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Nome é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            
-            <Col>
-              <Form.Group controlId="statusAtual">
-                <Form.Label>Status</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="statusAtual"
-                  // value={inputs.statusAtual || ""}
-                  onChange={handleChange}
-                  placeholder="Ativo/Desativado"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Status atual é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col>
               <Form.Group controlId="dtNasc">
                 <Form.Label>Data de Nascimento</Form.Label>
                 <Form.Control
@@ -112,7 +96,9 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
 
+          <Row className="mb-3">
             <Col>
               <Form.Group controlId="dtAdmissao">
                 <Form.Label>Data de Admissão</Form.Label>
@@ -146,6 +132,75 @@ export default function FormFuncionario(props) {
 
           <Row className="mb-3">
             <Col>
+              <Form.Group controlId="dtAdmissao">
+                <Form.Label>Data de Admissão</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="dtAdmissao"
+                  // value={inputs.dtAdmissao || ""}
+                  onChange={handleChange}
+                  placeholder="00/00/0000"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Data de Admissão é obrigatória.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+
+            <Col>
+              <Form.Group controlId="dtDemissao">
+                <Form.Label>Data de Demissão</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="dtDemissao"
+                  // value={inputs.dtDemissao || ""}
+                  onChange={handleChange}
+                  placeholder="00/00/0000"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+
+            <Col>
+              <Form.Group controlId="statusAtual">
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="statusAtual"
+                  // value={inputs.statusAtual || ""}
+                  onChange={handleChange}
+                  placeholder="Ativo/Desativado"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Status atual é obrigatório.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+
+            <Col>
+              <Form.Group controlId="statusAtual">
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="statusAtual"
+                  // value={inputs.statusAtual || ""}
+                  onChange={handleChange}
+                  placeholder="Ativo/Desativado"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Status atual é obrigatório.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col>
               <Form.Group controlId="logradouro">
                 <Form.Label>Logradouro</Form.Label>
                 <Form.Control
@@ -161,7 +216,9 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
 
+          <Row className="mb-3">
             <Col>
               <Form.Group controlId="bairro">
                 <Form.Label>Bairro</Form.Label>
@@ -180,26 +237,6 @@ export default function FormFuncionario(props) {
             </Col>
 
             <Col>
-              <Form.Group controlId="cep">
-                <Form.Label>CEP</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="cep"
-                  // value={inputs.cep || ""}
-                  onChange={handleChange}
-                  placeholder="19050-920"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  CEP é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-
-          <Col>
               <Form.Group controlId="municipio">
                 <Form.Label>Município</Form.Label>
                 <Form.Control
@@ -215,6 +252,9 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
+
+          <Row className="mb-3">
 
             <Col>
               <Form.Group controlId="uf">
@@ -262,6 +302,25 @@ export default function FormFuncionario(props) {
             </Col>
 
             <Col>
+              <Form.Group controlId="cep">
+                <Form.Label>CEP</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="cep"
+                  // value={inputs.cep || ""}
+                  onChange={handleChange}
+                  placeholder="19050-920"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  CEP é obrigatório.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col>
               <Form.Group controlId="telefone">
                 <Form.Label>Telefone</Form.Label>
                 <Form.Control
@@ -277,9 +336,7 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-          </Row>
 
-          <Row className="mb-3">
             <Col>
               <Form.Group controlId="email">
                 <Form.Label>E-mail</Form.Label>
@@ -296,7 +353,9 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
 
+          <Row className="mb-3">
             <Col>
               <Form.Group controlId="usuario">
                 <Form.Label>Usuario</Form.Label>

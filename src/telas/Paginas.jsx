@@ -15,6 +15,9 @@ import listaFuncionarios from "../dados/funcionarios";
 import TabelaRelatorioAprendizes from "../formularios/TabelaRelatorioAprendizes";
 import RelatorioAprendiz from "../formularios/RelatorioAprendiz";
 import { useNavigate, useParams } from "react-router-dom";
+import TabelaCadastroCargos from "../formularios/TabelaCadastroCargos";
+import listaCargos from "../dados/cargos";
+import FormCargo from "../formularios/FormCargo";
 
 function PaginaCadastroCurso(props) {
   const obj = { texto1: "Cadastro", texto2: "Curso" };
@@ -40,6 +43,16 @@ function PaginaCadastroFuncionario(props) {
   return (
     <Pagina obj={obj}>
       <TelaCadastroFuncionarios />
+    </Pagina>
+  );
+}
+
+function PaginaCadastroCargo(props) {
+  const obj = { texto1: "Cadastro", texto2: "Cargo" };
+
+  return (
+    <Pagina obj={obj}>
+      <TabelaCadastroCargos />
     </Pagina>
   );
 }
@@ -115,6 +128,25 @@ function TelaCadastroFuncionarios(props) {
   );
 }
 
+function TabelaCadastroCargos(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+
+  function alternarTelas() {
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroCargos
+        cargos={listaCargos}
+        chamarCadastro={alternarTelas}
+      />
+    </>
+  ) : (
+    <FormCargo chamarTabela={alternarTelas} />
+  );
+}
+
 function PaginaInicial(props) {
   return (
     <Pagina>
@@ -150,5 +182,6 @@ export {
   PaginaCadastroEmpresa,
   PaginaInicial,
   PaginaRelatorioAprendiz,
-  PaginaCadastroFuncionario
+  PaginaCadastroFuncionario,
+  PaginaCadastroCargo
 };

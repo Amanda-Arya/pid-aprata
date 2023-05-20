@@ -40,6 +40,9 @@ export default function Menu() {
                   <NavDropdown.Item as={Link} to="/cadastro-funcionario">
                     Funcionario
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-cargo">
+                    Cargo
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link as={Link} to="/relatorio-aprendiz">
                   Relatório do Aprendiz
