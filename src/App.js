@@ -5,6 +5,7 @@ import {
   PaginaCadastroEmpresa,
   PaginaInicial,
   PaginaRelatorioAprendiz,
+  PaginaCadastroFuncionario,
 } from "./telas/Paginas";
 
 function App() {
@@ -22,6 +23,11 @@ function App() {
             exact
             path="cadastro-empresa"
             element={<PaginaCadastroEmpresa />}
+          />
+          <Route
+            exact
+            path="cadastro-funcionario"
+            element={<PaginaCadastroFuncionario />}
           />
           <Route
             exact

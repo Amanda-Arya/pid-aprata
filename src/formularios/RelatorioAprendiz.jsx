@@ -1,6 +1,6 @@
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container, Form, Dropdown, Button } from "react-bootstrap";
-import moment from "moment";
+//import moment from "moment";
 import listaRegistros from "../dados/registros";
 import Registro from "../templates/Registro";
 import { BiArrowBack } from "react-icons/bi";

@@ -3,12 +3,15 @@ import "./styles/Tela404.css";
 import error from "./img/erro404.jpg";
 import FormEmpresa from "../formularios/FormEmpresa";
 import FormCurso from "../formularios/FormCurso";
+import FormFuncionario from "../formularios/FormFuncionario";
 import TabelaCadastroCursos from "../formularios/TabelaCadastroCursos";
 import TabelaCadastroEmpresas from "../formularios/TabelaCadastroEmpresas";
+import TabelaCadastroFuncionarios from "../formularios/TabelaCadastroFuncionarios";
 import listaCursos from "../dados/cursos";
 import { useState } from "react";
 import listaEmpresas from "../dados/empresas";
 import listaAlunos from "../dados/alunos";
+import listaFuncionarios from "../dados/funcionarios";
 import TabelaRelatorioAprendizes from "../formularios/TabelaRelatorioAprendizes";
 import RelatorioAprendiz from "../formularios/RelatorioAprendiz";
 import { useNavigate, useParams } from "react-router-dom";
@@ -28,6 +31,15 @@ function PaginaCadastroEmpresa(props) {
   return (
     <Pagina obj={obj}>
       <TelaCadastroEmpresas />
+    </Pagina>
+  );
+}
+
+function PaginaCadastroFuncionario(props) {
+  const obj = { texto1: "Cadastro", texto2: "Funcionario" };
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroFuncionarios />
     </Pagina>
   );
 }
@@ -84,6 +96,25 @@ function TelaCadastroEmpresas(props) {
   );
 }
 
+function TelaCadastroFuncionarios(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+
+  function alternarTelas() {
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroFuncionarios
+        funcionarios={listaFuncionarios}
+        chamarCadastro={alternarTelas}
+      />
+    </>
+  ) : (
+    <FormFuncionario chamarTabela={alternarTelas} />
+  );
+}
+
 function PaginaInicial(props) {
   return (
     <Pagina>
@@ -119,4 +150,5 @@ export {
   PaginaCadastroEmpresa,
   PaginaInicial,
   PaginaRelatorioAprendiz,
+  PaginaCadastroFuncionario
 };
