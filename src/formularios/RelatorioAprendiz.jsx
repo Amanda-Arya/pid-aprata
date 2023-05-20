@@ -19,9 +19,9 @@ export default function RelatorioAprendiz(props) {
           className="d-flex justify-content-between w-100 mb-3"
           style={{ height: "40px" }}
         >
-          <BotaoVoltar />
+          <BotaoVoltar acaoBtnVoltar={props.chamarTabela} />
           <Dropdown>
-            <Dropdown.Toggle variant="light" id="dropdown-basic">
+            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
               Ações aprendiz
             </Dropdown.Toggle>
             <Dropdown.Menu>

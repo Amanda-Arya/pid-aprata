@@ -76,11 +76,11 @@ function TelaCadastroEmpresas(props) {
     <>
       <TabelaCadastroEmpresas
         empresas={listaEmpresas}
-        chamarCadastro={alternarTelas}
+        novoCadastro={alternarTelas}
       />
     </>
   ) : (
-    <FormEmpresa chamarTabela={alternarTelas} />
+    <FormEmpresa retornarTabela={alternarTelas} />
   );
 }
 

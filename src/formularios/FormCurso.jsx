@@ -1,6 +1,6 @@
 import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
-import MenuAcao from "../templates/MenuAcao";
+import MenuAcao from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
 export default function FormCurso(props) {
@@ -41,7 +41,7 @@ export default function FormCurso(props) {
           onSubmit={handleSubmit}
           onReset={resetSubmit}
         >
-          <MenuAcao chamarTabela={props.chamarTabela} />
+          <MenuAcao acaoBtnVoltar={props.chamarTabela} />
           <Row className="mb-3">
             <Col xs={3}>
               <Form.Group controlId="codigo">

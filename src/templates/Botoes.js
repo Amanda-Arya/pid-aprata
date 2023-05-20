@@ -11,7 +11,7 @@ import {
 
 function BotaoVoltar(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
+    <Button className="mx-1" variant="outline-secondary" onClick={props.acaoBtnVoltar}>
       <BiArrowBack size={20} /> Voltar
     </Button>
   );
@@ -59,7 +59,7 @@ function BotaoEditar(props) {
 
 function BotaoNovo(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
+    <Button className="mx-1" variant="outline-secondary" onClick={props.acaoBtnNovo}>
       <AiOutlineFileAdd size={20} /> Novo
     </Button>
   );

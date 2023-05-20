@@ -8,7 +8,7 @@ export default function TabelaCadastroEmpresas(props) {
     <div>
       <Cabecalho2 texto1={"Consulta"} texto2={"Empresas"} />
       <Container className="mt-3">
-        <MenuTabela chamarCadastro={props.chamarCadastro} />
+        <MenuTabela acaoBtnNovo={props.novoCadastro} />
         <Table striped bordered hover style={{ fontSize: "12px" }}>
           <thead>
             <tr>

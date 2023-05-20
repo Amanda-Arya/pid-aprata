@@ -14,12 +14,8 @@ export default function TabelaRelatorioAprendizes(props) {
       />
       <Container className="mt-3">
         <div
-          className="d-flex justify-content-between w-100 mb-3"
-          style={{ height: "40px" }}
+          className="d-flex justify-content-center w-100 mb-3"
         >
-          <Button variant="light">
-            <BiArrowBack size={20} /> Voltar
-          </Button>
           <Form className="w-50">
             <Form.Group as={Row} controlId="consultaAluno">
               <Form.Label className="text-center" column sm={2}>
