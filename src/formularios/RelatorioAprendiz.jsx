@@ -3,11 +3,10 @@ import { Container, Form, Dropdown, Button } from "react-bootstrap";
 //import moment from "moment";
 import listaRegistros from "../dados/registros";
 import Registro from "../templates/Registro";
-import { BiArrowBack } from "react-icons/bi";
+import { BotaoCancelar, BotaoSalvar, BotaoVoltar } from "../templates/Botoes";
 
 export default function RelatorioAprendiz(props) {
   const obj = props.dados;
-  console.log(props.dados);
 
   return (
     <>
@@ -20,11 +19,9 @@ export default function RelatorioAprendiz(props) {
           className="d-flex justify-content-between w-100 mb-3"
           style={{ height: "40px" }}
         >
-          <Button variant="light" onClick={props.chamarTabela}>
-            <BiArrowBack size={20} /> Voltar
-          </Button>
+          <BotaoVoltar acaoBtnVoltar={props.chamarTabela} />
           <Dropdown>
-            <Dropdown.Toggle variant="light" id="dropdown-basic">
+            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
               Ações aprendiz
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -49,20 +46,30 @@ export default function RelatorioAprendiz(props) {
           <hr />
           <div className="d-flex flex-column align-items-center justify-content-center">
             <div className="w-75">
-              <textarea
+              {/* <textarea
                 className="w-100 mb-3"
                 name=""
                 id=""
                 cols="30"
                 rows="5"
                 style={{ resize: "none" }}
-              ></textarea>
+              ></textarea> */}
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Adicionar Registro</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  style={{ resize: "none" }}
+                />
+              </Form.Group>
             </div>
+
             <div className="w-75">
-              <Button type="submit" variant="outline-primary" className="me-2">
-                Adicionar registro
-              </Button>
-              <Button variant="outline-warning">Cancelar</Button>
+              <BotaoSalvar />
+              <BotaoCancelar />
             </div>
           </div>
         </Form>

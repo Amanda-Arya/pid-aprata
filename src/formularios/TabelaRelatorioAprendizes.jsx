@@ -1,8 +1,7 @@
 import { Form, Table, Row, Col } from "react-bootstrap";
 import Cabecalho2 from "../templates/Cabecalho2";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { AiOutlineFileSearch } from "react-icons/ai";
-import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 export default function TabelaRelatorioAprendizes(props) {
@@ -14,12 +13,8 @@ export default function TabelaRelatorioAprendizes(props) {
       />
       <Container className="mt-3">
         <div
-          className="d-flex justify-content-between w-100 mb-3"
-          style={{ height: "40px" }}
+          className="d-flex justify-content-center w-100 mb-3"
         >
-          <Button variant="light">
-            <BiArrowBack size={20} /> Voltar
-          </Button>
           <Form className="w-50">
             <Form.Group as={Row} controlId="consultaAluno">
               <Form.Label className="text-center" column sm={2}>
@@ -37,7 +32,7 @@ export default function TabelaRelatorioAprendizes(props) {
           </Form>
         </div>
         <Container className="my-3 w-50"></Container>
-        <Table striped bordered hover style={{ fontSize: "12px" }}>
+        <Table bordered hover style={{ fontSize: "12px" }}>
           <thead>
             <tr>
               <th>#</th>

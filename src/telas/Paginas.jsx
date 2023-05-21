@@ -72,6 +72,7 @@ function Pagina404(props) {
 // Define qual tela será exibida, tabela de cursos ou formulário de cursos
 function TelaCadastroCursos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
+  const [cursos, setCursos] = useState(listaCursos);
 
   function alternarTelas() {
     setExibeTabela(!exibeTabela);
@@ -80,18 +81,24 @@ function TelaCadastroCursos(props) {
   return exibeTabela ? (
     <>
       <TabelaCadastroCursos
-        cursos={listaCursos}
+        listaCursos={cursos}
+        setCursos={setCursos}
         chamarCadastro={alternarTelas}
       />
     </>
   ) : (
-    <FormCurso chamarTabela={alternarTelas} />
+    <FormCurso
+      listaCursos={cursos}
+      setCursos={setCursos}
+      chamarTabela={alternarTelas}
+    />
   );
 }
 
 // Define qual tela será exibida, tabela de cursos ou formulário de cursos
 function TelaCadastroEmpresas(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
+  const [empresas, setEmpresas] = useState(listaEmpresas);
 
   function alternarTelas() {
     setExibeTabela(!exibeTabela);
@@ -100,12 +107,17 @@ function TelaCadastroEmpresas(props) {
   return exibeTabela ? (
     <>
       <TabelaCadastroEmpresas
-        empresas={listaEmpresas}
+        listaEmpresas={empresas}
+        setEmpresas={setEmpresas}
         chamarCadastro={alternarTelas}
       />
     </>
   ) : (
-    <FormEmpresa chamarTabela={alternarTelas} />
+    <FormEmpresa
+      chamarTabela={alternarTelas}
+      listaEmpresas={empresas}
+      setEmpresas={setEmpresas}
+    />
   );
 }
 
@@ -168,7 +180,10 @@ function PaginaRelatorioAprendiz(props) {
   return (
     <Pagina>
       {aprendizId ? (
-        <RelatorioAprendiz dados={listaAlunos[aprendizId-1]} chamarTabela={alternarTelas}/>
+        <RelatorioAprendiz
+          dados={listaAlunos[aprendizId - 1]}
+          chamarTabela={alternarTelas}
+        />
       ) : (
         <TabelaRelatorioAprendizes alunos={listaAlunos} />
       )}

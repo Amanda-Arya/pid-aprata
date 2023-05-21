@@ -1,37 +1,20 @@
-import { BiArrowBack } from "react-icons/bi";
-import { Button } from "react-bootstrap";
-import {
-  AiOutlineFileAdd,
-  AiOutlineEdit,
-  AiOutlineDelete,
-} from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import "./styles/MenuTabela.css";
+import { Link } from "react-router-dom";
 
 export default function MenuTabela(props) {
   return (
-    <>
-      <div
-        className="d-flex justify-content-between w-100 mb-3"
-        style={{ height: "40px" }}
-      >
-        <Button variant="light">
-          <BiArrowBack size={20} /> Voltar
-        </Button>
-        <div className="d-flex">
-          <Button
-            variant="light"
-            className="mx-2"
-            onClick={props.chamarCadastro}
-          >
-            <AiOutlineFileAdd size={20} /> Novo
-          </Button>
-          <Button variant="light" className="mx-2" disabled>
-            <AiOutlineEdit size={20} /> Editar
-          </Button>
-          <Button variant="light" disabled>
-            <AiOutlineDelete size={20} /> Excluir
-          </Button>
-        </div>
-      </div>
-    </>
+    <div className="d-flex justify-content-between">
+      {/* <AiOutlineFileText size={20} title="Detalhes" className="icon-btn"/> */}
+      <Link to={props.acaoBtnEditar}>
+        <AiOutlineEdit size={20} title="Editar" className="icon-btn" />
+      </Link>
+      <AiOutlineDelete
+        size={20}
+        title="Excluir"
+        className="icon-btn"
+        onClick={props.acaoBtnExcluir}
+      />
+    </div>
   );
 }

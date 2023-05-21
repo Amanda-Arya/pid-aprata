@@ -2,19 +2,26 @@ import { Button, Form, Table } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
+import MenuTabela from "../templates/MenuTabela";
 
 export default function TabelaCadastroEmpresas(props) {
+  function excluirEmpresa(cnpj) {
+    const listaAtualizada = props.listaEmpresas.filter(
+      (empresa) => empresa.cnpj !== cnpj
+    );
+    props.setEmpresas(listaAtualizada);
+  }
+
   return (
     <div>
       <Cabecalho2 texto1={"Consulta"} texto2={"Empresas"} />
       <Container className="mt-3">
-        <MenuTabela chamarCadastro={props.chamarCadastro} />
-        <Table striped bordered hover style={{ fontSize: "12px" }}>
+        <div className="d-flex mb-3">
+          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+        </div>
+        <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>
-                <Form.Check aria-label="option 1" />
-              </th>
               <th>CNPJ</th>
               <th>IE</th>
               <th>Razão Social</th>
@@ -26,12 +33,9 @@ export default function TabelaCadastroEmpresas(props) {
             </tr>
           </thead>
           <tbody>
-            {props.empresas.map((empresa, i) => {
+            {props.listaEmpresas.map((empresa, i) => {
               return (
                 <tr key={i}>
-                  <td>
-                    <Form.Check aria-label="option 1" />
-                  </td>
                   <td>{empresa.cnpj}</td>
                   <td>{empresa.ie}</td>
                   <td>{empresa.razaoSocial}</td>
