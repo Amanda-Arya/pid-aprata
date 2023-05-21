@@ -1,4 +1,4 @@
-import { Container, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Container, Col, Form, Row, FormGroup } from "react-bootstrap";
 import { useState } from "react";
 import MenuAcao from "../templates/MenuAcao";
 import Cabecalho2 from "../templates/Cabecalho2";
@@ -48,9 +48,6 @@ export default function FormCargo(props) {
               <Form.Group controlId="codigo">
                 <Form.Label>Código</Form.Label>
                 <Form.Control type="text" name="codigo" disabled />
-                <Form.Control.Feedback type="invalid">
-                  Código é obrigatório.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -63,7 +60,7 @@ export default function FormCargo(props) {
                   type="text"
                   name="nome"
                   onChange={handleChange}
-                  placeholder="Informática"
+                  placeholder="Administrativo"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -80,6 +77,7 @@ export default function FormCargo(props) {
                 <Form.Control
                   as="textarea"
                   name="descricao"
+                  onChange={handleChange}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -89,12 +87,17 @@ export default function FormCargo(props) {
             </Col>
           </Row>
 
-          <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">Níveis de Acesso</InputGroup.Text>
-            <Form.Control
-            />
-          </InputGroup>
-
+          <Row className="mb-3">
+            <Col>
+              <FormGroup controlId="nivelAcesso">
+                <Form.Check type="switch" name="nivelAcesso" label="Cadastro" inline />
+                <Form.Check type="switch" name="nivelAcesso" label="Consulta" inline />
+                <Form.Check type="switch" name="nivelAcesso" label="Exclusão" inline />
+                <Form.Check type="switch" name="nivelAcesso" label="Alteração" inline />
+                <Form.Check type="switch" name="nivelAcesso" label="Relatórios" inline />
+              </FormGroup>
+            </Col>
+          </Row>
         </Form>
       </Container>
     </div >
