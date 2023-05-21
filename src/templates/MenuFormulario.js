@@ -1,4 +1,4 @@
-import { BotaoCancelar, BotaoSalvar, BotaoVoltar } from "./Botoes";
+import { BotaoSalvar, BotaoVoltar } from "./Botoes";
 
 export default function MenuFormulario(props) {
   return (
@@ -7,7 +7,7 @@ export default function MenuFormulario(props) {
         <BotaoVoltar acaoBtnVoltar={props.acaoBtnVoltar} />
         <div className="d-flex">
           <BotaoSalvar />
-          <BotaoCancelar />
+          {/* <BotaoCancelar /> */}
         </div>
       </div>
     </>
