@@ -1,6 +1,5 @@
 import Cabecalho2 from "../templates/Cabecalho2";
-import { Container, Form, Dropdown, Button } from "react-bootstrap";
-import moment from "moment";
+import { Container, Form, Dropdown } from "react-bootstrap";
 import listaRegistros from "../dados/registros";
 import Registro from "../templates/Registro";
 import { BotaoCancelar, BotaoSalvar, BotaoVoltar } from "../templates/Botoes";

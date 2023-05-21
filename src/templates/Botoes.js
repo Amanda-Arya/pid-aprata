@@ -11,7 +11,11 @@ import {
 
 function BotaoVoltar(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary" onClick={props.acaoBtnVoltar}>
+    <Button
+      className="mx-1"
+      variant="outline-secondary"
+      onClick={props.acaoBtnVoltar}
+    >
       <BiArrowBack size={20} /> Voltar
     </Button>
   );
@@ -19,15 +23,19 @@ function BotaoVoltar(props) {
 
 function BotaoDetalhes(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
-      <AiOutlineFileText size={20} /> Detalhes
+    <Button className="mx-1" variant="outline-secondary" title="Detalhes">
+      <AiOutlineFileText size={props.size} /> {props.texto}
     </Button>
   );
 }
 
 function BotaoCancelar(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
+    <Button
+      type="reset"
+      className="mx-1"
+      variant="outline-secondary"
+    >
       <GrClose size={20} /> Cancelar
     </Button>
   );
@@ -35,7 +43,11 @@ function BotaoCancelar(props) {
 
 function BotaoSalvar(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
+    <Button
+      type="submit"
+      className="mx-1"
+      variant="outline-secondary"
+    >
       <AiOutlineSave size={20} /> Salvar
     </Button>
   );
@@ -43,23 +55,27 @@ function BotaoSalvar(props) {
 
 function BotaoExcluir(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
-      <AiOutlineDelete size={20} /> Excluir
+    <Button className="mx-1" variant="outline-secondary" title="Excluir">
+      <AiOutlineDelete size={props.size} /> {props.texto}
     </Button>
   );
 }
 
 function BotaoEditar(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary">
-      <AiOutlineEdit size={20} /> Editar
+    <Button className="mx-1" variant="outline-secondary" title="Editar">
+      <AiOutlineEdit size={props.size} /> {props.texto}
     </Button>
   );
 }
 
 function BotaoNovo(props) {
   return (
-    <Button className="mx-1" variant="outline-secondary" onClick={props.acaoBtnNovo}>
+    <Button
+      className="mx-1"
+      variant="outline-secondary"
+      onClick={props.acaoBtnNovo}
+    >
       <AiOutlineFileAdd size={20} /> Novo
     </Button>
   );
