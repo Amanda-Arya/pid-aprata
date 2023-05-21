@@ -17,8 +17,6 @@ export default function TabelaCadastroFuncionarios(props) {
               </th>
               <th>CPF</th>
               <th>Nome</th>
-              <th>Status</th>
-              <th>Cargo</th>
               <th>Usuário</th>
               <th>Telefone</th>
               <th>E-mail</th>
@@ -33,8 +31,6 @@ export default function TabelaCadastroFuncionarios(props) {
                   </td>
                   <td>{funcionario.cpf}</td>
                   <td>{funcionario.nome}</td>
-                  <td>{funcionario.statusAtual}</td>
-                  <td>{funcionario.cargo}</td>
                   <td>{funcionario.usuario}</td>
                   <td>{funcionario.telefone}</td>
                   <td>{funcionario.email}</td>

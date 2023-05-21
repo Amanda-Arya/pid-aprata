@@ -1,4 +1,4 @@
-import { Container, Col, Form, Row } from "react-bootstrap";
+import { Container, Col, Form, Row, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import MenuAcao from "../templates/MenuAcao";
 import Cabecalho2 from "../templates/Cabecalho2";
@@ -88,6 +88,12 @@ export default function FormCargo(props) {
               </Form.Group>
             </Col>
           </Row>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1">Níveis de Acesso</InputGroup.Text>
+            <Form.Control
+            />
+          </InputGroup>
 
         </Form>
       </Container>

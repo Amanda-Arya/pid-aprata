@@ -2,15 +2,14 @@ const listaCargos = [
     {
         codigo : 1,
         nome : "Professores",
-        descricao : "Cargo responsável pela atribuição de \
-        frequência dos alunos, além da docência que lhe é \
-        própria dentro da instituição"
+        descricao : "Cargo responsável pela atribuição de frequência \
+        dos alunos, além da docência que lhe é própria dentro da instituição"
     },
     {
         codigo : 2,
         nome : "Orientador",
-        descricao : "Cargo responsável por emitir "
-
+        descricao : "Cargo responsável por registrar os relatórios \
+        dos aprendizes nas empresas"
     },
     {
         codigo : 3,

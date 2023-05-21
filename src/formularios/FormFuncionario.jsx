@@ -84,11 +84,10 @@ export default function FormFuncionario(props) {
               <Form.Group controlId="dtNasc">
                 <Form.Label>Data de Nascimento</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="date"
                   name="dtNasc"
                   // value={inputs.dtNasc || ""}
                   onChange={handleChange}
-                  placeholder="00/00/0000"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -103,11 +102,10 @@ export default function FormFuncionario(props) {
               <Form.Group controlId="dtAdmissao">
                 <Form.Label>Data de Admissão</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="date"
                   name="dtAdmissao"
                   // value={inputs.dtAdmissao || ""}
                   onChange={handleChange}
-                  placeholder="00/00/0000"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -120,61 +118,33 @@ export default function FormFuncionario(props) {
               <Form.Group controlId="dtDemissao">
                 <Form.Label>Data de Demissão</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="date"
                   name="dtDemissao"
                   // value={inputs.dtDemissao || ""}
                   onChange={handleChange}
-                  placeholder="00/00/0000"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col>
-              <Form.Group controlId="dtAdmissao">
-                <Form.Label>Data de Admissão</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="dtAdmissao"
-                  // value={inputs.dtAdmissao || ""}
-                  onChange={handleChange}
-                  placeholder="00/00/0000"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Data de Admissão é obrigatória.
+                  Data de Demissão é obrigatória.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
-            <Col>
-              <Form.Group controlId="dtDemissao">
-                <Form.Label>Data de Demissão</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="dtDemissao"
-                  // value={inputs.dtDemissao || ""}
-                  onChange={handleChange}
-                  placeholder="00/00/0000"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+          </Row>          
 
           <Row className="mb-3">
-
             <Col>
               <Form.Group controlId="statusAtual">
                 <Form.Label>Status</Form.Label>
-                <Form.Control
-                  type="text"
+                <Form.Select
                   name="statusAtual"
                   // value={inputs.statusAtual || ""}
                   onChange={handleChange}
-                  placeholder="Ativo/Desativado"
                   required
-                />
+                >
+                  <option value="">Selecione</option>
+                  <option value="1">Ativo</option>
+                  <option value="2">Desativado</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Status atual é obrigatório.
                 </Form.Control.Feedback>
@@ -182,18 +152,21 @@ export default function FormFuncionario(props) {
             </Col>
 
             <Col>
-              <Form.Group controlId="statusAtual">
-                <Form.Label>Status</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="statusAtual"
-                  // value={inputs.statusAtual || ""}
+              <Form.Group controlId="cargo">
+                <Form.Label>Cargo</Form.Label>
+                <Form.Select
+                  name="cargo"
+                  // value={inputs.cargo || ""}
                   onChange={handleChange}
-                  placeholder="Ativo/Desativado"
                   required
-                />
+                >
+                  <option value="">Selecione</option>
+                  <option value="1">Professor</option>
+                  <option value="2">Orientador</option>
+                  <option value="3">Administrativo</option>
+                </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Status atual é obrigatório.
+                  Cargo é obrigatório.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

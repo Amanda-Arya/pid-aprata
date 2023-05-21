@@ -52,7 +52,7 @@ function PaginaCadastroCargo(props) {
 
   return (
     <Pagina obj={obj}>
-      <TabelaCadastroCargos />
+      <TelaCadastroCargos />
     </Pagina>
   );
 }
@@ -128,7 +128,7 @@ function TelaCadastroFuncionarios(props) {
   );
 }
 
-function TabelaCadastroCargos(props) {
+function TelaCadastroCargos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
 
   function alternarTelas() {
