@@ -3,6 +3,14 @@ a.nav-link {
 }
 
 a.nav-link:hover {
-  background-color: #00ADEE;
-  color: white;
+  background-color: #E9ECEF;
+}
+
+a.nav-link:active {
+  background-color: #0D6EFD;
+  color: #FFF;
+}
+
+a.dropdown-toggle.show.nav-link:active {
+  color: #FFF;
 }

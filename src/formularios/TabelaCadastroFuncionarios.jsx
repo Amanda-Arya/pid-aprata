@@ -4,17 +4,17 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroEmpresas(props) {
-  function excluirEmpresa(cnpj) {
-    const listaAtualizada = props.listaEmpresas.filter(
-      (empresa) => empresa.cnpj !== cnpj
+export default function TabelaCadastroFuncionarios(props) {
+  function excluirFuncionario(cpf) {
+    const listaAtualizada = props.listaFuncionarios.filter(
+      (funcionario) => funcionario.cpf !== cpf
     );
-    props.setEmpresas(listaAtualizada);
+    props.setFuncionarios(listaAtualizada);
   }
 
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Empresas"} />
+      <Cabecalho2 texto1={"Consulta"} texto2={"Funcionarios"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
           <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
@@ -22,32 +22,28 @@ export default function TabelaCadastroEmpresas(props) {
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>CNPJ</th>
-              <th>IE</th>
-              <th>Razão Social</th>
-              <th>Município</th>
-              <th>UF</th>
+              <th>CPF</th>
+              <th>Nome</th>
+              <th>Usuário</th>
               <th>Telefone</th>
               <th>E-mail</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {props.listaEmpresas.map((empresa, i) => {
+            {props.listaFuncionarios.map((funcionario, i) => {
               return (
                 <tr key={i}>
-                  <td>{empresa.cnpj}</td>
-                  <td>{empresa.ie}</td>
-                  <td>{empresa.razaoSocial}</td>
-                  <td>{empresa.municipio}</td>
-                  <td>{empresa.uf}</td>
-                  <td>{empresa.telefone}</td>
-                  <td>{empresa.email}</td>
+                  <td>{funcionario.cpf}</td>
+                  <td>{funcionario.nome}</td>
+                  <td>{funcionario.usuario}</td>
+                  <td>{funcionario.telefone}</td>
+                  <td>{funcionario.email}</td>
                   <td>
                     <MenuTabela
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirEmpresa(empresa.cnpj);
+                          excluirFuncionario(funcionario.cpf);
                         }
                       }}
                     />

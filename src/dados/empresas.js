@@ -1,6 +1,6 @@
 const listaEmpresas = [
   {
-    cnpj : "00.000.000/0000-00",
+    cnpj : "11.111.111/1111-11",
     ie : "000.000.000.000",
     razaoSocial : "Universidade do Oeste Paulista",
     logradouro : "R. José Bongiovani, 700",
@@ -12,7 +12,7 @@ const listaEmpresas = [
     email : "faculdade@unoeste.edu.br"
   },
   {
-    cnpj : "00.000.000/0000-00",
+    cnpj : "22.222.222/2222-22",
     ie : "000.000.000.000",
     razaoSocial : "Universidade do Oeste Paulista",
     logradouro : "R. José Bongiovani, 700",
@@ -24,7 +24,7 @@ const listaEmpresas = [
     email : "faculdade@unoeste.edu.br"
   },
   {
-    cnpj : "00.000.000/0000-00",
+    cnpj : "33.333.333/3333-33",
     ie : "000.000.000.000",
     razaoSocial : "Universidade do Oeste Paulista",
     logradouro : "R. José Bongiovani, 700",

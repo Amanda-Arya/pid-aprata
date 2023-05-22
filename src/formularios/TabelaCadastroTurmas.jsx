@@ -4,17 +4,16 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroEmpresas(props) {
-  function excluirEmpresa(cnpj) {
-    const listaAtualizada = props.listaEmpresas.filter(
-      (empresa) => empresa.cnpj !== cnpj
+export default function TabelaCadastroTurmas(props) {
+  function excluirTurma(codigo) {
+    const listaAtualizada = props.listaTurmas.filter(
+      (turma) => turma.codigo !== codigo
     );
-    props.setEmpresas(listaAtualizada);
+    props.setTurmas(listaAtualizada);
   }
-
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Empresas"} />
+      <Cabecalho2 texto1={"Consulta"} texto2={"Turmas"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
           <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
@@ -22,32 +21,36 @@ export default function TabelaCadastroEmpresas(props) {
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>CNPJ</th>
-              <th>IE</th>
-              <th>Razão Social</th>
-              <th>Município</th>
-              <th>UF</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
+              <th>#</th>
+              <th>Período</th>
+              <th>Ano Letivo</th>
+              <th>Cursos</th>
+              <th>Inicio</th>
+              <th>Fim</th>
+              <th>Status</th>
+              <th>Vagas</th>
+              <th>Sala</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {props.listaEmpresas.map((empresa, i) => {
+            {props.listaTurmas.map((turma, i) => {
               return (
                 <tr key={i}>
-                  <td>{empresa.cnpj}</td>
-                  <td>{empresa.ie}</td>
-                  <td>{empresa.razaoSocial}</td>
-                  <td>{empresa.municipio}</td>
-                  <td>{empresa.uf}</td>
-                  <td>{empresa.telefone}</td>
-                  <td>{empresa.email}</td>
+                  <td>{turma.codigo}</td>
+                  <td>{turma.periodo}</td>
+                  <td>{turma.anoLetivo}</td>
+                  <td>{turma.cursos}</td>
+                  <td>{turma.dtInicio}</td>
+                  <td>{turma.dtFim}</td>
+                  <td>{turma.status}</td>
+                  <td>{turma.vagas}</td>
+                  <td>{turma.sala}</td>
                   <td>
                     <MenuTabela
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirEmpresa(empresa.cnpj);
+                          excluirTurma(turma.codigo);
                         }
                       }}
                     />

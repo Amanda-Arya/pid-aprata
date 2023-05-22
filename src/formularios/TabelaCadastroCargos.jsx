@@ -1,20 +1,20 @@
 import { Table } from "react-bootstrap";
 import { BotaoNovo } from "../templates/Botoes";
+import MenuTabela from "../templates/MenuTabela";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
-import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroEmpresas(props) {
-  function excluirEmpresa(cnpj) {
-    const listaAtualizada = props.listaEmpresas.filter(
-      (empresa) => empresa.cnpj !== cnpj
+export default function TabelaCadastroCargos(props) {
+  function excluirCargo(codigo) {
+    const listaAtualizada = props.listaCargos.filter(
+      (cargo) => cargo.codigo !== codigo
     );
-    props.setEmpresas(listaAtualizada);
+    props.setCargos(listaAtualizada);
   }
 
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Empresas"} />
+      <Cabecalho2 texto1={"Consulta"} texto2={"Cargos"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
           <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
@@ -22,32 +22,24 @@ export default function TabelaCadastroEmpresas(props) {
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>CNPJ</th>
-              <th>IE</th>
-              <th>Razão Social</th>
-              <th>Município</th>
-              <th>UF</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Descrição</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {props.listaEmpresas.map((empresa, i) => {
+            {props.listaCargos.map((cargo, i) => {
               return (
                 <tr key={i}>
-                  <td>{empresa.cnpj}</td>
-                  <td>{empresa.ie}</td>
-                  <td>{empresa.razaoSocial}</td>
-                  <td>{empresa.municipio}</td>
-                  <td>{empresa.uf}</td>
-                  <td>{empresa.telefone}</td>
-                  <td>{empresa.email}</td>
+                  <td>{cargo.codigo}</td>
+                  <td>{cargo.nome}</td>
+                  <td>{cargo.descricao}</td>
                   <td>
                     <MenuTabela
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirEmpresa(empresa.cnpj);
+                          excluirCargo(cargo.codigo);
                         }
                       }}
                     />

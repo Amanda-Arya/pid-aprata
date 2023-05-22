@@ -31,13 +31,28 @@ export default function Menu() {
                   Home
                 </Nav.Link>
                 <NavDropdown title="Cadastro" id={`offcanvasNavbarDropdown`}>
-                  <NavDropdown.Item as={Link} to="/cadastroCurso">
+                  <NavDropdown.Item as={Link} to="/cadastro-aluno">
+                    Aluno
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-curso">
                     Curso
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/cadastroEmpresa">
+                  <NavDropdown.Item as={Link} to="/cadastro-empresa">
                     Empresa
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-funcionario">
+                    Funcionario
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-cargo">
+                    Cargo
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-turma">
+                    Turma
+                  </NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link as={Link} to="/relatorio-aprendiz">
+                  Relatório do Aprendiz
+                </Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
