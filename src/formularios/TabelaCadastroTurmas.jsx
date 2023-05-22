@@ -4,17 +4,16 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroFuncionarios(props) {
-  function excluirFuncionario(cpf) {
-    const listaAtualizada = props.listaFuncionarios.filter(
-      (funcionario) => funcionario.cpf !== cpf
+export default function TabelaCadastroTurmas(props) {
+  function excluirTurma(codigo) {
+    const listaAtualizada = props.listaTurmas.filter(
+      (turma) => turma.codigo !== codigo
     );
-    props.setFuncionarios(listaAtualizada);
+    props.setTurmas(listaAtualizada);
   }
-
   return (
     <div>
-      <Cabecalho2 texto1={"Consulta"} texto2={"Funcionarios"} />
+      <Cabecalho2 texto1={"Consulta"} texto2={"Turmas"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
           <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
@@ -22,28 +21,36 @@ export default function TabelaCadastroFuncionarios(props) {
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>CPF</th>
-              <th>Nome</th>
-              <th>Usuário</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
+              <th>#</th>
+              <th>Período</th>
+              <th>Ano Letivo</th>
+              <th>Cursos</th>
+              <th>Inicio</th>
+              <th>Fim</th>
+              <th>Status</th>
+              <th>Vagas</th>
+              <th>Sala</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {props.listaFuncionarios.map((funcionario, i) => {
+            {props.listaTurmas.map((turma, i) => {
               return (
                 <tr key={i}>
-                  <td>{funcionario.cpf}</td>
-                  <td>{funcionario.nome}</td>
-                  <td>{funcionario.usuario}</td>
-                  <td>{funcionario.telefone}</td>
-                  <td>{funcionario.email}</td>
+                  <td>{turma.codigo}</td>
+                  <td>{turma.periodo}</td>
+                  <td>{turma.anoLetivo}</td>
+                  <td>{turma.cursos}</td>
+                  <td>{turma.dtInicio}</td>
+                  <td>{turma.dtFim}</td>
+                  <td>{turma.status}</td>
+                  <td>{turma.vagas}</td>
+                  <td>{turma.sala}</td>
                   <td>
                     <MenuTabela
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirFuncionario(funcionario.cpf);
+                          excluirTurma(turma.codigo);
                         }
                       }}
                     />

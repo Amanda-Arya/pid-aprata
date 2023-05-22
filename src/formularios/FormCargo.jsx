@@ -1,16 +1,24 @@
 import { Container, Col, Form, Row, FormGroup } from "react-bootstrap";
-import { useState } from "react";
-import MenuAcao from "../templates/MenuAcao";
+import { useState, useEffect } from "react";
+import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
 export default function FormCargo(props) {
-  const [inputs, setInputs] = useState({});
   const [validated, setValidated] = useState(false);
+  const [cargo, setCargo] = useState({
+    codigo: "",
+    nome: "",
+    descricao: "",
+  });
+
+  useEffect(() => {
+    setCargo(() => ({ codigo: props.listaCargos.length + 1 }));
+  }, [props]);
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setCargo((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -18,7 +26,10 @@ export default function FormCargo(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      console.log(inputs);
+      let cargos = props.listaCargos;
+      cargos.push(cargo)
+      props.setCargos(cargos);
+      props.chamarTabela();
       form.reset();
     } else {
       setValidated(true);
@@ -41,13 +52,17 @@ export default function FormCargo(props) {
           onSubmit={handleSubmit}
           onReset={resetSubmit}
         >
-          <MenuAcao chamarTabela={props.chamarTabela} />
-
+          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
           <Row className="mb-3">
-            <Col xs={3}>
+            <Col xs={6}>
               <Form.Group controlId="codigo">
                 <Form.Label>Código</Form.Label>
-                <Form.Control type="text" name="codigo" disabled />
+                <Form.Control
+                  type="text"
+                  name="codigo"
+                  value={cargo.codigo}
+                  disabled
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -59,6 +74,7 @@ export default function FormCargo(props) {
                 <Form.Control
                   type="text"
                   name="nome"
+                  value={cargo.nome}
                   onChange={handleChange}
                   placeholder="Administrativo"
                   required
@@ -78,6 +94,7 @@ export default function FormCargo(props) {
                   as="textarea"
                   name="descricao"
                   onChange={handleChange}
+                  value={cargo.descricao}
                   required
                 />
                 <Form.Control.Feedback type="invalid">

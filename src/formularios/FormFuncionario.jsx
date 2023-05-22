@@ -1,16 +1,33 @@
 import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
-import MenuAcao from "../templates/MenuAcao";
+import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
 export default function FormFuncionario(props) {
-  const [inputs, setInputs] = useState({});
   const [validated, setValidated] = useState(false);
+  const [funcionario, setFuncionario] = useState({
+    cpf: "",
+    nome: "",
+    dtNascimento: "",
+    dtAdmissao: "",
+    dtDemissao: "",
+    statusAtual: "",
+    cargo : "",
+    endereco : "",
+    bairro: "",
+    municipio: "",
+    uf: "",
+    cep: "",
+    telefone: "",
+    email: "",
+    usuario: "",
+    senha: ""
+  })
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setFuncionario((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -18,7 +35,10 @@ export default function FormFuncionario(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      console.log(inputs);
+      let funcionarios = props.listaFuncionarios;
+      funcionarios.push(funcionario);
+      props.setFuncionarios(funcionarios);
+      props.chamarTabela();
       form.reset();
     } else {
       setValidated(true);
@@ -41,7 +61,7 @@ export default function FormFuncionario(props) {
           onSubmit={handleSubmit}
           onReset={resetSubmit}
         >
-          <MenuAcao chamarTabela={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
 
           <Row className="my-3">
             <Col>
@@ -50,7 +70,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="nome"
-                  // value={inputs.nome || ""}
+                  value={funcionario.nome}
                   onChange={handleChange}
                   placeholder="Rodrigo Nascimento"
                   required
@@ -69,7 +89,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="cpf"
-                  // value={inputs.cpf || ""}
+                  value={funcionario.cpf}
                   onChange={handleChange}
                   placeholder="000.000.000-00"
                   required
@@ -81,12 +101,12 @@ export default function FormFuncionario(props) {
             </Col>
 
             <Col>
-              <Form.Group controlId="dtNasc">
+              <Form.Group controlId="dtNascimento">
                 <Form.Label>Data de Nascimento</Form.Label>
                 <Form.Control
                   type="date"
-                  name="dtNasc"
-                  // value={inputs.dtNasc || ""}
+                  name="dtNascimento"
+                  value={funcionario.dtNascimento}
                   onChange={handleChange}
                   required
                 />
@@ -104,7 +124,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="date"
                   name="dtAdmissao"
-                  // value={inputs.dtAdmissao || ""}
+                  value={funcionario.dtAdmissao}
                   onChange={handleChange}
                   required
                 />
@@ -120,7 +140,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="date"
                   name="dtDemissao"
-                  // value={inputs.dtDemissao || ""}
+                  value={funcionario.dtDemissao}
                   onChange={handleChange}
                   required
                 />
@@ -129,7 +149,7 @@ export default function FormFuncionario(props) {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-          </Row>          
+          </Row>
 
           <Row className="mb-3">
             <Col>
@@ -137,7 +157,7 @@ export default function FormFuncionario(props) {
                 <Form.Label>Status</Form.Label>
                 <Form.Select
                   name="statusAtual"
-                  // value={inputs.statusAtual || ""}
+                  value={funcionario.statusAtual}
                   onChange={handleChange}
                   required
                 >
@@ -156,7 +176,7 @@ export default function FormFuncionario(props) {
                 <Form.Label>Cargo</Form.Label>
                 <Form.Select
                   name="cargo"
-                  // value={inputs.cargo || ""}
+                  value={funcionario.cargo}
                   onChange={handleChange}
                   required
                 >
@@ -174,18 +194,18 @@ export default function FormFuncionario(props) {
 
           <Row className="mb-3">
             <Col>
-              <Form.Group controlId="logradouro">
-                <Form.Label>Logradouro</Form.Label>
+              <Form.Group controlId="endereco">
+                <Form.Label>Endereço</Form.Label>
                 <Form.Control
                   type="text"
-                  name="logradouro"
-                  // value={inputs.logradouro || ""}
+                  name="endereco"
+                  value={funcionario.endereco}
                   onChange={handleChange}
                   placeholder="R. José Bongiovani, 700"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Logradouro é obrigatório.
+                  Endereco é obrigatório.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -198,7 +218,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="bairro"
-                  // value={inputs.bairro || ""}
+                  value={funcionario.bairro}
                   onChange={handleChange}
                   placeholder="Cidade Universitária"
                   required
@@ -215,7 +235,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="municipio"
-                  // value={inputs.municipio || ""}
+                  value={funcionario.municipio}
                   onChange={handleChange}
                   placeholder="Presidente Prudente"
                   required
@@ -234,7 +254,7 @@ export default function FormFuncionario(props) {
                 <Form.Label>UF</Form.Label>
                 <Form.Select
                   name="uf"
-                  // value={inputs.uf || ""}
+                  value={funcionario.uf}
                   onChange={handleChange}
                   required
                 >
@@ -280,7 +300,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="cep"
-                  // value={inputs.cep || ""}
+                  value={funcionario.cep}
                   onChange={handleChange}
                   placeholder="19050-920"
                   required
@@ -299,7 +319,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="telefone"
-                  // value={inputs.telefone || ""}
+                  value={funcionario.telefone}
                   onChange={handleChange}
                   placeholder="(18) 3229-1000"
                   required
@@ -316,7 +336,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="email"
-                  // value={inputs.email || ""}
+                  value={funcionario.email}
                   onChange={handleChange}
                   placeholder="faculdade@unoeste.edu.br"
                   required
@@ -335,7 +355,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="usuario"
-                  // value={inputs.usuario || ""}
+                  value={funcionario.usuario}
                   onChange={handleChange}
                   placeholder="Usuário"
                   required
@@ -352,7 +372,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="senha"
-                  // value={inputs.senha || ""}
+                  value={funcionario.senha}
                   onChange={handleChange}
                   placeholder="senha123"
                   required

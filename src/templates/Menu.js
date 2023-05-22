@@ -31,6 +31,9 @@ export default function Menu() {
                   Home
                 </Nav.Link>
                 <NavDropdown title="Cadastro" id={`offcanvasNavbarDropdown`}>
+                  <NavDropdown.Item as={Link} to="/cadastro-aluno">
+                    Aluno
+                  </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/cadastro-curso">
                     Curso
                   </NavDropdown.Item>
@@ -42,6 +45,9 @@ export default function Menu() {
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/cadastro-cargo">
                     Cargo
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-turma">
+                    Turma
                   </NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link as={Link} to="/relatorio-aprendiz">

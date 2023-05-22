@@ -1,35 +1,49 @@
-import { Form, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import { BotaoNovo } from "../templates/Botoes";
 import MenuTabela from "../templates/MenuTabela";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 
 export default function TabelaCadastroCargos(props) {
+  function excluirCargo(codigo) {
+    const listaAtualizada = props.listaCargos.filter(
+      (cargo) => cargo.codigo !== codigo
+    );
+    props.setCargos(listaAtualizada);
+  }
+
   return (
     <div>
       <Cabecalho2 texto1={"Consulta"} texto2={"Cargos"} />
       <Container className="mt-3">
-        <MenuTabela chamarCadastro={props.chamarCadastro} />
-        <Table striped bordered hover style={{ fontSize: "12px" }}>
+        <div className="d-flex mb-3">
+          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+        </div>
+        <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
-              <th>
-                <Form.Check aria-label="option 1" />
-              </th>
               <th>#</th>
               <th>Nome</th>
               <th>Descrição</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {props.cargos.map((cargo, i) => {
+            {props.listaCargos.map((cargo, i) => {
               return (
                 <tr key={i}>
-                  <td>
-                    <Form.Check aria-label="option 1" />
-                  </td>
                   <td>{cargo.codigo}</td>
                   <td>{cargo.nome}</td>
                   <td>{cargo.descricao}</td>
+                  <td>
+                    <MenuTabela
+                      acaoBtnExcluir={() => {
+                        if (window.confirm("Confirma a exclusão do item?")) {
+                          excluirCargo(cargo.codigo);
+                        }
+                      }}
+                    />
+                  </td>
                 </tr>
               );
             })}

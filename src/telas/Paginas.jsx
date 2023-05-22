@@ -1,23 +1,28 @@
 import Pagina from "../templates/Pagina";
 import "./styles/Tela404.css";
 import error from "./img/erro404.jpg";
-import FormEmpresa from "../formularios/FormEmpresa";
-import FormCurso from "../formularios/FormCurso";
-import FormFuncionario from "../formularios/FormFuncionario";
-import TabelaCadastroCursos from "../formularios/TabelaCadastroCursos";
-import TabelaCadastroEmpresas from "../formularios/TabelaCadastroEmpresas";
-import TabelaCadastroFuncionarios from "../formularios/TabelaCadastroFuncionarios";
-import listaCursos from "../dados/cursos";
-import { useState } from "react";
 import listaEmpresas from "../dados/empresas";
-import listaAlunos from "../dados/alunos";
+import FormEmpresa from "../formularios/FormEmpresa";
+import TabelaCadastroEmpresas from "../formularios/TabelaCadastroEmpresas";
+import listaCursos from "../dados/cursos";
+import FormCurso from "../formularios/FormCurso";
+import TabelaCadastroCursos from "../formularios/TabelaCadastroCursos";
 import listaFuncionarios from "../dados/funcionarios";
+import FormFuncionario from "../formularios/FormFuncionario";
+import TabelaCadastroFuncionarios from "../formularios/TabelaCadastroFuncionarios";
+import listaAlunos from "../dados/alunos";
 import TabelaRelatorioAprendizes from "../formularios/TabelaRelatorioAprendizes";
 import RelatorioAprendiz from "../formularios/RelatorioAprendiz";
-import { useNavigate, useParams } from "react-router-dom";
-import TabelaCadastroCargos from "../formularios/TabelaCadastroCargos";
 import listaCargos from "../dados/cargos";
 import FormCargo from "../formularios/FormCargo";
+import TabelaCadastroCargos from "../formularios/TabelaCadastroCargos";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import TabelaCadastroTurmas from "../formularios/TabelaCadastroTurmas";
+import listaTurmas from "../dados/turmas";
+import FormTurma from "../formularios/FormTurma";
+import TabelaCadastroAlunos from "../formularios/TabelaCadastroAlunos";
+import FormAluno from "../formularios/FormAluno";
 
 function PaginaCadastroCurso(props) {
   const obj = { texto1: "Cadastro", texto2: "Curso" };
@@ -57,6 +62,26 @@ function PaginaCadastroCargo(props) {
   );
 }
 
+function PaginaCadastroTurma(props) {
+  const obj = { texto1: "Cadastro", texto2: "Turma" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroTurmas />
+    </Pagina>
+  )
+}
+
+function PaginaCadastroAluno(props) {
+  const obj = { texto1: "Cadastro", texto2: "Aluno" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroAlunos />
+    </Pagina>
+  )
+}
+
 function Pagina404(props) {
   return (
     <Pagina>
@@ -69,7 +94,7 @@ function Pagina404(props) {
   );
 }
 
-// Define qual tela será exibida, tabela de cursos ou formulário de cursos
+// Define qual tela será exibida, tabela ou formulário
 function TelaCadastroCursos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [cursos, setCursos] = useState(listaCursos);
@@ -95,7 +120,31 @@ function TelaCadastroCursos(props) {
   );
 }
 
-// Define qual tela será exibida, tabela de cursos ou formulário de cursos
+function TelaCadastroTurmas(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [turmas, setTurmas] = useState(listaTurmas);
+
+  function alternarTelas() {
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroTurmas
+        listaTurmas={turmas}
+        setTurmas={setTurmas}
+        chamarCadastro={alternarTelas}
+      />
+    </>
+  ) : (
+    <FormTurma
+      listaTurmas={turmas}
+      setTurmas={setTurmas}
+      chamarTabela={alternarTelas}
+    />
+  );
+}
+
 function TelaCadastroEmpresas(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [empresas, setEmpresas] = useState(listaEmpresas);
@@ -123,6 +172,7 @@ function TelaCadastroEmpresas(props) {
 
 function TelaCadastroFuncionarios(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
+  const [funcionarios, setFuncionarios] = useState(listaFuncionarios);
 
   function alternarTelas() {
     setExibeTabela(!exibeTabela);
@@ -131,17 +181,23 @@ function TelaCadastroFuncionarios(props) {
   return exibeTabela ? (
     <>
       <TabelaCadastroFuncionarios
-        funcionarios={listaFuncionarios}
+        listaFuncionarios={funcionarios}
+        setFuncionarios={setFuncionarios}
         chamarCadastro={alternarTelas}
       />
     </>
   ) : (
-    <FormFuncionario chamarTabela={alternarTelas} />
+    <FormFuncionario
+      chamarTabela={alternarTelas}
+      listaFuncionarios={funcionarios}
+      setFuncionarios={setFuncionarios}
+    />
   );
 }
 
 function TelaCadastroCargos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
+  const [cargos, setCargos] = useState(listaCargos);
 
   function alternarTelas() {
     setExibeTabela(!exibeTabela);
@@ -150,12 +206,42 @@ function TelaCadastroCargos(props) {
   return exibeTabela ? (
     <>
       <TabelaCadastroCargos
-        cargos={listaCargos}
+        listaCargos={cargos}
+        setCargos={setCargos}
         chamarCadastro={alternarTelas}
       />
     </>
   ) : (
-    <FormCargo chamarTabela={alternarTelas} />
+    <FormCargo
+      listaCargos={cargos}
+      setCargos={setCargos}
+      chamarTabela={alternarTelas}
+    />
+  );
+}
+
+function TelaCadastroAlunos(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [alunos, setAlunos] = useState(listaAlunos);
+
+  function alternarTelas() {
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroAlunos
+        listaAlunos={alunos}
+        setAlunos={setAlunos}
+        chamarCadastro={alternarTelas}
+      />
+    </>
+  ) : (
+    <FormAluno
+      listaAlunos={alunos}
+      setAlunos={setAlunos}
+      chamarTabela={alternarTelas}
+    />
   );
 }
 
@@ -198,5 +284,7 @@ export {
   PaginaInicial,
   PaginaRelatorioAprendiz,
   PaginaCadastroFuncionario,
-  PaginaCadastroCargo
+  PaginaCadastroCargo,
+  PaginaCadastroTurma,
+  PaginaCadastroAluno
 };
