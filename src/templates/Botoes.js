@@ -56,7 +56,7 @@ function BotaoSalvar(props) {
 function BotaoExcluir(props) {
   return (
     <Button className="mx-1" variant="outline-secondary" title="Excluir">
-      <AiOutlineDelete size={props.size} /> {props.texto}
+      <AiOutlineDelete size={props.size} />
     </Button>
   );
 }
@@ -64,7 +64,7 @@ function BotaoExcluir(props) {
 function BotaoEditar(props) {
   return (
     <Button className="mx-1" variant="outline-secondary" title="Editar">
-      <AiOutlineEdit size={props.size} /> {props.texto}
+      <AiOutlineEdit size={props.size} onClick={props.acaoBtnEditar} />
     </Button>
   );
 }

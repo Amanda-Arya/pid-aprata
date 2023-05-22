@@ -34,6 +34,9 @@ export default function Menu() {
                   <NavDropdown.Item as={Link} to="/cadastro-aluno">
                     Aluno
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/cadastro-cargo">
+                    Cargo
+                  </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/cadastro-curso">
                     Curso
                   </NavDropdown.Item>
@@ -42,9 +45,6 @@ export default function Menu() {
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/cadastro-funcionario">
                     Funcionario
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/cadastro-cargo">
-                    Cargo
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/cadastro-turma">
                     Turma
