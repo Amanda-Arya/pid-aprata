@@ -32,7 +32,7 @@ export default function TabelaRelatorioAprendizes(props) {
           </Form>
         </div>
         <Container className="my-3 w-50"></Container>
-        <Table bordered hover style={{ fontSize: "12px" }}>
+        <Table hover style={{ fontSize: "12px" }}>
           <thead>
             <tr>
               <th>#</th>

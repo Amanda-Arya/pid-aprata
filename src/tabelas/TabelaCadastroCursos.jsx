@@ -47,6 +47,7 @@ export default function TabelaCadastroCursos(props) {
                   <td>{curso.dtDesativacao ? curso.dtDesativacao : "N/A"}</td>
                   <td>
                     <MenuTabela
+                      acaoBtnEditar={() => { onclick=props.editarCurso(curso) }}
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
                           excluirCurso(curso.codigo);
