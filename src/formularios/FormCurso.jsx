@@ -3,27 +3,27 @@ import { useEffect, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
-export default function FormCurso(props) {
+export default function FormCurso({
+  curso,
+  aoMudarCurso,
+  listaCursos,
+  setCursos,
+  chamarTabela,
+}) {
   const [validated, setValidated] = useState(false);
-  const [curso, setCurso] = useState({
-    codigo: "",
-    nome: "",
-    sala: "",
-    eixo: "",
-    cargaHoras: "",
-    professor: "",
-    dtCriacao: "",
-    dtDesativacao: "",
-  });
 
+  // No primeiro render, verifica se o estado curso possui um código (edição), 
+  // se não houver (cadastro), sendo necessário gerar o código
   useEffect(() => {
-    setCurso(() => ({ codigo: props.listaCursos.length+1 }));
-  }, [props]);
+    if (!curso.codigo) {
+      aoMudarCurso({ codigo: listaCursos.length + 1 });
+    }
+  }, []);
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setCurso((values) => ({ ...values, [name]: value }));
+    aoMudarCurso((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -31,11 +31,15 @@ export default function FormCurso(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let cursos = props.listaCursos;
-      cursos.push(curso);
-      props.setCursos(cursos);
-      props.chamarTabela();
-      form.reset();
+      let cursos = listaCursos;
+
+      if (curso.codigo) {
+        cursos[curso.codigo - 1] = curso;
+      } else {
+        cursos.push(curso);
+      }
+      setCursos(cursos);
+      alert("Cadastro realizado com sucesso.");
     } else {
       setValidated(true);
     }
@@ -57,7 +61,7 @@ export default function FormCurso(props) {
           onSubmit={handleSubmit}
           onReset={resetSubmit}
         >
-          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={() => chamarTabela()} />
           <Row className="mb-3">
             <Col xs={6}>
               <Form.Group controlId="codigo">

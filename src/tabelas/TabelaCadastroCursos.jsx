@@ -4,12 +4,17 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroCursos(props) {
+export default function TabelaCadastroCursos({listaCursos, curso, aoMudarCurso, setCursos, chamarTelaCadastro}) {
   function excluirCurso(codigo) {
-    const listaAtualizada = props.listaCursos.filter(
+    const listaAtualizada = listaCursos.filter(
       (curso) => curso.codigo !== codigo
     );
-    props.setCursos(listaAtualizada);
+    setCursos(listaAtualizada);
+  }
+
+  function editarCurso(codigo) {
+    aoMudarCurso( listaCursos[codigo-1] );
+    chamarTelaCadastro(codigo);
   }
 
   return (
@@ -17,7 +22,7 @@ export default function TabelaCadastroCursos(props) {
       <Cabecalho2 texto1={"Consulta"} texto2={"Cursos"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
-          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+          <BotaoNovo acaoBtnNovo={() => chamarTelaCadastro()} />
         </div>
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
@@ -34,7 +39,7 @@ export default function TabelaCadastroCursos(props) {
             </tr>
           </thead>
           <tbody>
-            {props.listaCursos.map((curso, i) => {
+            {listaCursos.map((curso, i) => {
               return (
                 <tr key={i}>
                   <td>{curso.codigo}</td>
@@ -47,7 +52,7 @@ export default function TabelaCadastroCursos(props) {
                   <td>{curso.dtDesativacao ? curso.dtDesativacao : "N/A"}</td>
                   <td>
                     <MenuTabela
-                      acaoBtnEditar={() => { onclick=props.editarCurso(curso) }}
+                      acaoBtnEditar={() => {editarCurso(curso.codigo)}}
                       acaoBtnExcluir={() => {
                         if (window.confirm("Confirma a exclusão do item?")) {
                           excluirCurso(curso.codigo);

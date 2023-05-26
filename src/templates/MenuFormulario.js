@@ -7,7 +7,6 @@ export default function MenuFormulario(props) {
         <BotaoVoltar acaoBtnVoltar={props.acaoBtnVoltar} />
         <div className="d-flex">
           <BotaoSalvar />
-          {/* <BotaoCancelar /> */}
         </div>
       </div>
     </>
