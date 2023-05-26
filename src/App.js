@@ -4,7 +4,7 @@ import {
   Pagina404,
   PaginaCadastroEmpresa,
   PaginaInicial,
-  PaginaRelatorioAprendiz,
+  // PaginaRelatorioAprendiz,
   PaginaCadastroFuncionario,
   PaginaCadastroCargo,
   PaginaCadastroTurma,
@@ -47,7 +47,7 @@ function App() {
             path="cadastro-turma"
             element={<PaginaCadastroTurma />}
           />
-          <Route
+          {/* <Route
             exact
             path="relatorio-aprendiz"
             element={<PaginaRelatorioAprendiz />}
@@ -56,7 +56,7 @@ function App() {
               path=":aprendizId"
               element={<PaginaRelatorioAprendiz />}
             ></Route>
-          </Route>
+          </Route> */}
 
           <Route path="*" element={<Pagina404 />} />
         </Routes>
