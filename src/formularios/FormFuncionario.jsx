@@ -2,6 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
+import InputMask from 'react-input-mask';
 
 export default function FormFuncionario(props) {
   const [validated, setValidated] = useState(false);
@@ -92,6 +93,8 @@ export default function FormFuncionario(props) {
                   value={funcionario.cpf}
                   onChange={handleChange}
                   placeholder="000.000.000-00"
+                  as={InputMask}
+                  mask="999.999.999-99"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -303,6 +306,8 @@ export default function FormFuncionario(props) {
                   value={funcionario.cep}
                   onChange={handleChange}
                   placeholder="19050-920"
+                  as={InputMask}
+                  mask="99999-999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -322,6 +327,8 @@ export default function FormFuncionario(props) {
                   value={funcionario.telefone}
                   onChange={handleChange}
                   placeholder="(18) 3229-1000"
+                  as={InputMask}
+                  mask="(99) 9999-9999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -334,7 +341,7 @@ export default function FormFuncionario(props) {
               <Form.Group controlId="email">
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="email"
                   name="email"
                   value={funcionario.email}
                   onChange={handleChange}

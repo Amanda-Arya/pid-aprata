@@ -2,6 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
+import InputMask from 'react-input-mask';
 
 export default function FormAluno(props) {
     const [validated, setValidated] = useState(false);
@@ -69,7 +70,7 @@ export default function FormAluno(props) {
                                     name="nome"
                                     value={aluno.nome}
                                     onChange={handleChange}
-                                    placeholder="Miguel da Silva"
+                                    placeholder="Digite o nome do Aluno"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -88,7 +89,7 @@ export default function FormAluno(props) {
                                     name="nomeMae"
                                     value={aluno.nomeMae}
                                     onChange={handleChange}
-                                    placeholder="Julia Silva"
+                                    placeholder="Digite o nome da mãe"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -107,7 +108,10 @@ export default function FormAluno(props) {
                                     name="rg"
                                     value={aluno.rg}
                                     onChange={handleChange}
-                                    placeholder="XXXXXXXX-X"
+                                    placeholder="Digite o RG"
+                                    as={InputMask}
+                                    mask="99.999.999-9"
+
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -124,7 +128,9 @@ export default function FormAluno(props) {
                                     name="cpf"
                                     value={aluno.cpf}
                                     onChange={handleChange}
-                                    placeholder="XXX.XXX.XXX-XX"
+                                    placeholder="Digite o CPF"
+                                    as={InputMask}
+                                    mask="999.999.999-99"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -160,7 +166,7 @@ export default function FormAluno(props) {
                                     name="endereco"
                                     value={aluno.endereco}
                                     onChange={handleChange}
-                                    placeholder="Rua AAAAAAAA"
+                                    placeholder="Digite o endereço"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -179,7 +185,7 @@ export default function FormAluno(props) {
                                     name="bairro"
                                     value={aluno.bairro}
                                     onChange={handleChange}
-                                    placeholder="Vila AAAAAAAAAAA"
+                                    placeholder="Digite o bairro"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -195,7 +201,7 @@ export default function FormAluno(props) {
                                     name="cidade"
                                     value={aluno.cidade}
                                     onChange={handleChange}
-                                    placeholder="Osasco"
+                                    placeholder="Digite a cidade"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -259,7 +265,9 @@ export default function FormAluno(props) {
                                     name="tel"
                                     value={aluno.tel}
                                     onChange={handleChange}
-                                    placeholder="(XX)XXXX-XXXX"
+                                    placeholder="Digite o telefone"
+                                    as={InputMask}
+                                    mask="(99)9999-9999"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -278,7 +286,7 @@ export default function FormAluno(props) {
                                     name="escola"
                                     value={aluno.escola}
                                     onChange={handleChange}
-                                    placeholder="EMEF AAAAAAAAA"
+                                    placeholder="Digite a escola"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -297,7 +305,7 @@ export default function FormAluno(props) {
                                     value={aluno.serie}
                                     name="serie"
                                     onChange={handleChange}
-                                    placeholder="9 ano"
+                                    placeholder="Digite a série"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">

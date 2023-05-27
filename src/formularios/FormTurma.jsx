@@ -2,6 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
+import InputMask from 'react-input-mask';
 
 export default function FormTurma(props) {
     const [validated, setValidated] = useState(false);
@@ -105,6 +106,8 @@ export default function FormTurma(props) {
                                     value={turma.ano}
                                     onChange={handleChange}
                                     placeholder="2023"
+                                    as={InputMask}
+                                    mask="9999"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
@@ -190,6 +193,8 @@ export default function FormTurma(props) {
                                     value={turma.vagas}
                                     onChange={handleChange}
                                     placeholder="20"
+                                    as={InputMask}
+                                    mask="999"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
