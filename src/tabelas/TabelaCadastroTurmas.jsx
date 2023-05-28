@@ -16,7 +16,7 @@ export default function TabelaCadastroTurmas(props) {
 
   function editarTurma(codigo) {
     const turmaEmEdicao = props.listaTurmas.filter(
-      (turma) => turma.codigo == codigo
+      (turma) => turma.codigo === codigo
     );
     props.aoMudarTurma(...turmaEmEdicao);
     props.chamarCadastro(codigo);

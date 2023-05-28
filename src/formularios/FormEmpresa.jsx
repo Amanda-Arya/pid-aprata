@@ -19,11 +19,11 @@ export default function FormEmpresa(props) {
     if (form.checkValidity()) {
       const empresas = props.listaEmpresas;
       // Retorna o objeto igual ao código selecionado
-      const obj = empresas.filter((i) => i.codigo == props.empresa.codigo);
+      const obj = empresas.filter((i) => i.codigo === props.empresa.codigo);
 
       if (obj.length) {
         // Retorna o index do objeto a ser substituído (Editado)
-        const isEqualTo = (empresa) => empresa.codigo == obj[0].codigo;
+        const isEqualTo = (empresa) => empresa.codigo === obj[0].codigo;
         const index = empresas.findIndex(isEqualTo);
         // Substitui o objeto
         empresas[index] = props.empresa;

@@ -16,7 +16,7 @@ export default function TabelaCadastroEmpresas(props) {
 
   function editarEmpresa(codigo) {
     const empresaEmEdicao = props.listaEmpresas.filter(
-      (empresa) => empresa.codigo == codigo
+      (empresa) => empresa.codigo === codigo
     );
     props.aoMudarEmpresa(...empresaEmEdicao);
     props.chamarCadastro(codigo);

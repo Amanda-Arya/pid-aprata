@@ -21,7 +21,7 @@ export default function TabelaCadastroCursos({
   }
 
   function editarCurso(codigo) {
-    const cursoEmEdicao = listaCursos.filter((curso) => curso.codigo == codigo);
+    const cursoEmEdicao = listaCursos.filter((curso) => curso.codigo === codigo);
     aoMudarCurso(...cursoEmEdicao);
     chamarTelaCadastro(codigo);
   }
