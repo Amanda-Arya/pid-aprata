@@ -16,7 +16,7 @@ export default function TabelaCadastroFuncionarios(props) {
 
   function editarFuncionario(codigo) {
     const funcionarioEmEdicao = props.listaFuncionarios.filter(
-      (func) => func.codigo == codigo
+      (func) => func.codigo === codigo
     );
     props.aoMudarFuncionario(...funcionarioEmEdicao);
     props.chamarCadastro(codigo);
@@ -36,7 +36,9 @@ export default function TabelaCadastroFuncionarios(props) {
               <th>CPF</th>
               <th>Nome</th>
               <th>Usuário</th>
+              <th>Cargo</th>
               <th>Telefone</th>
+              <th>Status</th>
               <th>E-mail</th>
               <th>Ações</th>
             </tr>
@@ -49,7 +51,9 @@ export default function TabelaCadastroFuncionarios(props) {
                   <td>{funcionario.cpf}</td>
                   <td>{funcionario.nome}</td>
                   <td>{funcionario.usuario}</td>
+                  <td>{funcionario.cargo}</td>
                   <td>{funcionario.telefone}</td>
+                  <td>{funcionario.statusAtual}</td>
                   <td>{funcionario.email}</td>
                   <td>
                     <MenuTabela

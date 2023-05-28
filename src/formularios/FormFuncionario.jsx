@@ -21,12 +21,12 @@ export default function FormFuncionario(props) {
       const funcionarios = props.listaFuncionarios;
       // Retorna o objeto igual ao código selecionado
       const obj = funcionarios.filter(
-        (i) => i.codigo == props.funcionario.codigo
+        (i) => i.codigo === props.funcionario.codigo
       );
 
       if (obj.length) {
         // Retorna o index do objeto a ser substituído (Editado)
-        const isEqualTo = (func) => func.codigo == obj[0].codigo;
+        const isEqualTo = (func) => func.codigo === obj[0].codigo;
         const index = funcionarios.findIndex(isEqualTo);
         // Substitui o objeto
         funcionarios[index] = props.funcionario;
@@ -62,11 +62,11 @@ export default function FormFuncionario(props) {
                   name="nome"
                   value={props.funcionario.nome || ""}
                   onChange={handleChange}
-                  placeholder="Rodrigo Nascimento"
+                  placeholder="Digite o nome do funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Nome é obrigatório.
+                  Nome do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -81,13 +81,13 @@ export default function FormFuncionario(props) {
                   name="cpf"
                   value={props.funcionario.cpf || ""}
                   onChange={handleChange}
-                  placeholder="000.000.000-00"
+                  placeholder="Digite o CPF do funcionário"
                   as={InputMask}
                   mask="999.999.999-99"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CPF é obrigatório.
+                  CPF do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -103,7 +103,7 @@ export default function FormFuncionario(props) {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Data de Nascimento é obrigatória.
+                  Data de nascimento do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -121,7 +121,7 @@ export default function FormFuncionario(props) {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Data de Admissão é obrigatória.
+                  Data de admissão do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -134,11 +134,7 @@ export default function FormFuncionario(props) {
                   name="dtDemissao"
                   value={props.funcionario.dtDemissao || ""}
                   onChange={handleChange}
-                  required
                 />
-                <Form.Control.Feedback type="invalid">
-                  Data de Demissão é obrigatória.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -158,7 +154,7 @@ export default function FormFuncionario(props) {
                   <option value="Inativo">Inativo</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Status atual é obrigatório.
+                  Status atual é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -178,7 +174,7 @@ export default function FormFuncionario(props) {
                   <option value="Administrativo">Administrativo</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Cargo é obrigatório.
+                  Cargo do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -193,11 +189,11 @@ export default function FormFuncionario(props) {
                   name="endereco"
                   value={props.funcionario.endereco || ""}
                   onChange={handleChange}
-                  placeholder="R. José Bongiovani, 700"
+                  placeholder="Digite o endereço do funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Endereco é obrigatório.
+                  Endereco do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -212,11 +208,11 @@ export default function FormFuncionario(props) {
                   name="bairro"
                   value={props.funcionario.bairro || ""}
                   onChange={handleChange}
-                  placeholder="Cidade Universitária"
+                  placeholder="Digite o bairro do funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Bairro é obrigatório.
+                  Bairro do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -229,11 +225,11 @@ export default function FormFuncionario(props) {
                   name="municipio"
                   value={props.funcionario.municipio || ""}
                   onChange={handleChange}
-                  placeholder="Presidente Prudente"
+                  placeholder="Digite o município do funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Município é obrigatório.
+                  Município do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -280,7 +276,7 @@ export default function FormFuncionario(props) {
                   <option value="EX">Estrangeiro</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  UF é obrigatório.
+                  UF é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -293,13 +289,13 @@ export default function FormFuncionario(props) {
                   name="cep"
                   value={props.funcionario.cep || ""}
                   onChange={handleChange}
-                  placeholder="19050-920"
+                  placeholder="Digite o CEP do funcionário"
                   as={InputMask}
                   mask="99999-999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CEP é obrigatório.
+                  CEP do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -308,19 +304,19 @@ export default function FormFuncionario(props) {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="telefone">
-                <Form.Label>Telefone</Form.Label>
+                <Form.Label>Telefone/Celular</Form.Label>
                 <Form.Control
                   type="text"
                   name="telefone"
                   value={props.funcionario.telefone || ""}
                   onChange={handleChange}
-                  placeholder="(18) 3229-1000"
+                  placeholder="Digite o telefone/celular do funcionário"
                   as={InputMask}
-                  mask="(99) 9999-9999"
+                  mask="(99)99999-9999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Telefone é obrigatório.
+                  Telefone/celular do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -333,11 +329,11 @@ export default function FormFuncionario(props) {
                   name="email"
                   value={props.funcionario.email || ""}
                   onChange={handleChange}
-                  placeholder="faculdade@unoeste.edu.br"
+                  placeholder="Digite o email do funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  E-mail é obrigatório.
+                  E-mail do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -352,11 +348,11 @@ export default function FormFuncionario(props) {
                   name="usuario"
                   value={props.funcionario.usuario || ""}
                   onChange={handleChange}
-                  placeholder="Usuário"
+                  placeholder="Digite um usuário para o funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Usuário é obrigatório.
+                  Usuário do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -369,11 +365,11 @@ export default function FormFuncionario(props) {
                   name="senha"
                   value={props.funcionario.senha || ""}
                   onChange={handleChange}
-                  placeholder="senha123"
+                  placeholder="Digite uma senha para o funcionário"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Senha é obrigatória.
+                  Senha do funcionário é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

@@ -16,7 +16,7 @@ export default function TabelaCadastroCargos(props) {
 
   function editarCargo(codigo) {
     const cargoEmEdicao = props.listaCargos.filter(
-      (cargo) => cargo.codigo == codigo
+      (cargo) => cargo.codigo === codigo
     );
     props.aoMudarCargo(...cargoEmEdicao);
     props.chamarCadastro(codigo);

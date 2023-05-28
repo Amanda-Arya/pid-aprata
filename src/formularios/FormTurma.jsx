@@ -2,7 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 export default function FormTurma(props) {
   const [validated, setValidated] = useState(false);
@@ -20,11 +20,11 @@ export default function FormTurma(props) {
     if (form.checkValidity()) {
       const turmas = props.listaTurmas;
       // Retorna o objeto igual ao código selecionado
-      const obj = turmas.filter((i) => i.codigo == props.turma.codigo);
+      const obj = turmas.filter((i) => i.codigo === props.turma.codigo);
 
       if (obj.length) {
         // Retorna o index do objeto a ser substituído (Editado)
-        const isEqualTo = (turma) => turma.codigo == obj[0].codigo;
+        const isEqualTo = (turma) => turma.codigo === obj[0].codigo;
         const index = turmas.findIndex(isEqualTo);
         // Substitui o objeto
         turmas[index] = props.turma;
@@ -60,9 +60,6 @@ export default function FormTurma(props) {
                   value={props.turma.codigo || ""}
                   disabled
                 />
-                <Form.Control.Feedback type="invalid">
-                  Código é obrigatório.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -83,7 +80,7 @@ export default function FormTurma(props) {
                   <option value="Noturno">Noturno</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Período é obrigatório.
+                  Período da turma é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -95,122 +92,101 @@ export default function FormTurma(props) {
                   name="anoLetivo"
                   value={props.turma.anoLetivo || ""}
                   onChange={handleChange}
-                  placeholder="2023"
+                  placeholder="Digite o ano letivo"
                   as={InputMask}
                   mask="9999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Ano Letivo é obrigatório.
+                  Ano letivo é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
-                    <Row className="mb-3">
-                        <Col>
-                            <Form.Group controlId="cursos">
-                                <Form.Label>Cursos</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="cursos"
-                                    value={props.turma.cursos || ""}
-                                    onChange={handleChange}
-                                    placeholder="Cursos"
-                                    required
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    Cursos são obrigatórios.
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row className="mb-3">
-                        <Col>
-                            <Form.Group controlId="dtInicio">
-                                <Form.Label>Data Início</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    name="dtInicio"
-                                    value={props.turma.dtInicio || ""}
-                                    onChange={handleChange}
-                                    required
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    Data de Início é obrigatório.
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="dtFim">
-                                <Form.Label>Data Fim</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    value={props.turma.dtFim || ""}
-                                    name="dtFim"
-                                    onChange={handleChange}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-
-                    <Row className="mb-3">
-                        <Col>
-                            <Form.Group controlId="status">
-                                <Form.Label>Status</Form.Label>
-                                <Form.Select
-                                    name="status"
-                                    value={props.turma.status || ""}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="">Selecione</option>
-                                    <option value="Ativo">Ativo</option>
-                                    <option value="Inativo">Inativo</option>
-
-                                </Form.Select>
-                                <Form.Control.Feedback type="invalid">
-                                    Status é obrigatório.
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="vagas">
-                                <Form.Label>Vagas</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="vagas"
-                                    value={props.turma.vagas || ""}
-                                    onChange={handleChange}
-                                    placeholder="20"
-                                    as={InputMask}
-                                    mask="999"
-                                    required
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    Vagas é obrigatório.
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Col>
-                    </Row>
           <Row className="mb-3">
             <Col>
-              <Form.Group controlId="sala">
-                <Form.Label>Sala</Form.Label>
+              <Form.Group controlId="cursos">
+                <Form.Label>Cursos</Form.Label>
                 <Form.Select
-                  name="sala"
-                  value={props.turma.sala || ""}
+                  name="cursos"
+                  onChange={handleChange}
+                  value={props.turma.cursos || ""}
+                  required
+                >
+                  <option value="">Selecione</option>
+                  <option value="Técnicas em Escritório e Técnico de Segurança do Trabalho">Técnicas em Escritório e Técnico de Segurança do Trabalho</option>
+                  <option value="Técnicas em Serviços de Supermercados">Técnicas em Serviços de Supermercados</option>
+                  <option value="Comunicação e Linguagem e Informática">Comunicação e Linguagem e Informática</option>
+                </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  Escolha do curso é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col>
+              <Form.Group controlId="dtInicio">
+                <Form.Label>Data Início</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dtInicio"
+                  value={props.turma.dtInicio || ""}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Data de início é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="dtFim">
+                <Form.Label>Data Fim</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={props.turma.dtFim || ""}
+                  name="dtFim"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col>
+              <Form.Group controlId="status">
+                <Form.Label>Status</Form.Label>
+                <Form.Select
+                  name="status"
+                  value={props.turma.status || ""}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Selecione</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                  <option value="Ativo">Ativo</option>
+                  <option value="Inativo">Inativo</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Sala é obrigatório.
+                  Status atual da turma é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="vagas">
+                <Form.Label>Vagas</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="vagas"
+                  value={props.turma.vagas || ""}
+                  onChange={handleChange}
+                  placeholder="Digite a quantidade de vagas para turma"
+                  as={InputMask}
+                  mask="999"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Quantidade de vagas é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

@@ -37,10 +37,8 @@ export default function TabelaCadastroTurmas(props) {
               <th>Ano Letivo</th>
               <th>Cursos</th>
               <th>Inicio</th>
-              <th>Fim</th>
               <th>Status</th>
               <th>Vagas</th>
-              <th>Sala</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -53,10 +51,8 @@ export default function TabelaCadastroTurmas(props) {
                   <td>{turma.anoLetivo}</td>
                   <td>{turma.cursos}</td>
                   <td>{turma.dtInicio}</td>
-                  <td>{turma.dtFim}</td>
                   <td>{turma.status}</td>
                   <td>{turma.vagas}</td>
-                  <td>{turma.sala}</td>
                   <td>
                     <MenuTabela
                       aoEditar={() => editarTurma(turma.codigo)}

@@ -1,5 +1,5 @@
 import { Container, Col, Form, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
@@ -25,11 +25,11 @@ export default function FormCurso({
     if (form.checkValidity()) {
       const cursos = listaCursos;
       // Retorna o objeto igual ao código selecionado
-      const obj = cursos.filter((i) => i.codigo == curso.codigo);
+      const obj = cursos.filter((i) => i.codigo === curso.codigo);
 
       if (obj.length) {
         // Retorna o index do objeto a ser substituído (Editado)
-        const isEqualTo = (curso) => curso.codigo == obj[0].codigo;
+        const isEqualTo = (curso) => curso.codigo === obj[0].codigo;
         const index = cursos.findIndex(isEqualTo);
         // Substitui o objeto
         cursos[index] = curso;
@@ -65,9 +65,6 @@ export default function FormCurso({
                   value={curso.codigo}
                   disabled
                 />
-                <Form.Control.Feedback type="invalid">
-                  CNPJ é obrigatório.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -80,11 +77,11 @@ export default function FormCurso({
                   name="nome"
                   value={curso.nome || ""}
                   onChange={handleChange}
-                  placeholder="Informática"
+                  placeholder="Digite o nome do curso"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Nome é obrigatório.
+                  Nome do curso é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -98,11 +95,11 @@ export default function FormCurso({
                   name="sala"
                   onChange={handleChange}
                   value={curso.sala || ""}
-                  placeholder="Sala 2"
+                  placeholder="Digite a sala do curso"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Sala é obrigatório.
+                  Sala do curso é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -114,11 +111,11 @@ export default function FormCurso({
                   name="eixo"
                   onChange={handleChange}
                   value={curso.eixo || ""}
-                  placeholder="Auxiliar em Montagem e Manutenção de Computadores"
+                  placeholder="Digite o eixo formativo do curso"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Eixo é obrigatório.
+                  Eixo formativo do curso é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -141,7 +138,7 @@ export default function FormCurso({
                   <option value="Hannah Arendt">Hannah Arendt</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Professor é obrigatório.
+                  Escolha do professor é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -153,11 +150,11 @@ export default function FormCurso({
                   name="cargaHoras"
                   onChange={handleChange}
                   value={curso.cargaHoras || ""}
-                  placeholder="120 horas"
+                  placeholder="Digite a carga horária do curso"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Carga Horária é obrigatório.
+                  Carga horária do cruso é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -174,7 +171,7 @@ export default function FormCurso({
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Data de criação é obrigatório.
+                  Data de criação é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
