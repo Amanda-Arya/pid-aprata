@@ -194,6 +194,7 @@ function TelaCadastroCargos(props) {
 function TelaCadastroCursos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [cursos, setCursos] = useState(LISTA_CURSOS);
+  const [filtro, setFiltro] = useState("");
   const [curso, setCurso] = useState({
     codigo: "",
     nome: "",
@@ -225,6 +226,8 @@ function TelaCadastroCursos(props) {
         chamarTelaCadastro={alternarTelas}
         curso={curso}
         aoMudarCurso={setCurso}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (

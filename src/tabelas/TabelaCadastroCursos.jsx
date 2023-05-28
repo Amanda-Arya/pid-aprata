@@ -1,4 +1,4 @@
-import { Table } from "react-bootstrap";
+import { Table, Form } from "react-bootstrap";
 import { BotaoNovo } from "../templates/Botoes";
 import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
@@ -10,7 +10,11 @@ export default function TabelaCadastroCursos({
   aoMudarCurso,
   setCursos,
   chamarTelaCadastro,
+  filtro,
+  aoMudarFiltro,
 }) {
+  const linhas = [];
+
   function excluirCurso(codigo) {
     if (window.confirm("Confirma a exclusão do item?")) {
       const listaAtualizada = listaCursos.filter(
@@ -21,17 +25,42 @@ export default function TabelaCadastroCursos({
   }
 
   function editarCurso(codigo) {
-    const cursoEmEdicao = listaCursos.filter((curso) => curso.codigo === codigo);
+    const cursoEmEdicao = listaCursos.filter(
+      (curso) => curso.codigo === codigo
+    );
     aoMudarCurso(...cursoEmEdicao);
     chamarTelaCadastro(codigo);
   }
+
+  listaCursos.forEach((curso, i) => {
+    if (curso.nome.toLowerCase().indexOf(filtro.toLowerCase()) === -1) {
+      return;
+    }
+    linhas.push(
+      <LinhaCurso
+        curso={curso}
+        key={i}
+        editarCurso={editarCurso}
+        excluirCurso={excluirCurso}
+      />
+    );
+  });
 
   return (
     <div>
       <Cabecalho2 texto1={"Consulta"} texto2={"Cursos"} />
       <Container className="mt-3">
-        <div className="d-flex mb-3">
+        <div className="d-flex mb-3 justify-content-between">
           <BotaoNovo acaoBtnNovo={() => chamarTelaCadastro()} />
+          <Form>
+            <Form.Control
+              type="text"
+              value={filtro}
+              placeholder="Pesquisar..."
+              onChange={(e) => aoMudarFiltro(e.target.value)}
+              style={{ width: "300px" }}
+            />
+          </Form>
         </div>
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
@@ -48,7 +77,8 @@ export default function TabelaCadastroCursos({
             </tr>
           </thead>
           <tbody>
-            {listaCursos.map((curso, i) => {
+            {linhas}
+            {/* {listaCursos?.map((curso, i) => {
               return (
                 <tr key={i}>
                   <td>{curso.codigo}</td>
@@ -67,10 +97,31 @@ export default function TabelaCadastroCursos({
                   </td>
                 </tr>
               );
-            })}
+            })} */}
           </tbody>
         </Table>
       </Container>
     </div>
+  );
+}
+
+function LinhaCurso({ curso, editarCurso, excluirCurso }) {
+  return (
+    <tr>
+      <td>{curso.codigo}</td>
+      <td>{curso.nome}</td>
+      <td>{curso.sala}</td>
+      <td>{curso.eixo}</td>
+      <td>{curso.professor}</td>
+      <td>{curso.cargaHoras}</td>
+      <td>{curso.dtCriacao}</td>
+      <td>{curso.dtDesativacao}</td>
+      <td>
+        <MenuTabela
+          aoEditar={() => editarCurso(curso.codigo)}
+          aoExcluir={() => excluirCurso(curso.codigo)}
+        />
+      </td>
+    </tr>
   );
 }
