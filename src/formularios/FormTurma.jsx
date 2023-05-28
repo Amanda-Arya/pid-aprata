@@ -2,6 +2,7 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
+import InputMask from 'react-input-mask';
 
 export default function FormTurma(props) {
   const [validated, setValidated] = useState(false);
@@ -95,6 +96,8 @@ export default function FormTurma(props) {
                   value={props.turma.anoLetivo || ""}
                   onChange={handleChange}
                   placeholder="2023"
+                  as={InputMask}
+                  mask="9999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -103,91 +106,92 @@ export default function FormTurma(props) {
               </Form.Group>
             </Col>
           </Row>
+                    <Row className="mb-3">
+                        <Col>
+                            <Form.Group controlId="cursos">
+                                <Form.Label>Cursos</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="cursos"
+                                    value={props.turma.cursos || ""}
+                                    onChange={handleChange}
+                                    placeholder="Cursos"
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Cursos são obrigatórios.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="mb-3">
+                        <Col>
+                            <Form.Group controlId="dtInicio">
+                                <Form.Label>Data Início</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="dtInicio"
+                                    value={props.turma.dtInicio || ""}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Data de Início é obrigatório.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group controlId="dtFim">
+                                <Form.Label>Data Fim</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    value={props.turma.dtFim || ""}
+                                    name="dtFim"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
-          <Row className="mb-3">
-            <Col>
-              <Form.Group controlId="cursos">
-                <Form.Label>Cursos</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="cursos"
-                  value={props.turma.cursos || ""}
-                  onChange={handleChange}
-                  placeholder="Cursos"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Cursos são obrigatórios.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col>
-              <Form.Group controlId="dtInicio">
-                <Form.Label>Data Início</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="dtInicio"
-                  value={props.turma.dtInicio || ""}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Data de Início é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="dtFim">
-                <Form.Label>Data Fim</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={props.turma.dtFim || ""}
-                  name="dtFim"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+                    <Row className="mb-3">
+                        <Col>
+                            <Form.Group controlId="status">
+                                <Form.Label>Status</Form.Label>
+                                <Form.Select
+                                    name="status"
+                                    value={props.turma.status || ""}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
 
-          <Row className="mb-3">
-            <Col>
-              <Form.Group controlId="status">
-                <Form.Label>Status</Form.Label>
-                <Form.Select
-                  name="status"
-                  value={props.turma.status || ""}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Selecione</option>
-                  <option value="Ativo">Ativo</option>
-                  <option value="Inativo">Inativo</option>
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Status é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="vagas">
-                <Form.Label>Vagas</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="vagas"
-                  value={props.turma.vagas || ""}
-                  onChange={handleChange}
-                  placeholder="20"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Vagas é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid">
+                                    Status é obrigatório.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group controlId="vagas">
+                                <Form.Label>Vagas</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="vagas"
+                                    value={props.turma.vagas || ""}
+                                    onChange={handleChange}
+                                    placeholder="20"
+                                    as={InputMask}
+                                    mask="999"
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Vagas é obrigatório.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="sala">
