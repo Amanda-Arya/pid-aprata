@@ -1,7 +1,7 @@
 export const LISTA_ALUNOS = [
   {
     codigo: 1,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-11",
     nome: "Eduardo Rossetti",
     dtNascimento: "2023-01-15",
     nomeMae: "Maria da Silva",
@@ -17,7 +17,7 @@ export const LISTA_ALUNOS = [
   },
   {
     codigo: 2,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-22",
     nome: "Cristiano do Couto",
     dtNascimento: "2023-01-15",
     nomeMae: "Lucia de Almeida",
@@ -33,7 +33,7 @@ export const LISTA_ALUNOS = [
   },
   {
     codigo: 3,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-33",
     nome: "Vinicius Alves",
     dtNascimento: "2023-01-15",
     nomeMae: "Solange Lima",
@@ -49,7 +49,7 @@ export const LISTA_ALUNOS = [
   },
   {
     codigo: 4,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-44",
     nome: "José Rodrigues",
     dtNascimento: "2023-01-15",
     nomeMae: "Solange Santos",
@@ -65,7 +65,7 @@ export const LISTA_ALUNOS = [
   },
   {
     codigo: 5,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-55",
     nome: "João da Silva",
     dtNascimento: "2023-01-15",
     nomeMae: "Solange Santos",
@@ -81,7 +81,7 @@ export const LISTA_ALUNOS = [
   },
   {
     codigo: 6,
-    cpf: "000.000.000-00",
+    cpf: "000.000.000-66",
     nome: "Luciano Pereira",
     dtNascimento: "2023-01-15",
     nomeMae: "Solange Santos",
@@ -153,6 +153,7 @@ export const LISTA_CURSOS = [
 
 export const LISTA_EMPRESAS = [
   {
+    codigo: 1,
     cnpj: "11.111.111/1111-11",
     ie: "000.000.000.000",
     razaoSocial: "Universidade do Oeste Paulista",
@@ -165,6 +166,7 @@ export const LISTA_EMPRESAS = [
     email: "faculdade@unoeste.edu.br",
   },
   {
+    codigo: 2,
     cnpj: "22.222.222/2222-22",
     ie: "000.000.000.000",
     razaoSocial: "Universidade do Oeste Paulista",
@@ -177,6 +179,7 @@ export const LISTA_EMPRESAS = [
     email: "faculdade@unoeste.edu.br",
   },
   {
+    codigo: 3,
     cnpj: "33.333.333/3333-33",
     ie: "000.000.000.000",
     razaoSocial: "Universidade do Oeste Paulista",
@@ -192,6 +195,7 @@ export const LISTA_EMPRESAS = [
 
 export const LISTA_FUNCIONARIOS = [
   {
+    codigo: 1,
     cpf: "519.959.785-36",
     nome: "Márcio Santos Pauline",
     dtNascimento: "2023-01-15",
@@ -210,6 +214,7 @@ export const LISTA_FUNCIONARIOS = [
     senha: "pinheiro123",
   },
   {
+    codigo: 2,
     cpf: "472.290.568-48",
     nome: "Caio Rodrigues de Souza",
     dtNascimento: "2023-01-15",
@@ -228,12 +233,13 @@ export const LISTA_FUNCIONARIOS = [
     senha: "caio123",
   },
   {
+    codigo: 3,
     cpf: "986.295.986-62",
     nome: "Rogério Kaleb Lópes",
-    dtNasc: "2023-01-15",
+    dtNascimento: "2023-01-15",
     dtAdmissao: "2023-01-15",
     dtDemissao: "2023-01-15",
-    statusAtual: "Desativado",
+    statusAtual: "Inativo",
     cargo: "Administrativo",
     endereco: "Rua Napoleão Lópes, 410",
     bairro: "Jardim França",
@@ -253,8 +259,8 @@ export const LISTA_TURMAS = [
     periodo: "Matutino",
     anoLetivo: "2022",
     cursos: "Comunicação e Linguagem e Informática",
-    dtInicio: "12/02/2022",
-    dtFim: "25/11/2023",
+    dtInicio: "2022-02-12",
+    dtFim: "2023-11-25",
     status: "Ativo",
     vagas: "19",
     sala: "3",
@@ -264,9 +270,9 @@ export const LISTA_TURMAS = [
     periodo: "Matutino",
     anoLetivo: "2020",
     cursos: "Técnicas em Serviços de Supermercados",
-    dtInicio: "12/02/2020",
-    dtFim: "25/11/2020",
-    status: "Desativo",
+    dtInicio: "2020-02-12",
+    dtFim: "2020-11-25",
+    status: "Inativo",
     vagas: "29",
     sala: "1",
   },
@@ -275,8 +281,8 @@ export const LISTA_TURMAS = [
     periodo: "Vespertino",
     anoLetivo: "2023",
     cursos: "Técnicas em Escritório e Técnico de Segurança do Trabalho",
-    dtInicio: "12/02/2023",
-    dtFim: "25/11/2025",
+    dtInicio: "2023-02-12",
+    dtFim: "2025-11-25",
     status: "Ativo",
     vagas: "9",
     sala: "1",

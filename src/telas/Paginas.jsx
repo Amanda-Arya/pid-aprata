@@ -23,12 +23,34 @@ import {
 } from "../dados/dados";
 import "./styles/Tela404.css";
 
+// PÁGINAS
+
 function PaginaCadastroCurso(props) {
   const obj = { texto1: "Cadastro", texto2: "Curso" };
 
   return (
     <Pagina obj={obj}>
       <TelaCadastroCursos />
+    </Pagina>
+  );
+}
+
+function PaginaCadastroAluno(props) {
+  const obj = { texto1: "Cadastro", texto2: "Aluno" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroAlunos />
+    </Pagina>
+  );
+}
+
+function PaginaCadastroCargo(props) {
+  const obj = { texto1: "Cadastro", texto2: "Cargo" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroCargos />
     </Pagina>
   );
 }
@@ -51,32 +73,12 @@ function PaginaCadastroFuncionario(props) {
   );
 }
 
-function PaginaCadastroCargo(props) {
-  const obj = { texto1: "Cadastro", texto2: "Cargo" };
-
-  return (
-    <Pagina obj={obj}>
-      <TelaCadastroCargos />
-    </Pagina>
-  );
-}
-
 function PaginaCadastroTurma(props) {
   const obj = { texto1: "Cadastro", texto2: "Turma" };
 
   return (
     <Pagina obj={obj}>
       <TelaCadastroTurmas />
-    </Pagina>
-  );
-}
-
-function PaginaCadastroAluno(props) {
-  const obj = { texto1: "Cadastro", texto2: "Aluno" };
-
-  return (
-    <Pagina obj={obj}>
-      <TelaCadastroAlunos />
     </Pagina>
   );
 }
@@ -90,6 +92,102 @@ function Pagina404(props) {
         <h2>A página que você está procurando não pôde ser encontrada</h2>
       </div>
     </Pagina>
+  );
+}
+
+// TELAS
+
+function TelaCadastroAlunos(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [alunos, setAlunos] = useState(LISTA_ALUNOS);
+  const [aluno, setAluno] = useState({
+    codigo: "",
+    cpf: "",
+    nome: "",
+    dtNascimento: "",
+    nomeMae: "",
+    rg: "",
+    endereco: "",
+    bairro: "",
+    cidade: "",
+    uf: "",
+    tel: "",
+    escola: "",
+    serie: "",
+    periodo: "",
+  });
+
+  function alternarTelas(codigo) {
+    if (codigo) {
+      setExibeTabela(false);
+      return;
+    } else {
+      setAluno({ codigo: alunos[alunos.length - 1].codigo + 1 });
+    }
+
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroAlunos
+        listaAlunos={alunos}
+        setAlunos={setAlunos}
+        chamarCadastro={alternarTelas}
+        aluno={aluno}
+        aoMudarAluno={setAluno}
+      />
+    </>
+  ) : (
+    <FormAluno
+      listaAlunos={alunos}
+      setAlunos={setAlunos}
+      chamarTabela={alternarTelas}
+      aluno={aluno}
+      aoMudarAluno={setAluno}
+    />
+  );
+}
+
+function TelaCadastroCargos(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [cargos, setCargos] = useState(LISTA_CARGOS);
+  const [cargo, setCargo] = useState({
+    codigo: "",
+    nome: "",
+    descricao: "",
+  });
+
+  function alternarTelas(codigo) {
+    if (codigo) {
+      setExibeTabela(false);
+      return;
+    } else {
+      // Criação de ID paliativo, para uso em mock_data
+      setCargo({ codigo: cargos[cargos.length - 1].codigo + 1 });
+    }
+
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroCargos
+        listaCargos={cargos}
+        setCargos={setCargos}
+        chamarCadastro={alternarTelas}
+        cargo={cargo}
+        aoMudarCargo={setCargo}
+      />
+    </>
+  ) : (
+    <FormCargo
+      listaCargos={cargos}
+      setCargos={setCargos}
+      chamarTabela={alternarTelas}
+      cargo={cargo}
+      aoMudarCargo={setCargo}
+    />
   );
 }
 
@@ -107,17 +205,13 @@ function TelaCadastroCursos(props) {
     dtDesativacao: "",
   });
 
-  // Função é chamada a partir do componente tabela ou formulário, Se receber um código ao ser chamada,
-  // será alterado o valor do estado exibeTabela para false e o formulário será mostrado.
-  // Ao ser chamada sem argumento, pelo botão Voltar ou Novo, o componente volta ao seu estado inicial,
-  // alternando entre as telas Tabela e Formulário
-
   function alternarTelas(codigo) {
     if (codigo) {
       setExibeTabela(false);
       return;
     } else {
-      setCurso({});
+      // Criação de ID paliativo, para uso em mock_data
+      setCurso({ codigo: cursos[cursos.length - 1].codigo + 1 });
     }
 
     setExibeTabela(!exibeTabela);
@@ -144,6 +238,110 @@ function TelaCadastroCursos(props) {
   );
 }
 
+function TelaCadastroEmpresas(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [empresas, setEmpresas] = useState(LISTA_EMPRESAS);
+  const [empresa, setEmpresa] = useState({
+    codigo: "",
+    cnpj: "",
+    ie: "",
+    razaoSocial: "",
+    logradouro: "",
+    bairro: "",
+    municipio: "",
+    uf: "",
+    cep: "",
+    telefone: "",
+    email: "",
+  });
+
+  function alternarTelas(codigo) {
+    if (codigo) {
+      setExibeTabela(false);
+      return;
+    } else {
+      setEmpresa({ codigo: empresas[empresas.length - 1].codigo + 1 });
+    }
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroEmpresas
+        listaEmpresas={empresas}
+        setEmpresas={setEmpresas}
+        chamarCadastro={alternarTelas}
+        empresa={empresa}
+        aoMudarEmpresa={setEmpresa}
+      />
+    </>
+  ) : (
+    <FormEmpresa
+      chamarTabela={alternarTelas}
+      listaEmpresas={empresas}
+      setEmpresas={setEmpresas}
+      empresa={empresa}
+      aoMudarEmpresa={setEmpresa}
+    />
+  );
+}
+
+function TelaCadastroFuncionarios(props) {
+  const [exibeTabela, setExibeTabela] = useState(true);
+  const [funcionarios, setFuncionarios] = useState(LISTA_FUNCIONARIOS);
+  const [funcionario, setFuncionario] = useState({
+    codigo: "",
+    cpf: "",
+    nome: "",
+    dtNascimento: "",
+    dtAdmissao: "",
+    dtDemissao: "",
+    statusAtual: "",
+    cargo: "",
+    endereco: "",
+    bairro: "",
+    municipio: "",
+    uf: "",
+    cep: "",
+    telefone: "",
+    email: "",
+    usuario: "",
+    senha: "",
+  });
+
+  function alternarTelas(codigo) {
+    if (codigo) {
+      setExibeTabela(false);
+      return;
+    } else {
+      setFuncionario({
+        codigo: funcionarios[funcionarios.length - 1].codigo + 1,
+      });
+    }
+    setExibeTabela(!exibeTabela);
+  }
+
+  return exibeTabela ? (
+    <>
+      <TabelaCadastroFuncionarios
+        listaFuncionarios={funcionarios}
+        setFuncionarios={setFuncionarios}
+        chamarCadastro={alternarTelas}
+        funcionario={funcionario}
+        aoMudarFuncionario={setFuncionario}
+      />
+    </>
+  ) : (
+    <FormFuncionario
+      chamarTabela={alternarTelas}
+      listaFuncionarios={funcionarios}
+      setFuncionarios={setFuncionarios}
+      funcionario={funcionario}
+      aoMudarFuncionario={setFuncionario}
+    />
+  );
+}
+
 function TelaCadastroTurmas(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [turmas, setTurmas] = useState(LISTA_TURMAS);
@@ -164,7 +362,7 @@ function TelaCadastroTurmas(props) {
       setExibeTabela(false);
       return;
     } else {
-      setTurma({});
+      setTurma({ codigo: turmas[turmas.length - 1].codigo + 1 });
     }
     setExibeTabela(!exibeTabela);
   }
@@ -186,106 +384,6 @@ function TelaCadastroTurmas(props) {
       chamarTabela={alternarTelas}
       turma={turma}
       aoMudarTurma={setTurma}
-    />
-  );
-}
-
-function TelaCadastroEmpresas(props) {
-  const [exibeTabela, setExibeTabela] = useState(true);
-  const [empresas, setEmpresas] = useState(LISTA_EMPRESAS);
-
-  function alternarTelas() {
-    setExibeTabela(!exibeTabela);
-  }
-
-  return exibeTabela ? (
-    <>
-      <TabelaCadastroEmpresas
-        listaEmpresas={empresas}
-        setEmpresas={setEmpresas}
-        chamarCadastro={alternarTelas}
-      />
-    </>
-  ) : (
-    <FormEmpresa
-      chamarTabela={alternarTelas}
-      listaEmpresas={empresas}
-      setEmpresas={setEmpresas}
-    />
-  );
-}
-
-function TelaCadastroFuncionarios(props) {
-  const [exibeTabela, setExibeTabela] = useState(true);
-  const [funcionarios, setFuncionarios] = useState(LISTA_FUNCIONARIOS);
-
-  function alternarTelas() {
-    setExibeTabela(!exibeTabela);
-  }
-
-  return exibeTabela ? (
-    <>
-      <TabelaCadastroFuncionarios
-        listaFuncionarios={funcionarios}
-        setFuncionarios={setFuncionarios}
-        chamarCadastro={alternarTelas}
-      />
-    </>
-  ) : (
-    <FormFuncionario
-      chamarTabela={alternarTelas}
-      listaFuncionarios={funcionarios}
-      setFuncionarios={setFuncionarios}
-    />
-  );
-}
-
-function TelaCadastroCargos(props) {
-  const [exibeTabela, setExibeTabela] = useState(true);
-  const [cargos, setCargos] = useState(LISTA_CARGOS);
-
-  function alternarTelas() {
-    setExibeTabela(!exibeTabela);
-  }
-
-  return exibeTabela ? (
-    <>
-      <TabelaCadastroCargos
-        listaCargos={cargos}
-        setCargos={setCargos}
-        chamarCadastro={alternarTelas}
-      />
-    </>
-  ) : (
-    <FormCargo
-      listaCargos={cargos}
-      setCargos={setCargos}
-      chamarTabela={alternarTelas}
-    />
-  );
-}
-
-function TelaCadastroAlunos(props) {
-  const [exibeTabela, setExibeTabela] = useState(true);
-  const [alunos, setAlunos] = useState(LISTA_ALUNOS);
-
-  function alternarTelas() {
-    setExibeTabela(!exibeTabela);
-  }
-
-  return exibeTabela ? (
-    <>
-      <TabelaCadastroAlunos
-        listaAlunos={alunos}
-        setAlunos={setAlunos}
-        chamarCadastro={alternarTelas}
-      />
-    </>
-  ) : (
-    <FormAluno
-      listaAlunos={alunos}
-      setAlunos={setAlunos}
-      chamarTabela={alternarTelas}
     />
   );
 }

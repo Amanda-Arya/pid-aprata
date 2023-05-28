@@ -12,14 +12,6 @@ export default function FormCurso({
 }) {
   const [validated, setValidated] = useState(false);
 
-  // No primeiro render, verifica se o estado curso possui um código (edição), 
-  // se não houver (cadastro), sendo necessário gerar o código
-  useEffect(() => {
-    if (!curso.codigo) {
-      aoMudarCurso({ codigo: listaCursos.length + 1 });
-    }
-  }, []);
-
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -31,22 +23,24 @@ export default function FormCurso({
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let cursos = listaCursos;
+      const cursos = listaCursos;
+      // Retorna o objeto igual ao código selecionado
+      const obj = cursos.filter((i) => i.codigo == curso.codigo);
 
-      if (curso.codigo) {
-        cursos[curso.codigo - 1] = curso;
+      if (obj.length) {
+        // Retorna o index do objeto a ser substituído (Editado)
+        const isEqualTo = (curso) => curso.codigo == obj[0].codigo;
+        const index = cursos.findIndex(isEqualTo);
+        // Substitui o objeto
+        cursos[index] = curso;
       } else {
         cursos.push(curso);
       }
       setCursos(cursos);
-      alert("Cadastro realizado com sucesso.");
+      alert("Dados registrados com sucesso.");
     } else {
       setValidated(true);
     }
-  };
-
-  const resetSubmit = () => {
-    setValidated(false);
   };
 
   return (
@@ -59,7 +53,6 @@ export default function FormCurso({
           noValidate
           validated={validated}
           onSubmit={handleSubmit}
-          onReset={resetSubmit}
         >
           <MenuFormulario acaoBtnVoltar={() => chamarTabela()} />
           <Row className="mb-3">
@@ -85,7 +78,7 @@ export default function FormCurso({
                 <Form.Control
                   type="text"
                   name="nome"
-                  value={curso.nome}
+                  value={curso.nome || ""}
                   onChange={handleChange}
                   placeholder="Informática"
                   required
@@ -104,7 +97,7 @@ export default function FormCurso({
                   type="text"
                   name="sala"
                   onChange={handleChange}
-                  value={curso.sala}
+                  value={curso.sala || ""}
                   placeholder="Sala 2"
                   required
                 />
@@ -120,7 +113,7 @@ export default function FormCurso({
                   type="text"
                   name="eixo"
                   onChange={handleChange}
-                  value={curso.eixo}
+                  value={curso.eixo || ""}
                   placeholder="Auxiliar em Montagem e Manutenção de Computadores"
                   required
                 />
@@ -137,7 +130,7 @@ export default function FormCurso({
                 <Form.Select
                   name="professor"
                   onChange={handleChange}
-                  value={curso.professor}
+                  value={curso.professor || ""}
                   required
                 >
                   <option value="">Selecione</option>
@@ -159,7 +152,7 @@ export default function FormCurso({
                   type="text"
                   name="cargaHoras"
                   onChange={handleChange}
-                  value={curso.cargaHoras}
+                  value={curso.cargaHoras || ""}
                   placeholder="120 horas"
                   required
                 />
@@ -177,7 +170,7 @@ export default function FormCurso({
                   type="date"
                   name="dtCriacao"
                   onChange={handleChange}
-                  value={curso.dtCriacao}
+                  value={curso.dtCriacao || ""}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -192,7 +185,7 @@ export default function FormCurso({
                   type="date"
                   name="dtDesativacao"
                   onChange={handleChange}
-                  value={curso.dtDesativacao}
+                  value={curso.dtDesativacao || ""}
                 />
               </Form.Group>
             </Col>

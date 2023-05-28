@@ -4,16 +4,25 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
-export default function TabelaCadastroCursos({listaCursos, curso, aoMudarCurso, setCursos, chamarTelaCadastro}) {
+export default function TabelaCadastroCursos({
+  listaCursos,
+  curso,
+  aoMudarCurso,
+  setCursos,
+  chamarTelaCadastro,
+}) {
   function excluirCurso(codigo) {
-    const listaAtualizada = listaCursos.filter(
-      (curso) => curso.codigo !== codigo
-    );
-    setCursos(listaAtualizada);
+    if (window.confirm("Confirma a exclusão do item?")) {
+      const listaAtualizada = listaCursos.filter(
+        (curso) => curso.codigo !== codigo
+      );
+      setCursos(listaAtualizada);
+    }
   }
 
   function editarCurso(codigo) {
-    aoMudarCurso( listaCursos[codigo-1] );
+    const cursoEmEdicao = listaCursos.filter((curso) => curso.codigo == codigo);
+    aoMudarCurso(...cursoEmEdicao);
     chamarTelaCadastro(codigo);
   }
 
@@ -49,15 +58,11 @@ export default function TabelaCadastroCursos({listaCursos, curso, aoMudarCurso, 
                   <td>{curso.professor}</td>
                   <td>{curso.cargaHoras}</td>
                   <td>{curso.dtCriacao}</td>
-                  <td>{curso.dtDesativacao ? curso.dtDesativacao : "N/A"}</td>
+                  <td>{curso.dtDesativacao}</td>
                   <td>
                     <MenuTabela
-                      acaoBtnEditar={() => {editarCurso(curso.codigo)}}
-                      acaoBtnExcluir={() => {
-                        if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirCurso(curso.codigo);
-                        }
-                      }}
+                      aoEditar={() => editarCurso(curso.codigo)}
+                      aoExcluir={() => excluirCurso(curso.codigo)}
                     />
                   </td>
                 </tr>

@@ -5,11 +5,21 @@ import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
 export default function TabelaCadastroFuncionarios(props) {
-  function excluirFuncionario(cpf) {
-    const listaAtualizada = props.listaFuncionarios.filter(
-      (funcionario) => funcionario.cpf !== cpf
+  function excluirFuncionario(codigo) {
+    if (window.confirm("Confirma a exclusão do item?")) {
+      const listaAtualizada = props.listaFuncionarios.filter(
+        (funcionario) => funcionario.codigo !== codigo
+      );
+      props.setFuncionarios(listaAtualizada);
+    }
+  }
+
+  function editarFuncionario(codigo) {
+    const funcionarioEmEdicao = props.listaFuncionarios.filter(
+      (func) => func.codigo == codigo
     );
-    props.setFuncionarios(listaAtualizada);
+    props.aoMudarFuncionario(...funcionarioEmEdicao);
+    props.chamarCadastro(codigo);
   }
 
   return (
@@ -17,11 +27,12 @@ export default function TabelaCadastroFuncionarios(props) {
       <Cabecalho2 texto1={"Consulta"} texto2={"Funcionarios"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
-          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+          <BotaoNovo acaoBtnNovo={() => props.chamarCadastro()} />
         </div>
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
             <tr>
+              <th>#</th>
               <th>CPF</th>
               <th>Nome</th>
               <th>Usuário</th>
@@ -34,6 +45,7 @@ export default function TabelaCadastroFuncionarios(props) {
             {props.listaFuncionarios.map((funcionario, i) => {
               return (
                 <tr key={i}>
+                  <td>{funcionario.codigo}</td>
                   <td>{funcionario.cpf}</td>
                   <td>{funcionario.nome}</td>
                   <td>{funcionario.usuario}</td>
@@ -41,11 +53,8 @@ export default function TabelaCadastroFuncionarios(props) {
                   <td>{funcionario.email}</td>
                   <td>
                     <MenuTabela
-                      acaoBtnExcluir={() => {
-                        if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirFuncionario(funcionario.cpf);
-                        }
-                      }}
+                      aoEditar={() => editarFuncionario(funcionario.codigo)}
+                      aoExcluir={() => excluirFuncionario(funcionario.codigo)}
                     />
                   </td>
                 </tr>
