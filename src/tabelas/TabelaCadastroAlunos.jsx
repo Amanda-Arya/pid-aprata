@@ -16,7 +16,7 @@ export default function TabelaCadastroAlunos(props) {
 
   function editarAluno(codigo) {
     const alunoEmEdicao = props.listaAlunos.filter(
-      (aluno) => aluno.codigo == codigo
+      (aluno) => aluno.codigo === codigo
     );
     props.aoMudarAluno(...alunoEmEdicao);
     props.chamarCadastro(codigo);

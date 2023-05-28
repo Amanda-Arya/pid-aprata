@@ -18,7 +18,6 @@ export default function FormCargo(props) {
 
     if (form.checkValidity()) {
       const cargos = props.listaCargos;
-
       const obj = cargos.filter((i) => i.codigo === props.cargo.codigo);
 
       if (obj.length) {
@@ -75,11 +74,11 @@ export default function FormCargo(props) {
                   name="nome"
                   value={props.cargo.nome || ""}
                   onChange={handleChange}
-                  placeholder="Administrativo"
+                  placeholder="Digite o nome do cargo"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Nome é obrigatório.
+                  Nome do cargo é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -92,12 +91,13 @@ export default function FormCargo(props) {
                 <Form.Control
                   as="textarea"
                   name="descricao"
+                  placeholder="Digite uma descrição sobre o cargo"
                   onChange={handleChange}
                   value={props.cargo.descricao || ""}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Descrição é obrigatória.
+                  Descrição é obrigatória!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

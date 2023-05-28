@@ -5,37 +5,42 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import InputMask from 'react-input-mask';
 
 export default function FormAluno(props) {
-  const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(false);
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    props.aoMudarAluno((values) => ({ ...values, [name]: value }));
-  };
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        props.aoMudarAluno((values) => ({ ...values, [name]: value }));
+    };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
 
-    if (form.checkValidity()) {
-      const alunos = props.listaAlunos;
-      const obj = alunos.filter((i) => i.codigo == props.aluno.codigo);
+        if (form.checkValidity()) {
+            const alunos = props.listaAlunos;
+            const obj = alunos.filter((i) => i.codigo === props.aluno.codigo);
 
-      if (obj.length) {
-        // Retorna o index do objeto a ser substituído (Editado)
-        const isEqualTo = (aluno) => aluno.codigo == obj[0].codigo;
-        const index = alunos.findIndex(isEqualTo);
-        // Substitui o objeto
-        alunos[index] = props.aluno;
-      } else {
-        alunos.push(props.aluno);
-      }
-      props.setAlunos(alunos);
-      alert("Dados registrados com sucesso.");
-    } else {
-      setValidated(true);
-    }
-  };
+            if (obj.length) {
+                // Retorna o index do objeto a ser substituído (Editado)
+                const isEqualTo = (aluno) => aluno.codigo === obj[0].codigo;
+                const index = alunos.findIndex(isEqualTo);
+                // Substitui o objeto
+                alunos[index] = props.aluno;
+            } else {
+                alunos.push(props.aluno);
+            }
+            props.setAlunos(alunos);
+            alert("Dados registrados com sucesso.");
+        } else {
+            setValidated(true);
+        }
+    };
+
+    const resetSubmit = () => {
+        setValidated(false);
+    };
+
     return (
         <div>
             <Cabecalho2 texto1={"Cadastro"} texto2={"Aluno"} />
@@ -48,7 +53,7 @@ export default function FormAluno(props) {
                     onSubmit={handleSubmit}
                     onReset={resetSubmit}
                 >
-                    <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+                    <MenuFormulario acaoBtnVoltar={() => props.chamarTabela()} />
                     <Row className="my-3">
                         <Col>
                             <Form.Group controlId="nome">
@@ -58,11 +63,11 @@ export default function FormAluno(props) {
                                     name="nome"
                                     value={props.aluno.nome || ""}
                                     onChange={handleChange}
-                                    placeholder="Digite o nome do Aluno"
+                                    placeholder="Digite o nome do aluno"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Nome é obrigatório.
+                                    Nome do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -80,7 +85,7 @@ export default function FormAluno(props) {
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Nome da Mãe é obrigatório.
+                                    Nome da mãe é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -94,13 +99,13 @@ export default function FormAluno(props) {
                                     name="rg"
                                     value={props.aluno.rg || ""}
                                     onChange={handleChange}
-                                    placeholder="Digite o RG"
+                                    placeholder="Digite o RG do aluno"
                                     as={InputMask}
                                     mask="99.999.999-9"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    RG é obrigatório.
+                                    RG do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -113,13 +118,13 @@ export default function FormAluno(props) {
                                     name="cpf"
                                     value={props.aluno.cpf || ""}
                                     onChange={handleChange}
-                                    placeholder="Digite o CPF"
+                                    placeholder="Digite o CPF do aluno"
                                     as={InputMask}
                                     mask="999.999.999-99"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    CPF é obrigatório.
+                                    CPF do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -137,7 +142,7 @@ export default function FormAluno(props) {
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Data de Nascimento é obrigatório.
+                                    Data de nascimento do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -155,7 +160,7 @@ export default function FormAluno(props) {
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Endereço é obrigatório.
+                                    Endereço do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -174,7 +179,7 @@ export default function FormAluno(props) {
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Bairro é obrigatório.
+                                    Bairro do é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -190,7 +195,7 @@ export default function FormAluno(props) {
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Cidade é obrigatório.
+                                    Cidade do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -236,25 +241,25 @@ export default function FormAluno(props) {
                                     <option value="EX">Estrangeiro</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid">
-                                    UF é obrigatório.
+                                    UF é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group controlId="tel">
-                                <Form.Label>Telefone</Form.Label>
+                                <Form.Label>Telefone/Celular</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="tel"
                                     value={props.aluno.tel || ""}
                                     onChange={handleChange}
-                                    placeholder="Digite o telefone"
+                                    placeholder="Digite o telefone/celular do aluno"
                                     as={InputMask}
-                                    mask="(99)9999-9999"
+                                    mask="(99)99999-9999"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Telefone é obrigatório.
+                                    Telefone do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -269,11 +274,11 @@ export default function FormAluno(props) {
                                     name="escola"
                                     value={props.aluno.escola || ""}
                                     onChange={handleChange}
-                                    placeholder="Digite a escola"
+                                    placeholder="Digite a escola do aluno"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Escola é obrigatório.
+                                    Escola do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
@@ -288,48 +293,48 @@ export default function FormAluno(props) {
                                     value={props.aluno.serie || ""}
                                     name="serie"
                                     onChange={handleChange}
-                                    placeholder="Digite a série"
+                                    placeholder="Digite a série escolar do aluno"
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">
-                                    Serie é obrigatório.
+                                    Serie escolar do aluno é obrigatório!
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Col>
-            <Col>
-              <Form.Group controlId="periodo">
-                <Form.Label>Período</Form.Label>
-                <Form.Select
-                  name="periodo"
-                  onChange={handleChange}
-                  value={props.aluno.periodo || ""}
-                  required
-                >
-                  <option value="">Selecione</option>
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Noturno">Noturno</option>
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Período é obrigatório.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="my-4">
-            <Col>
-              <Form.Group className="mb-3" controlId="termComp">
-                <Form.Check type="checkbox" label="Termo de Compromisso" />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="compFamiliar">
-                <Form.Check type="checkbox" label="Composição Familiar" />
-              </Form.Group>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
-    </div>
-  );
+                        <Col>
+                            <Form.Group controlId="periodo">
+                                <Form.Label>Período</Form.Label>
+                                <Form.Select
+                                    name="periodo"
+                                    onChange={handleChange}
+                                    value={props.aluno.periodo || ""}
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+                                    <option value="Matutino">Matutino</option>
+                                    <option value="Vespertino">Vespertino</option>
+                                    <option value="Noturno">Noturno</option>
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid">
+                                    Período escolar do aluno é obrigatório!
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    {/*<Row className="my-4">
+                        <Col>
+                            <Form.Group className="mb-3" controlId="termComp">
+                                <Form.Check type="checkbox" label="Termo de Compromisso" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="compFamiliar">
+                                <Form.Check type="checkbox" label="Composição Familiar" />
+                            </Form.Group>
+                        </Col>
+                    </Row>*/}
+                </Form>
+            </Container>
+        </div>
+    );
 }

@@ -59,13 +59,13 @@ export default function FormEmpresa(props) {
                   name="cnpj"
                   value={props.empresa.cnpj || ""}
                   onChange={handleChange}
-                  placeholder="00.000.000/0000-00"
+                  placeholder="Digite o CNPJ da empresa"
                   as={InputMask}
                   mask="99.999.999/9999-99"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CNPJ é obrigatório.
+                  CNPJ da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -77,13 +77,13 @@ export default function FormEmpresa(props) {
                   name="ie"
                   value={props.empresa.ie || ""}
                   onChange={handleChange}
-                  placeholder="000.000.000.000"
+                  placeholder="Digite a I.E. da empresa"
                   as={InputMask}
-                  mask="999.999.999.999"
+                  mask="99.999.9999-9"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  IE é obrigatório.
+                  IE da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -97,11 +97,11 @@ export default function FormEmpresa(props) {
                   name="razaoSocial"
                   value={props.empresa.razaoSocial || ""}
                   onChange={handleChange}
-                  placeholder="Universidade do Oeste Paulista"
+                  placeholder="Digite a razão social da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Razão Social é obrigatório.
+                  Razão social da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -115,11 +115,11 @@ export default function FormEmpresa(props) {
                   name="logradouro"
                   value={props.empresa.logradouro || ""}
                   onChange={handleChange}
-                  placeholder="R. José Bongiovani, 700"
+                  placeholder="Digite o longradouro da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Logradouro é obrigatório.
+                  Logradouro é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -133,11 +133,11 @@ export default function FormEmpresa(props) {
                   name="bairro"
                   value={props.empresa.bairro || ""}
                   onChange={handleChange}
-                  placeholder="Cidade Universitária"
+                  placeholder="Digite o bairro da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Bairro é obrigatório.
+                  Bairro é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -149,11 +149,11 @@ export default function FormEmpresa(props) {
                   name="municipio"
                   value={props.empresa.municipio || ""}
                   onChange={handleChange}
-                  placeholder="Presidente Prudente"
+                  placeholder="Digite o município da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Município é obrigatório.
+                  Município da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -199,7 +199,7 @@ export default function FormEmpresa(props) {
                   <option value="EX">Estrangeiro</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  UF é obrigatório.
+                  UF é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -211,13 +211,13 @@ export default function FormEmpresa(props) {
                   name="cep"
                   value={props.empresa.cep || ""}
                   onChange={handleChange}
-                  placeholder="19050-920"
+                  placeholder="Digite o CEP da empresa"
                   as={InputMask}
                   mask="99999-999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CEP é obrigatório.
+                  CEP da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -231,13 +231,13 @@ export default function FormEmpresa(props) {
                   name="telefone"
                   value={props.empresa.telefone || ""}
                   onChange={handleChange}
-                  placeholder="(18) 3229-1000"
+                  placeholder="Digite o telefone da empresa"
                   as={InputMask}
-                  mask="(99) 9999-9999"
+                  mask="(99)9999-9999"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Telefone é obrigatório.
+                  Telefone da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -249,11 +249,11 @@ export default function FormEmpresa(props) {
                   name="email"
                   value={props.empresa.email || ""}
                   onChange={handleChange}
-                  placeholder="faculdade@unoeste.edu.br"
+                  placeholder="Digite o email da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  E-mail é obrigatório.
+                  E-mail da empresa é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
