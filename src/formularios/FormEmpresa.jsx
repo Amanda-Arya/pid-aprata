@@ -6,23 +6,11 @@ import InputMask from 'react-input-mask';
 
 export default function FormEmpresa(props) {
   const [validated, setValidated] = useState(false);
-  const [empresa, setEmpresa] = useState({
-    cnpj: "",
-    ie: "",
-    razaoSocial: "",
-    logradouro: "",
-    bairro: "",
-    municipio: "",
-    uf: "",
-    cep: "",
-    telefone: "",
-    email: "",
-  });
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setEmpresa((values) => ({ ...values, [name]: value }));
+    props.aoMudarEmpresa((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -30,18 +18,24 @@ export default function FormEmpresa(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let empresas = props.listaEmpresas;
-      empresas.push(empresa);
+      const empresas = props.listaEmpresas;
+      // Retorna o objeto igual ao código selecionado
+      const obj = empresas.filter((i) => i.codigo === props.empresa.codigo);
+
+      if (obj.length) {
+        // Retorna o index do objeto a ser substituído (Editado)
+        const isEqualTo = (empresa) => empresa.codigo === obj[0].codigo;
+        const index = empresas.findIndex(isEqualTo);
+        // Substitui o objeto
+        empresas[index] = props.empresa;
+      } else {
+        empresas.push(props.empresa);
+      }
       props.setEmpresas(empresas);
-      props.chamarTabela();
-      form.reset();
+      alert("Dados registrados com sucesso.");
     } else {
       setValidated(true);
     }
-  };
-
-  const resetSubmit = () => {
-    setValidated(false);
   };
 
   return (
@@ -54,9 +48,8 @@ export default function FormEmpresa(props) {
           noValidate
           validated={validated}
           onSubmit={handleSubmit}
-          onReset={resetSubmit}
         >
-          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={() => props.chamarTabela()} />
           <Row className="my-3">
             <Col>
               <Form.Group controlId="cnpj">
@@ -64,7 +57,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="cnpj"
-                  value={empresa.cnpj}
+                  value={props.empresa.cnpj || ""}
                   onChange={handleChange}
                   placeholder="00.000.000/0000-00"
                   as={InputMask}
@@ -82,7 +75,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="ie"
-                  value={empresa.ie}
+                  value={props.empresa.ie || ""}
                   onChange={handleChange}
                   placeholder="000.000.000.000"
                   as={InputMask}
@@ -102,7 +95,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="razaoSocial"
-                  value={empresa.razaoSocial}
+                  value={props.empresa.razaoSocial || ""}
                   onChange={handleChange}
                   placeholder="Universidade do Oeste Paulista"
                   required
@@ -120,7 +113,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="logradouro"
-                  value={empresa.logradouro}
+                  value={props.empresa.logradouro || ""}
                   onChange={handleChange}
                   placeholder="R. José Bongiovani, 700"
                   required
@@ -138,7 +131,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="bairro"
-                  value={empresa.bairro}
+                  value={props.empresa.bairro || ""}
                   onChange={handleChange}
                   placeholder="Cidade Universitária"
                   required
@@ -154,7 +147,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="municipio"
-                  value={empresa.municipio}
+                  value={props.empresa.municipio || ""}
                   onChange={handleChange}
                   placeholder="Presidente Prudente"
                   required
@@ -171,7 +164,7 @@ export default function FormEmpresa(props) {
                 <Form.Label>UF</Form.Label>
                 <Form.Select
                   name="uf"
-                  value={empresa.uf}
+                  value={props.empresa.uf || ""}
                   onChange={handleChange}
                   required
                 >
@@ -216,7 +209,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="cep"
-                  value={empresa.cep}
+                  value={props.empresa.cep || ""}
                   onChange={handleChange}
                   placeholder="19050-920"
                   as={InputMask}
@@ -236,7 +229,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="text"
                   name="telefone"
-                  value={empresa.telefone}
+                  value={props.empresa.telefone || ""}
                   onChange={handleChange}
                   placeholder="(18) 3229-1000"
                   as={InputMask}
@@ -254,7 +247,7 @@ export default function FormEmpresa(props) {
                 <Form.Control
                   type="email"
                   name="email"
-                  value={empresa.email}
+                  value={props.empresa.email || ""}
                   onChange={handleChange}
                   placeholder="faculdade@unoeste.edu.br"
                   required

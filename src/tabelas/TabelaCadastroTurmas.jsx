@@ -6,17 +6,28 @@ import MenuTabela from "../templates/MenuTabela";
 
 export default function TabelaCadastroTurmas(props) {
   function excluirTurma(codigo) {
-    const listaAtualizada = props.listaTurmas.filter(
-      (turma) => turma.codigo !== codigo
-    );
-    props.setTurmas(listaAtualizada);
+    if (window.confirm("Confirma a exclusão do item?")) {
+      const listaAtualizada = props.listaTurmas.filter(
+        (turma) => turma.codigo !== codigo
+      );
+      props.setTurmas(listaAtualizada);
+    }
   }
+
+  function editarTurma(codigo) {
+    const turmaEmEdicao = props.listaTurmas.filter(
+      (turma) => turma.codigo === codigo
+    );
+    props.aoMudarTurma(...turmaEmEdicao);
+    props.chamarCadastro(codigo);
+  }
+
   return (
     <div>
       <Cabecalho2 texto1={"Consulta"} texto2={"Turmas"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
-          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+          <BotaoNovo acaoBtnNovo={() => props.chamarCadastro()} />
         </div>
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
@@ -48,11 +59,8 @@ export default function TabelaCadastroTurmas(props) {
                   <td>{turma.sala}</td>
                   <td>
                     <MenuTabela
-                      acaoBtnExcluir={() => {
-                        if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirTurma(turma.codigo);
-                        }
-                      }}
+                      aoEditar={() => editarTurma(turma.codigo)}
+                      aoExcluir={() => excluirTurma(turma.codigo)}
                     />
                   </td>
                 </tr>

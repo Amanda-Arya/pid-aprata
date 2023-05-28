@@ -1,24 +1,15 @@
-import { Container, Col, Form, Row, FormGroup } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Container, Col, Form, Row } from "react-bootstrap";
+import { useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
 export default function FormCargo(props) {
   const [validated, setValidated] = useState(false);
-  const [cargo, setCargo] = useState({
-    codigo: "",
-    nome: "",
-    descricao: "",
-  });
-
-  useEffect(() => {
-    setCargo(() => ({ codigo: props.listaCargos.length + 1 }));
-  }, [props]);
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setCargo((values) => ({ ...values, [name]: value }));
+    props.aoMudarCargo((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -26,11 +17,19 @@ export default function FormCargo(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let cargos = props.listaCargos;
-      cargos.push(cargo)
-      props.setCargos(cargos);
-      props.chamarTabela();
-      form.reset();
+      const cargos = props.listaCargos;
+
+      const obj = cargos.filter((i) => i.codigo === props.cargo.codigo);
+
+      if (obj.length) {
+        const isEqualto = (curso) => curso.codigo === obj[0].codigo;
+        const index = cargos.findIndex(isEqualto);
+        cargos[index] = props.cargo;
+      } else {
+        cargos.push(props.cargo);
+      }
+
+      alert("Dados registrados com sucesso.");
     } else {
       setValidated(true);
     }
@@ -52,7 +51,7 @@ export default function FormCargo(props) {
           onSubmit={handleSubmit}
           onReset={resetSubmit}
         >
-          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={() => props.chamarTabela()} />
           <Row className="mb-3">
             <Col xs={6}>
               <Form.Group controlId="codigo">
@@ -60,7 +59,7 @@ export default function FormCargo(props) {
                 <Form.Control
                   type="text"
                   name="codigo"
-                  value={cargo.codigo}
+                  value={props.cargo.codigo}
                   disabled
                 />
               </Form.Group>
@@ -74,7 +73,7 @@ export default function FormCargo(props) {
                 <Form.Control
                   type="text"
                   name="nome"
-                  value={cargo.nome}
+                  value={props.cargo.nome || ""}
                   onChange={handleChange}
                   placeholder="Administrativo"
                   required
@@ -94,7 +93,7 @@ export default function FormCargo(props) {
                   as="textarea"
                   name="descricao"
                   onChange={handleChange}
-                  value={cargo.descricao}
+                  value={props.cargo.descricao || ""}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -103,20 +102,45 @@ export default function FormCargo(props) {
               </Form.Group>
             </Col>
           </Row>
-
+          {/* 
           <Row className="mb-3">
             <Col>
               <FormGroup controlId="nivelAcesso">
-                <Form.Check type="switch" name="nivelAcesso" label="Cadastro" inline />
-                <Form.Check type="switch" name="nivelAcesso" label="Consulta" inline />
-                <Form.Check type="switch" name="nivelAcesso" label="Exclusão" inline />
-                <Form.Check type="switch" name="nivelAcesso" label="Alteração" inline />
-                <Form.Check type="switch" name="nivelAcesso" label="Relatórios" inline />
+                <Form.Check
+                  type="switch"
+                  name="nivelAcesso"
+                  label="Cadastro"
+                  inline
+                />
+                <Form.Check
+                  type="switch"
+                  name="nivelAcesso"
+                  label="Consulta"
+                  inline
+                />
+                <Form.Check
+                  type="switch"
+                  name="nivelAcesso"
+                  label="Exclusão"
+                  inline
+                />
+                <Form.Check
+                  type="switch"
+                  name="nivelAcesso"
+                  label="Alteração"
+                  inline
+                />
+                <Form.Check
+                  type="switch"
+                  name="nivelAcesso"
+                  label="Relatórios"
+                  inline
+                />
               </FormGroup>
             </Col>
-          </Row>
+          </Row> */}
         </Form>
       </Container>
-    </div >
+    </div>
   );
 }

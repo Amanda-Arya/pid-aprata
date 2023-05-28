@@ -6,29 +6,11 @@ import InputMask from 'react-input-mask';
 
 export default function FormFuncionario(props) {
   const [validated, setValidated] = useState(false);
-  const [funcionario, setFuncionario] = useState({
-    cpf: "",
-    nome: "",
-    dtNascimento: "",
-    dtAdmissao: "",
-    dtDemissao: "",
-    statusAtual: "",
-    cargo : "",
-    endereco : "",
-    bairro: "",
-    municipio: "",
-    uf: "",
-    cep: "",
-    telefone: "",
-    email: "",
-    usuario: "",
-    senha: ""
-  })
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFuncionario((values) => ({ ...values, [name]: value }));
+    props.aoMudarFuncionario((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -36,18 +18,26 @@ export default function FormFuncionario(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let funcionarios = props.listaFuncionarios;
-      funcionarios.push(funcionario);
+      const funcionarios = props.listaFuncionarios;
+      // Retorna o objeto igual ao código selecionado
+      const obj = funcionarios.filter(
+        (i) => i.codigo == props.funcionario.codigo
+      );
+
+      if (obj.length) {
+        // Retorna o index do objeto a ser substituído (Editado)
+        const isEqualTo = (func) => func.codigo == obj[0].codigo;
+        const index = funcionarios.findIndex(isEqualTo);
+        // Substitui o objeto
+        funcionarios[index] = props.funcionario;
+      } else {
+        funcionarios.push(props.funcionario);
+      }
       props.setFuncionarios(funcionarios);
-      props.chamarTabela();
-      form.reset();
+      alert("Dados registrados com sucesso.");
     } else {
       setValidated(true);
     }
-  };
-
-  const resetSubmit = () => {
-    setValidated(false);
   };
 
   return (
@@ -60,9 +50,8 @@ export default function FormFuncionario(props) {
           noValidate
           validated={validated}
           onSubmit={handleSubmit}
-          onReset={resetSubmit}
         >
-          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={() => props.chamarTabela()} />
 
           <Row className="my-3">
             <Col>
@@ -71,7 +60,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="nome"
-                  value={funcionario.nome}
+                  value={props.funcionario.nome || ""}
                   onChange={handleChange}
                   placeholder="Rodrigo Nascimento"
                   required
@@ -90,7 +79,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="cpf"
-                  value={funcionario.cpf}
+                  value={props.funcionario.cpf || ""}
                   onChange={handleChange}
                   placeholder="000.000.000-00"
                   as={InputMask}
@@ -109,7 +98,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="date"
                   name="dtNascimento"
-                  value={funcionario.dtNascimento}
+                  value={props.funcionario.dtNascimento || ""}
                   onChange={handleChange}
                   required
                 />
@@ -127,7 +116,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="date"
                   name="dtAdmissao"
-                  value={funcionario.dtAdmissao}
+                  value={props.funcionario.dtAdmissao || ""}
                   onChange={handleChange}
                   required
                 />
@@ -143,7 +132,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="date"
                   name="dtDemissao"
-                  value={funcionario.dtDemissao}
+                  value={props.funcionario.dtDemissao || ""}
                   onChange={handleChange}
                   required
                 />
@@ -160,13 +149,13 @@ export default function FormFuncionario(props) {
                 <Form.Label>Status</Form.Label>
                 <Form.Select
                   name="statusAtual"
-                  value={funcionario.statusAtual}
+                  value={props.funcionario.statusAtual || ""}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Selecione</option>
-                  <option value="1">Ativo</option>
-                  <option value="2">Desativado</option>
+                  <option value="Ativo">Ativo</option>
+                  <option value="Inativo">Inativo</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Status atual é obrigatório.
@@ -179,14 +168,14 @@ export default function FormFuncionario(props) {
                 <Form.Label>Cargo</Form.Label>
                 <Form.Select
                   name="cargo"
-                  value={funcionario.cargo}
+                  value={props.funcionario.cargo || ""}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Selecione</option>
-                  <option value="1">Professor</option>
-                  <option value="2">Orientador</option>
-                  <option value="3">Administrativo</option>
+                  <option value="Professor">Professor</option>
+                  <option value="Orientador">Orientador</option>
+                  <option value="Administrativo">Administrativo</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Cargo é obrigatório.
@@ -202,7 +191,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="endereco"
-                  value={funcionario.endereco}
+                  value={props.funcionario.endereco || ""}
                   onChange={handleChange}
                   placeholder="R. José Bongiovani, 700"
                   required
@@ -221,7 +210,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="bairro"
-                  value={funcionario.bairro}
+                  value={props.funcionario.bairro || ""}
                   onChange={handleChange}
                   placeholder="Cidade Universitária"
                   required
@@ -238,7 +227,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="municipio"
-                  value={funcionario.municipio}
+                  value={props.funcionario.municipio || ""}
                   onChange={handleChange}
                   placeholder="Presidente Prudente"
                   required
@@ -251,13 +240,12 @@ export default function FormFuncionario(props) {
           </Row>
 
           <Row className="mb-3">
-
             <Col>
               <Form.Group controlId="uf">
                 <Form.Label>UF</Form.Label>
                 <Form.Select
                   name="uf"
-                  value={funcionario.uf}
+                  value={props.funcionario.uf || ""}
                   onChange={handleChange}
                   required
                 >
@@ -303,7 +291,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="cep"
-                  value={funcionario.cep}
+                  value={props.funcionario.cep || ""}
                   onChange={handleChange}
                   placeholder="19050-920"
                   as={InputMask}
@@ -324,7 +312,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="telefone"
-                  value={funcionario.telefone}
+                  value={props.funcionario.telefone || ""}
                   onChange={handleChange}
                   placeholder="(18) 3229-1000"
                   as={InputMask}
@@ -343,7 +331,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="email"
                   name="email"
-                  value={funcionario.email}
+                  value={props.funcionario.email || ""}
                   onChange={handleChange}
                   placeholder="faculdade@unoeste.edu.br"
                   required
@@ -362,7 +350,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="usuario"
-                  value={funcionario.usuario}
+                  value={props.funcionario.usuario || ""}
                   onChange={handleChange}
                   placeholder="Usuário"
                   required
@@ -379,7 +367,7 @@ export default function FormFuncionario(props) {
                 <Form.Control
                   type="text"
                   name="senha"
-                  value={funcionario.senha}
+                  value={props.funcionario.senha || ""}
                   onChange={handleChange}
                   placeholder="senha123"
                   required
@@ -390,7 +378,6 @@ export default function FormFuncionario(props) {
               </Form.Group>
             </Col>
           </Row>
-
         </Form>
       </Container>
     </div>

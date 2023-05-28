@@ -3,27 +3,19 @@ import { useEffect, useState } from "react";
 import MenuFormulario from "../templates/MenuFormulario";
 import Cabecalho2 from "../templates/Cabecalho2";
 
-export default function FormCurso(props) {
+export default function FormCurso({
+  curso,
+  aoMudarCurso,
+  listaCursos,
+  setCursos,
+  chamarTabela,
+}) {
   const [validated, setValidated] = useState(false);
-  const [curso, setCurso] = useState({
-    codigo: "",
-    nome: "",
-    sala: "",
-    eixo: "",
-    cargaHoras: "",
-    professor: "",
-    dtCriacao: "",
-    dtDesativacao: "",
-  });
-
-  useEffect(() => {
-    setCurso(() => ({ codigo: props.listaCursos.length+1 }));
-  }, [props]);
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setCurso((values) => ({ ...values, [name]: value }));
+    aoMudarCurso((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -31,18 +23,24 @@ export default function FormCurso(props) {
     event.preventDefault();
 
     if (form.checkValidity()) {
-      let cursos = props.listaCursos;
-      cursos.push(curso);
-      props.setCursos(cursos);
-      props.chamarTabela();
-      form.reset();
+      const cursos = listaCursos;
+      // Retorna o objeto igual ao código selecionado
+      const obj = cursos.filter((i) => i.codigo == curso.codigo);
+
+      if (obj.length) {
+        // Retorna o index do objeto a ser substituído (Editado)
+        const isEqualTo = (curso) => curso.codigo == obj[0].codigo;
+        const index = cursos.findIndex(isEqualTo);
+        // Substitui o objeto
+        cursos[index] = curso;
+      } else {
+        cursos.push(curso);
+      }
+      setCursos(cursos);
+      alert("Dados registrados com sucesso.");
     } else {
       setValidated(true);
     }
-  };
-
-  const resetSubmit = () => {
-    setValidated(false);
   };
 
   return (
@@ -55,9 +53,8 @@ export default function FormCurso(props) {
           noValidate
           validated={validated}
           onSubmit={handleSubmit}
-          onReset={resetSubmit}
         >
-          <MenuFormulario acaoBtnVoltar={props.chamarTabela} />
+          <MenuFormulario acaoBtnVoltar={() => chamarTabela()} />
           <Row className="mb-3">
             <Col xs={6}>
               <Form.Group controlId="codigo">
@@ -81,7 +78,7 @@ export default function FormCurso(props) {
                 <Form.Control
                   type="text"
                   name="nome"
-                  value={curso.nome}
+                  value={curso.nome || ""}
                   onChange={handleChange}
                   placeholder="Informática"
                   required
@@ -100,7 +97,7 @@ export default function FormCurso(props) {
                   type="text"
                   name="sala"
                   onChange={handleChange}
-                  value={curso.sala}
+                  value={curso.sala || ""}
                   placeholder="Sala 2"
                   required
                 />
@@ -116,7 +113,7 @@ export default function FormCurso(props) {
                   type="text"
                   name="eixo"
                   onChange={handleChange}
-                  value={curso.eixo}
+                  value={curso.eixo || ""}
                   placeholder="Auxiliar em Montagem e Manutenção de Computadores"
                   required
                 />
@@ -133,7 +130,7 @@ export default function FormCurso(props) {
                 <Form.Select
                   name="professor"
                   onChange={handleChange}
-                  value={curso.professor}
+                  value={curso.professor || ""}
                   required
                 >
                   <option value="">Selecione</option>
@@ -155,7 +152,7 @@ export default function FormCurso(props) {
                   type="text"
                   name="cargaHoras"
                   onChange={handleChange}
-                  value={curso.cargaHoras}
+                  value={curso.cargaHoras || ""}
                   placeholder="120 horas"
                   required
                 />
@@ -173,7 +170,7 @@ export default function FormCurso(props) {
                   type="date"
                   name="dtCriacao"
                   onChange={handleChange}
-                  value={curso.dtCriacao}
+                  value={curso.dtCriacao || ""}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -188,7 +185,7 @@ export default function FormCurso(props) {
                   type="date"
                   name="dtDesativacao"
                   onChange={handleChange}
-                  value={curso.dtDesativacao}
+                  value={curso.dtDesativacao || ""}
                 />
               </Form.Group>
             </Col>

@@ -5,71 +5,70 @@ import { Container } from "react-bootstrap";
 import MenuTabela from "../templates/MenuTabela";
 
 export default function TabelaCadastroAlunos(props) {
-    function excluirAlunos(codigo) {
-        const listaAtualizada = props.listaAlunos.filter(
-            (aluno) => aluno.codigo !== codigo
-        );
-        props.setAlunos(listaAtualizada);
+  function excluirAluno(codigo) {
+    if (window.confirm("Confirma a exclusão do item?")) {
+      const listaAtualizada = props.listaAlunos.filter(
+        (aluno) => aluno.codigo !== codigo
+      );
+      props.setAlunos(listaAtualizada);
     }
+  }
 
-    return (
-        <div>
-            <Cabecalho2 texto1={"Consulta"} texto2={"Alunos"} />
-            <Container className="mt-3">
-                <div className="d-flex mb-3">
-                    <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
-                </div>
-                <Table hover style={{ fontSize: "14px" }}>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>NomeMae</th>
-                            <th>RG</th>
-                            <th>CPF</th>
-                            <th>Data de Nascimento</th>
-                            <th>Endereco</th>
-                            <th>Bairro</th>
-                            <th>Cidade</th>
-                            <th>UF</th>
-                            <th>Telefone</th>
-                            <th>Escola</th>
-                            <th>Serie</th>
-                            <th>Periodo</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.listaAlunos.map((aluno, i) => {
-                            return (
-                                <tr key={i}>
-                                    <td>{aluno.nome}</td>
-                                    <td>{aluno.nomeMae}</td>
-                                    <td>{aluno.rg}</td>
-                                    <td>{aluno.cpf}</td>
-                                    <td>{aluno.dtNascimento}</td>
-                                    <td>{aluno.endereco}</td>
-                                    <td>{aluno.bairro}</td>
-                                    <td>{aluno.cidade}</td>
-                                    <td>{aluno.uf}</td>
-                                    <td>{aluno.tel}</td>
-                                    <td>{aluno.escola}</td>
-                                    <td>{aluno.serie}</td>
-                                    <td>{aluno.periodo}</td>
-                                    <td>
-                                        <MenuTabela
-                                            acaoBtnExcluir={() => {
-                                                if (window.confirm("Confirma a exclusão do item?")) {
-                                                    excluirAlunos(aluno.codigo);
-                                                }
-                                            }}
-                                        />
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </Table>
-            </Container>
-        </div>
+  function editarAluno(codigo) {
+    const alunoEmEdicao = props.listaAlunos.filter(
+      (aluno) => aluno.codigo == codigo
     );
+    props.aoMudarAluno(...alunoEmEdicao);
+    props.chamarCadastro(codigo);
+  }
+
+  return (
+    <div>
+      <Cabecalho2 texto1={"Consulta"} texto2={"Alunos"} />
+      <Container className="mt-3">
+        <div className="d-flex mb-3">
+          <BotaoNovo acaoBtnNovo={() => props.chamarCadastro()} />
+        </div>
+        <Table hover style={{ fontSize: "14px" }}>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>RG</th>
+              <th>CPF</th>
+              <th>Data de Nascimento</th>
+              <th>Telefone</th>
+              <th>Escola</th>
+              <th>Serie</th>
+              <th>Periodo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.listaAlunos.map((aluno, i) => {
+              return (
+                <tr key={i}>
+                  <td>{aluno.codigo}</td>
+                  <td>{aluno.nome}</td>
+                  <td>{aluno.rg}</td>
+                  <td>{aluno.cpf}</td>
+                  <td>{aluno.dtNascimento}</td>
+                  <td>{aluno.tel}</td>
+                  <td>{aluno.escola}</td>
+                  <td>{aluno.serie}</td>
+                  <td>{aluno.periodo}</td>
+                  <td>
+                    <MenuTabela
+                      aoEditar={() => editarAluno(aluno.codigo)}
+                      aoExcluir={() => excluirAluno(aluno.codigo)}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
+    </div>
+  );
 }

@@ -6,10 +6,20 @@ import { Container } from "react-bootstrap";
 
 export default function TabelaCadastroCargos(props) {
   function excluirCargo(codigo) {
-    const listaAtualizada = props.listaCargos.filter(
-      (cargo) => cargo.codigo !== codigo
+    if (window.confirm("Confirma a exclusão do item?")) {
+      const listaAtualizada = props.listaCargos.filter(
+        (cargo) => cargo.codigo !== codigo
+      );
+      props.setCargos(listaAtualizada);
+    }
+  }
+
+  function editarCargo(codigo) {
+    const cargoEmEdicao = props.listaCargos.filter(
+      (cargo) => cargo.codigo == codigo
     );
-    props.setCargos(listaAtualizada);
+    props.aoMudarCargo(...cargoEmEdicao);
+    props.chamarCadastro(codigo);
   }
 
   return (
@@ -17,7 +27,7 @@ export default function TabelaCadastroCargos(props) {
       <Cabecalho2 texto1={"Consulta"} texto2={"Cargos"} />
       <Container className="mt-3">
         <div className="d-flex mb-3">
-          <BotaoNovo acaoBtnNovo={props.chamarCadastro} />
+          <BotaoNovo acaoBtnNovo={() => props.chamarCadastro()} />
         </div>
         <Table hover style={{ fontSize: "14px" }}>
           <thead>
@@ -37,11 +47,8 @@ export default function TabelaCadastroCargos(props) {
                   <td>{cargo.descricao}</td>
                   <td>
                     <MenuTabela
-                      acaoBtnExcluir={() => {
-                        if (window.confirm("Confirma a exclusão do item?")) {
-                          excluirCargo(cargo.codigo);
-                        }
-                      }}
+                      aoEditar={() => editarCargo(cargo.codigo)}
+                      aoExcluir={() => excluirCargo(cargo.codigo)}
                     />
                   </td>
                 </tr>
