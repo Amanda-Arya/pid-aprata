@@ -6,7 +6,6 @@ import MenuTabela from "../templates/MenuTabela";
 
 export default function TabelaCadastroCursos({
   listaCursos,
-  curso,
   aoMudarCurso,
   setCursos,
   chamarTelaCadastro,
@@ -78,26 +77,6 @@ export default function TabelaCadastroCursos({
           </thead>
           <tbody>
             {linhas}
-            {/* {listaCursos?.map((curso, i) => {
-              return (
-                <tr key={i}>
-                  <td>{curso.codigo}</td>
-                  <td>{curso.nome}</td>
-                  <td>{curso.sala}</td>
-                  <td>{curso.eixo}</td>
-                  <td>{curso.professor}</td>
-                  <td>{curso.cargaHoras}</td>
-                  <td>{curso.dtCriacao}</td>
-                  <td>{curso.dtDesativacao}</td>
-                  <td>
-                    <MenuTabela
-                      aoEditar={() => editarCurso(curso.codigo)}
-                      aoExcluir={() => excluirCurso(curso.codigo)}
-                    />
-                  </td>
-                </tr>
-              );
-            })} */}
           </tbody>
         </Table>
       </Container>

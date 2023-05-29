@@ -100,6 +100,7 @@ function Pagina404(props) {
 function TelaCadastroAlunos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [alunos, setAlunos] = useState(LISTA_ALUNOS);
+  const [filtro, setFiltro] = useState("");
   const [aluno, setAluno] = useState({
     codigo: "",
     cpf: "",
@@ -136,6 +137,8 @@ function TelaCadastroAlunos(props) {
         chamarCadastro={alternarTelas}
         aluno={aluno}
         aoMudarAluno={setAluno}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (
@@ -152,6 +155,7 @@ function TelaCadastroAlunos(props) {
 function TelaCadastroCargos(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [cargos, setCargos] = useState(LISTA_CARGOS);
+  const [filtro, setFiltro] = useState("");
   const [cargo, setCargo] = useState({
     codigo: "",
     nome: "",
@@ -176,8 +180,9 @@ function TelaCadastroCargos(props) {
         listaCargos={cargos}
         setCargos={setCargos}
         chamarCadastro={alternarTelas}
-        cargo={cargo}
         aoMudarCargo={setCargo}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (
@@ -244,6 +249,7 @@ function TelaCadastroCursos(props) {
 function TelaCadastroEmpresas(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [empresas, setEmpresas] = useState(LISTA_EMPRESAS);
+  const [filtro, setFiltro] = useState("");
   const [empresa, setEmpresa] = useState({
     codigo: "",
     cnpj: "",
@@ -274,8 +280,9 @@ function TelaCadastroEmpresas(props) {
         listaEmpresas={empresas}
         setEmpresas={setEmpresas}
         chamarCadastro={alternarTelas}
-        empresa={empresa}
         aoMudarEmpresa={setEmpresa}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (
@@ -292,6 +299,7 @@ function TelaCadastroEmpresas(props) {
 function TelaCadastroFuncionarios(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [funcionarios, setFuncionarios] = useState(LISTA_FUNCIONARIOS);
+  const [filtro, setFiltro] = useState("");
   const [funcionario, setFuncionario] = useState({
     codigo: "",
     cpf: "",
@@ -330,8 +338,9 @@ function TelaCadastroFuncionarios(props) {
         listaFuncionarios={funcionarios}
         setFuncionarios={setFuncionarios}
         chamarCadastro={alternarTelas}
-        funcionario={funcionario}
         aoMudarFuncionario={setFuncionario}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (
@@ -348,6 +357,7 @@ function TelaCadastroFuncionarios(props) {
 function TelaCadastroTurmas(props) {
   const [exibeTabela, setExibeTabela] = useState(true);
   const [turmas, setTurmas] = useState(LISTA_TURMAS);
+  const [filtro, setFiltro] = useState("");
   const [turma, setTurma] = useState({
     codigo: "",
     periodo: "",
@@ -378,6 +388,8 @@ function TelaCadastroTurmas(props) {
         chamarCadastro={alternarTelas}
         turma={turma}
         aoMudarTurma={setTurma}
+        filtro={filtro}
+        aoMudarFiltro={setFiltro}
       />
     </>
   ) : (
