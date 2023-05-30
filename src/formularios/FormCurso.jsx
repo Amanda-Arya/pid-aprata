@@ -131,11 +131,11 @@ export default function FormCurso({
                   required
                 >
                   <option value="">Selecione</option>
-                  <option value="Albert Einstein">Albert Einstein</option>
-                  <option value="Isaac Newton">Isaac Newton</option>
-                  <option value="Marie Curie">Marie Curie</option>
-                  <option value="Stephen Hawking">Stephen Hawking</option>
-                  <option value="Hannah Arendt">Hannah Arendt</option>
+                  <option value="Márcia Oreste">Márcia Oreste</option>
+                  <option value="Caio Gharib">Caio Gharib</option>
+                  <option value="João Paulo Santos">João Paulo Santos</option>
+                  <option value="Saulo Gimenez">Saulo Gimenez</option>
+                  <option value=""></option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Escolha do professor é obrigatório!

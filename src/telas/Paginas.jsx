@@ -212,12 +212,18 @@ function TelaCadastroCursos(props) {
   });
 
   function alternarTelas(codigo) {
+    // Se for passado um código ao alternar telas, refere-se ao item a ser editado.
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
-      // Criação de ID paliativo, para uso em mock_data
+    }
+
+    // Código para novos cadastros recebe o último código do array + 1, ou,
+    // caso array esteja vazio, código igual a 1
+    if (cursos.length) {
       setCurso({ codigo: cursos[cursos.length - 1].codigo + 1 });
+    } else {
+      setCurso({ codigo: 1 });
     }
 
     setExibeTabela(!exibeTabela);
