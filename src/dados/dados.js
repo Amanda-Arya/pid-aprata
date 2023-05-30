@@ -2,27 +2,27 @@ export const LISTA_ALUNOS = [
   {
     codigo: 1,
     cpf: "489.306.416-11",
-    nome: "Eduardo Rossetti",
+    nome: "Eduardo Rossetti da Silva",
     dtNascimento: "2000-10-28",
     nomeMae: "Maria da Silva Rodrigues",
     rg: "04.201.154-3",
-    endereco: "Rua José Pereira",
+    endereco: "Rua José Pereira, 140",
     bairro: "Vila Nova",
     cidade: "Rancharia",
     uf: "SP",
     tel: "(18)99645-4493",
     escola: "Etec Dep Francisco Franco",
     serie: "1º EM",
-    periodo: "Matutino",
+    periodo: "Matutino"
   },
   {
     codigo: 2,
     cpf: "221.111.498-22",
     nome: "Cristiano do Couto",
     dtNascimento: "1990-01-15",
-    nomeMae: "Lúcia de Almeida",
+    nomeMae: "Lúcia de Almeida Couto",
     rg: "04.201.154-3",
-    endereco: "Rua Kalinka Manoel",
+    endereco: "Rua Kalinka Manoel, 60",
     bairro: "Vila Bela",
     cidade: "Presidente Epitácio",
     uf: "SP",
@@ -36,33 +36,65 @@ export const LISTA_ALUNOS = [
     cpf: "457.575.579-33",
     nome: "Vinicius Alves",
     dtNascimento: "2001-01-10",
-    nomeMae: "Solange Lima",
+    nomeMae: "Solange Lima Alves",
     rg: "04.201.154-3",
-    endereco: "Rua Joelinton Roca",
+    endereco: "Rua Joelinton Roca, 50",
     bairro: "Jardim Europa",
     cidade: "Presidente Prudente",
     uf: "SP",
     tel: "(11)99878-6351",
     escola: "E.E. Presidente Vargas",
     serie: "9º ano",
-    periodo: "Matutino",
+    periodo: "Matutino"
   },
   {
     codigo: 4,
     cpf: "789.545.456-44",
     nome: "José Rodrigues",
     dtNascimento: "2001-03-25",
-    nomeMae: "Solange Santos",
+    nomeMae: "Solange Santos Rodrigues",
     rg: "04.201.154-3",
-    endereco: "Rua Lópes Cintra",
+    endereco: "Rua Lópes Cintra, 80",
     bairro: "Vila Manuel",
     cidade: "Rancharia",
     uf: "SP",
     tel: "(11)99871-6547",
     escola: "E.E. Luís Dorini",
     serie: "8º ano",
-    periodo: "Vespertino",
+    periodo: "Vespertino"
   },
+  {
+    codigo: 5,
+    cpf: "158.456.419-70",
+    nome: "Caio Nogueira dos Santos",
+    dtNascimento: "2003-11-30",
+    nomeMae: "Maria Aparecido Nogueira",
+    rg: "06.549.876-4",
+    endereco: "Rua Manuel Nóbrega, 980",
+    bairro: "Vila Cantizzani",
+    cidade: "Martinópolis",
+    uf: "SP",
+    tel: "(11)99897-6111",
+    escola: "E.E. Carlos de Almeida",
+    serie: "3º EM",
+    periodo: "Vespertino"
+  },
+  {
+    codigo: 6,
+    cpf: "412.987.145-30",
+    nome: "Ana Maria dos Santos",
+    dtNascimento: "2002-08-14",
+    nomeMae: "Tainá Cristina dos Santos",
+    rg: "04.251.649-9",
+    endereco: "Rua Felipe Camarão, 897",
+    bairro: "Bairro Nova América",
+    cidade: "Rancharia",
+    uf: "SP",
+    tel: "(11)99841-9874",
+    escola: "E.E. ",
+    serie: "1º EM",
+    periodo: "Vespertino"
+  }
 ];
 
 export const LISTA_CARGOS = [
@@ -70,19 +102,55 @@ export const LISTA_CARGOS = [
     codigo: 1,
     nome: "Professores",
     descricao:
-      "Cargo responsável pela atribuição de frequência dos alunos, além da docência que lhe é própria dentro da instituição",
+      "Cargo responsável pela atribuição de frequência dos alunos, além da docência que lhe é própria dentro da instituição.",
   },
   {
     codigo: 2,
     nome: "Orientador",
     descricao:
-      "Cargo responsável por registrar os relatórios dos aprendizes nas empresas",
+      "Cargo responsável por registrar os relatórios dos aprendizes nas empresas.",
   },
   {
     codigo: 3,
     nome: "Administrativo",
     descricao:
-      "Cargo responsável pela matrícula do aluno e inserção nas turmas, e cadastros básicos",
+      "Cargo responsável pela matrícula do aluno e inserção nas turmas, e cadastros básicos.",
+  },
+  {
+    codigo: 4,
+    nome: "Conselheiro Fiscal",
+    descricao:
+      "Cargo responsável por verificar o cumprimento dos deveres legais e estatutários por parte da administração dela.",
+  },
+  {
+    codigo: 5,
+    nome: "Conselheiro Deliberativo",
+    descricao:
+      "Cargo responsável por assegurar a participação de todos os segmentos para participar das decisões da instituição, acompanhando a aplicação dos recursos e discutindo prioridades.",
+  },
+  {
+    codigo: 6,
+    nome: "Procuradoria Pública",
+    descricao:
+      "Cargo responsável por prestar atendimento jurídico em sentido amplo, de natureza judicial e extrajudicial, e de educação em direitos.",
+  },
+  {
+    codigo: 7,
+    nome: "Office Boy",
+    descricao:
+      "Cargo responsável por executar serviços administrativos, o que inclui a entrega de documentos, organização de correspondências e auxílio nas atividades logísticas gerais.",
+  },
+  {
+    codigo: 8,
+    nome: "Coordenador Pedagógico",
+    descricao:
+      "Cargo responsável por atuar com as situações educacionais e promove elos entre instituição, família e estudantes. ",
+  },
+  {
+    codigo: 9,
+    nome: "Assistente Social",
+    descricao:
+      "Cargo responsável por realizar o trabalho prático para entregar e implementar políticas públicas e programas sociais.",
   },
 ];
 
@@ -91,9 +159,9 @@ export const LISTA_CURSOS = [
     codigo: 1,
     nome: "Auxiliar em Manutenção e Montagem de Computadores",
     sala: "Sala 1, Térreo",
-    eixo: "N/A",
-    cargaHoras: "15 horas",
-    professor: "Hannah Arendt",
+    eixo: "Computação",
+    cargaHoras: "60 horas",
+    professor: "Caio Gharib",
     dtCriacao: "2020-01-18",
     dtDesativacao: "",
   },
@@ -114,8 +182,48 @@ export const LISTA_CURSOS = [
     eixo: "N/A",
     cargaHoras: "40 horas",
     professor: "Isaac Newton",
+    dtCriacao: "2021-01-15",
+    dtDesativacao: "2022-01-01"
+  },
+  {
+    codigo: 4,
+    nome: "Aprendizagem em Recepção",
+    sala: "Sala 5, Térreo",
+    eixo: "Comercial",
+    cargaHoras: "40 horas",
+    professor: "Márcia Oreste",
+    dtCriacao: "2022-01-05",
+    dtDesativacao: ""
+  },
+  {
+    codigo: 5,
+    nome: "Informática",
+    sala: "Sala 5, Térreo",
+    eixo: "Computação",
+    cargaHoras: "40 horas",
+    professor: "Caio Gharib",
+    dtCriacao: "2023-02-30",
+    dtDesativacao: ""
+  },
+  {
+    codigo: 6,
+    nome: "Comunicação e Linguagem",
+    sala: "Sala 5, Térreo",
+    eixo: "Soft-Skills",
+    cargaHoras: "20 horas",
+    professor: "João Paulo Santos",
     dtCriacao: "2023-01-15",
-    dtDesativacao: "",
+    dtDesativacao: ""
+  },
+  {
+    codigo: 7,
+    nome: "Técnicas em Serviços de Supermercados",
+    sala: "Sala 5, Térreo",
+    eixo: "Comercial",
+    cargaHoras: "40 horas",
+    professor: "Márcia Oreste",
+    dtCriacao: "2022-01-30",
+    dtDesativacao: ""
   },
 ];
 
