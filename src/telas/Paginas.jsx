@@ -122,8 +122,11 @@ function TelaCadastroAlunos(props) {
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
+    }
+    if (alunos.length) {
       setAluno({ codigo: alunos[alunos.length - 1].codigo + 1 });
+    } else {
+      setAluno({ codigo: 1 });
     }
 
     setExibeTabela(!exibeTabela);
@@ -166,9 +169,12 @@ function TelaCadastroCargos(props) {
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
-      // Criação de ID paliativo, para uso em mock_data
+    }
+
+    if (cargos.length) {
       setCargo({ codigo: cargos[cargos.length - 1].codigo + 1 });
+    } else {
+      setCargo({ codigo: 1 });
     }
 
     setExibeTabela(!exibeTabela);
@@ -274,9 +280,14 @@ function TelaCadastroEmpresas(props) {
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
-      setEmpresa({ codigo: empresas[empresas.length - 1].codigo + 1 });
     }
+
+    if (empresas.length) {
+      setEmpresa({ codigo: empresas[empresas.length - 1].codigo + 1 });
+    } else {
+      setEmpresa({ codigo: 1 });
+    }
+
     setExibeTabela(!exibeTabela);
   }
 
@@ -330,11 +341,16 @@ function TelaCadastroFuncionarios(props) {
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
+    }
+
+    if (funcionarios.length) {
       setFuncionario({
         codigo: funcionarios[funcionarios.length - 1].codigo + 1,
       });
+    } else {
+      setFuncionario({ codigo: 1 });
     }
+
     setExibeTabela(!exibeTabela);
   }
 
@@ -380,9 +396,14 @@ function TelaCadastroTurmas(props) {
     if (codigo) {
       setExibeTabela(false);
       return;
-    } else {
-      setTurma({ codigo: turmas[turmas.length - 1].codigo + 1 });
     }
+
+    if (turmas.length) {
+      setTurma({ codigo: turmas[turmas.length - 1].codigo + 1 });
+    } else {
+      setTurma({ codigo: 1 });
+    }
+
     setExibeTabela(!exibeTabela);
   }
 

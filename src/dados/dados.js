@@ -91,7 +91,7 @@ export const LISTA_ALUNOS = [
     cidade: "Rancharia",
     uf: "SP",
     tel: "(11)99841-9874",
-    escola: "E.E. ",
+    escola: "E.E. Sagrado Coração de Jesus",
     serie: "1º EM",
     periodo: "Vespertino"
   }
