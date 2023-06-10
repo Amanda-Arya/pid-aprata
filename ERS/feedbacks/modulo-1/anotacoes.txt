@@ -1,0 +1,6 @@
+Correção:
+- Escopo necessita de modificação no primeiro parágrafo; falta detalhar melhor a função de feedback.
+- Dados da instituição deve ter mais detalhes sobre a instituição.
+- "Gerenciar turmas" como fundamental e modificar o nome da função fundamental para "Inserir alunos nas turmas".
+- Especificar o filtro nas saídas.
+- Aumentar o número de protótipos.

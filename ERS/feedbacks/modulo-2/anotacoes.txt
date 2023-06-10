@@ -1,0 +1,9 @@
+Correções:
+- Escopo -> Deve ser melhorado: 1º paráfrago, deixar claro quais as "outras necessidades". Deixar mais claro sobre as aulas e os projetos de estágios com as empresas parceiras.
+- Dados da Instituição -> Colocar o histórico da instituição.
+- Estudo de viabilidade -> Não precisa mais falar sobre o sistema. Explicar a proposta: quantos computadores, como será distribuido, acessível de outro computador.
+- Justificativa para alternativa selecionada -> Não há necessidade.
+- Lista de Funções -> Há poucas funções fundamentais. Faltam os filtros.
+- Requisitos adiados -> Não irá adiar. Nota e frequência poderia ser implementado.
+- Impressora não é um hardware específico.
+- Revisar as cardinalidades.
