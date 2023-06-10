@@ -4,6 +4,8 @@ import rotaCurso from "./Rotas/rotaCurso.js";
 import rotaFuncionario from "./Rotas/rotaFuncionario.js";
 import rotaCargo from "./Rotas/rotaCargo.js";
 import cors from "cors";
+import rotaAluno from "./Rotas/rotaAluno.js";
+import rotaTurma from "./Rotas/rotaTurma.js";
 
 const app = express();
 
@@ -17,8 +19,8 @@ app.use("/empresas", rotaEmpresa);
 app.use("/cursos", rotaCurso);
 app.use("/funcionarios", rotaFuncionario);
 app.use("/cargos", rotaCargo);
-//app.use("/alunos", rotaAluno);
-//app.use("/turmas", rotaTurma);
+app.use("/alunos", rotaAluno);
+app.use("/turmas", rotaTurma);
 
 app.listen(4000, () => {
   console.log("Server listening on http://localhost:4000");

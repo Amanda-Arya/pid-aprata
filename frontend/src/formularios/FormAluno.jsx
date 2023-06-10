@@ -5,40 +5,42 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { cep, cpf, telefone } from "../utils/masks";
+import { rg, cpf, cep, telefone } from "../utils/masks";
 
-export default function FormFuncionario({
-  cargos,
+export default function FormAluno({
   onEdit,
   setExibeTabela,
   setOnEdit,
-  getFuncionarios,
+  getAlunos,
 }) {
   const [validated, setValidated] = useState(false);
   const ref = useRef();
 
   useEffect(() => {
     if (onEdit) {
-      const funcionario = ref.current;
-      funcionario.codigo.value = onEdit.codigo;
-      funcionario.cpf.value = onEdit.cpf;
-      funcionario.dt_nasc.value = onEdit.dt_nasc;
-      funcionario.dt_admissao.value = onEdit.dt_admissao;
-      funcionario.dt_demissao.value = onEdit.dt_demissao;
-      funcionario.status.value = onEdit.status;
-      funcionario.nome_usuario.value = onEdit.nome_usuario;
-      funcionario.senha_usuario.value = onEdit.senha_usuario;
-      funcionario.cargo.value = onEdit.Cargo_codigo;
-      funcionario.nome.value = onEdit.nome;
-      funcionario.telefone.value = onEdit.telefone;
-      funcionario.email.value = onEdit.email;
-      funcionario.endereco.value = onEdit.endereco;
-      funcionario.bairro.value = onEdit.bairro;
-      funcionario.cidade.value = onEdit.cidade;
-      funcionario.cep.value = onEdit.cep;
-      funcionario.uf.value = onEdit.uf;
+      const aluno = ref.current;
+      aluno.codigo.value = onEdit.codigo;
+      aluno.rg.value = onEdit.rg;
+      aluno.cpf.value = onEdit.cpf;
+      aluno.nome_mae.value = onEdit.nome_mae;
+      aluno.dt_nasc.value = onEdit.dt_nasc;
+      aluno.escola.value = onEdit.escola;
+      aluno.serie.value = onEdit.serie;
+      aluno.periodo.value = onEdit.periodo;
+      aluno.nome.value = onEdit.nome;
+      aluno.telefone.value = onEdit.telefone;
+      aluno.email.value = onEdit.email;
+      aluno.endereco.value = onEdit.endereco;
+      aluno.bairro.value = onEdit.bairro;
+      aluno.cidade.value = onEdit.cidade;
+      aluno.cep.value = onEdit.cep;
+      aluno.uf.value = onEdit.uf;
     }
   }, [onEdit]);
+
+  const handleRgMask = (e) => {
+    rg(e);
+  };
 
   const handleCpfMask = (e) => {
     cpf(e);
@@ -52,24 +54,23 @@ export default function FormFuncionario({
     telefone(e);
   };
 
-  const clearForm = (funcionario) => {
-    funcionario.codigo.value = "";
-    funcionario.cpf.value = "";
-    funcionario.dt_nasc.value = "";
-    funcionario.dt_admissao.value = "";
-    funcionario.dt_demissao.value = "";
-    funcionario.status.value = "";
-    funcionario.nome_usuario.value = "";
-    funcionario.senha_usuario.value = "";
-    funcionario.cargo.value = "";
-    funcionario.nome.value = "";
-    funcionario.telefone.value = "";
-    funcionario.email.value = "";
-    funcionario.endereco.value = "";
-    funcionario.bairro.value = "";
-    funcionario.cidade.value = "";
-    funcionario.cep.value = "";
-    funcionario.uf.value = "";
+  const clearForm = (aluno) => {
+    aluno.codigo.value = "";
+    aluno.rg.value = "";
+    aluno.cpf.value = "";
+    aluno.nome_mae.value = "";
+    aluno.dt_nasc.value = "";
+    aluno.escola.value = "";
+    aluno.serie.value = "";
+    aluno.periodo.value = "";
+    aluno.nome.value = "";
+    aluno.telefone.value = "";
+    aluno.email.value = "";
+    aluno.endereco.value = "";
+    aluno.bairro.value = "";
+    aluno.cidade.value = "";
+    aluno.cep.value = "";
+    aluno.uf.value = "";
   };
 
   const handleBackButton = () => {
@@ -81,63 +82,65 @@ export default function FormFuncionario({
     const form = event.currentTarget;
     event.preventDefault();
 
-    const funcionario = ref.current;
+    const aluno = ref.current;
 
     if (form.checkValidity()) {
       if (onEdit) {
         await axios
-          .put(`${urlBase}/funcionarios/`, {
-            codigo: funcionario.codigo.value,
-            cpf: funcionario.cpf.value,
-            dt_nasc: funcionario.dt_nasc.value,
-            dt_admissao: funcionario.dt_admissao.value,
-            dt_demissao: funcionario.dt_demissao.value,
-            status: funcionario.status.value,
-            nome_usuario: funcionario.nome_usuario.value,
-            senha_usuario: funcionario.senha_usuario.value,
-            cargo: funcionario.cargo.value,
-            nome: funcionario.nome.value,
-            telefone: funcionario.telefone.value,
-            email: funcionario.email.value,
-            endereco: funcionario.endereco.value,
-            bairro: funcionario.bairro.value,
-            cidade: funcionario.cidade.value,
-            cep: funcionario.cep.value,
-            uf: funcionario.uf.value,
+          .put(`${urlBase}/alunos/`, {
+            codigo: aluno.codigo.value,
+            rg: aluno.rg.value,
+            cpf: aluno.cpf.value,
+            nome_mae: aluno.nome_mae.value,
+            dt_nasc: aluno.dt_nasc.value,
+            escola: aluno.escola.value,
+            serie: aluno.serie.value,
+            periodo: aluno.periodo.value,
+            nome: aluno.nome.value,
+            telefone: aluno.telefone.value,
+            email: aluno.email.value,
+            endereco: aluno.endereco.value,
+            bairro: aluno.bairro.value,
+            cidade: aluno.cidade.value,
+            cep: aluno.cep.value,
+            uf: aluno.uf.value,
           })
           .then(({ data }) => {
             toast.info(data.mensagem);
-            clearForm(funcionario);
+            clearForm(aluno);
           })
-          .catch(({ response }) => toast.error(response.data.mensagem));
+          .catch(({ response }) => {
+            toast.error(response.data.mensagem);
+          });
       } else {
         await axios
-          .post(`${urlBase}/funcionarios/`, {
-            cpf: funcionario.cpf.value,
-            dt_nasc: funcionario.dt_nasc.value,
-            dt_admissao: funcionario.dt_admissao.value,
-            dt_demissao: funcionario.dt_demissao.value,
-            status: funcionario.status.value,
-            nome_usuario: funcionario.nome_usuario.value,
-            senha_usuario: funcionario.senha_usuario.value,
-            cargo: funcionario.cargo.value,
-            nome: funcionario.nome.value,
-            telefone: funcionario.telefone.value,
-            email: funcionario.email.value,
-            endereco: funcionario.endereco.value,
-            bairro: funcionario.bairro.value,
-            cidade: funcionario.cidade.value,
-            cep: funcionario.cep.value,
-            uf: funcionario.uf.value,
+          .post(`${urlBase}/alunos/`, {
+            rg: aluno.rg.value,
+            cpf: aluno.cpf.value,
+            nome_mae: aluno.nome_mae.value,
+            dt_nasc: aluno.dt_nasc.value,
+            escola: aluno.escola.value,
+            serie: aluno.serie.value,
+            periodo: aluno.periodo.value,
+            nome: aluno.nome.value,
+            telefone: aluno.telefone.value,
+            email: aluno.email.value,
+            endereco: aluno.endereco.value,
+            bairro: aluno.bairro.value,
+            cidade: aluno.cidade.value,
+            cep: aluno.cep.value,
+            uf: aluno.uf.value,
           })
           .then(({ data }) => {
             toast.info(data.mensagem);
-            clearForm(funcionario);
+            clearForm(aluno);
           })
-          .catch(({ response }) => toast.error(response.data.mensagem));
+          .catch(({ response }) => {
+            toast.error(response.data.mensagem);
+          });
       }
 
-      getFuncionarios();
+      getAlunos();
 
       if (validated) {
         setValidated(false);
@@ -149,7 +152,7 @@ export default function FormFuncionario({
 
   return (
     <div>
-      <Cabecalho2 texto1={"Cadastro"} texto2={"Funcionario"} />
+      <Cabecalho2 texto1={"Cadastro"} texto2={"Aluno"} />
       <Container className="mt-3">
         <Form
           method="POST"
@@ -176,17 +179,48 @@ export default function FormFuncionario({
                 <Form.Control
                   type="text"
                   name="nome"
-                  placeholder="Digite o nome do funcionário"
+                  placeholder="Digite o nome do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Nome do funcionário é obrigatório!
+                  Nome do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
-
           <Row className="mb-3">
+            <Col>
+              <Form.Group>
+                <Form.Label>Nome da Mãe</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="nome_mae"
+                  placeholder="Digite o nome da mãe"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Nome da mãe é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col>
+              <Form.Group>
+                <Form.Label>RG</Form.Label>
+                <Form.Control
+                  onKeyUp={handleRgMask}
+                  type="text"
+                  name="rg"
+                  placeholder="Digite o RG do aluno"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  RG do aluno é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+
             <Col>
               <Form.Group>
                 <Form.Label>CPF</Form.Label>
@@ -194,97 +228,41 @@ export default function FormFuncionario({
                   onKeyUp={handleCpfMask}
                   type="text"
                   name="cpf"
-                  placeholder="Digite o CPF do funcionário"
+                  placeholder="Digite o CPF do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CPF do funcionário é obrigatório!
+                  CPF do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
 
-            <Col>
+          <Row className="mb-3">
+            <Col xs={6}>
               <Form.Group>
                 <Form.Label>Data de Nascimento</Form.Label>
                 <Form.Control type="date" name="dt_nasc" required />
                 <Form.Control.Feedback type="invalid">
-                  Data de nascimento do funcionário é obrigatório!
+                  Data de nascimento do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col>
-              <Form.Group>
-                <Form.Label>Data de Admissão</Form.Label>
-                <Form.Control type="date" name="dt_admissao" required />
-                <Form.Control.Feedback type="invalid">
-                  Data de admissão do funcionário é obrigatório!
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-
-            <Col>
-              <Form.Group>
-                <Form.Label>Data de Demissão</Form.Label>
-                <Form.Control type="date" name="dt_demissao" />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
-            <Col>
-              <Form.Group>
-                <Form.Label>Status</Form.Label>
-                <Form.Select name="status" required>
-                  <option value="">Selecione</option>
-                  <option value="Ativo">Ativo</option>
-                  <option value="Inativo">Inativo</option>
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Status atual é obrigatório!
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-
-            <Col>
-              <Form.Group>
-                <Form.Label>Cargo</Form.Label>
-                <Form.Select name="cargo" required>
-                  <option value="">Selecione</option>
-                  {cargos.map((cargo, i) => {
-                    return (
-                      <option value={cargo.codigo} key={i}>
-                        {cargo.nome}
-                      </option>
-                    );
-                  })}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Cargo do funcionário é obrigatório!
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row className="mb-3">
             <Col>
               <Form.Group>
                 <Form.Label>Endereço</Form.Label>
                 <Form.Control
                   type="text"
                   name="endereco"
-                  placeholder="Digite o endereço do funcionário"
+                  placeholder="Digite o endereço"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Endereco do funcionário é obrigatório!
+                  Endereço do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
-
           <Row className="mb-3">
             <Col>
               <Form.Group>
@@ -292,31 +270,29 @@ export default function FormFuncionario({
                 <Form.Control
                   type="text"
                   name="bairro"
-                  placeholder="Digite o bairro do funcionário"
+                  placeholder="Digite o bairro"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Bairro do funcionário é obrigatório!
+                  Bairro do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
             <Col>
               <Form.Group>
                 <Form.Label>Cidade</Form.Label>
                 <Form.Control
                   type="text"
                   name="cidade"
-                  placeholder="Digite a cidade do funcionário"
+                  placeholder="Digite a cidade"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Cidade do funcionário é obrigatório!
+                  Cidade do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
-
           <Row className="mb-3">
             <Col>
               <Form.Group>
@@ -357,7 +333,6 @@ export default function FormFuncionario({
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
             <Col>
               <Form.Group>
                 <Form.Label>CEP</Form.Label>
@@ -365,16 +340,15 @@ export default function FormFuncionario({
                   onKeyUp={handleCepMask}
                   type="text"
                   name="cep"
-                  placeholder="Digite o CEP do funcionário"
+                  placeholder="Digite o CEP do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  CEP do funcionário é obrigatório!
+                  CEP do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
-
           <Row className="mb-3">
             <Col>
               <Form.Group>
@@ -383,26 +357,25 @@ export default function FormFuncionario({
                   onKeyUp={handleTelMask}
                   type="text"
                   name="telefone"
-                  placeholder="Digite o telefone/celular do funcionário"
+                  placeholder="Digite o telefone/celular do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Telefone/celular do funcionário é obrigatório!
+                  Telefone do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
             <Col>
               <Form.Group>
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
-                  placeholder="Digite o email do funcionário"
+                  placeholder="Digite o email do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  E-mail do funcionário é obrigatório!
+                  E-mail do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -411,30 +384,46 @@ export default function FormFuncionario({
           <Row className="mb-3">
             <Col>
               <Form.Group>
-                <Form.Label>Usuario</Form.Label>
+                <Form.Label>Escola</Form.Label>
                 <Form.Control
                   type="text"
-                  name="nome_usuario"
-                  placeholder="Digite um usuário para o funcionário"
+                  name="escola"
+                  placeholder="Digite a escola do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Usuário do funcionário é obrigatório!
+                  Escola do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
+          </Row>
 
+          <Row className="mb-3">
             <Col>
               <Form.Group>
-                <Form.Label>Senha</Form.Label>
+                <Form.Label>Serie</Form.Label>
                 <Form.Control
-                  type="password"
-                  name="senha_usuario"
-                  placeholder="Digite uma senha para o funcionário"
+                  type="text"
+                  name="serie"
+                  placeholder="Digite a série escolar do aluno"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Senha do funcionário é obrigatório!
+                  Serie escolar do aluno é obrigatório!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>Período</Form.Label>
+                <Form.Select name="periodo" required>
+                  <option value="">Selecione</option>
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Noturno">Noturno</option>
+                </Form.Select>
+                <Form.Control.Feedback type="invalid">
+                  Período escolar do aluno é obrigatório!
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

@@ -16,7 +16,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `aprata` DEFAULT CHARACTER SET utf8 ;
 USE `aprata` ;
-
 -- -----------------------------------------------------
 -- Table `aprata`.`pessoa`
 -- -----------------------------------------------------
@@ -34,8 +33,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`pessoa` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 36
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`aluno`
 -- -----------------------------------------------------
@@ -60,8 +57,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`aluno` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`cargo`
 -- -----------------------------------------------------
@@ -72,8 +67,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`cargo` (
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`curso`
 -- -----------------------------------------------------
@@ -89,8 +82,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`curso` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 29
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`empresa`
 -- -----------------------------------------------------
@@ -112,8 +103,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`empresa` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 33
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`funcionario`
 -- -----------------------------------------------------
@@ -126,12 +115,18 @@ CREATE TABLE IF NOT EXISTS `aprata`.`funcionario` (
   `status` varchar (10) NOT NULL,
   `nome_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `senha_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `cargo` varchar (11) NOT NULL,
+  `Cargo_codigo` INT(11) NOT NULL,
   `Pessoa_codigo` INT(11) NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC),
   UNIQUE INDEX `nome_usuario_UNIQUE` (`nome_usuario` ASC),
+  INDEX `fk_Funcionario_Cargo1_idx` (`Cargo_codigo` ASC),
   INDEX `fk_Funcionario_Pessoa1_idx` (`Pessoa_codigo` ASC),
+  CONSTRAINT `fk_Funcionario_Cargo1`
+    FOREIGN KEY (`Cargo_codigo`)
+    REFERENCES `aprata`.`cargo` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Funcionario_Pessoa1`
     FOREIGN KEY (`Pessoa_codigo`)
     REFERENCES `aprata`.`pessoa` (`codigo`)
@@ -139,8 +134,6 @@ CREATE TABLE IF NOT EXISTS `aprata`.`funcionario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `aprata`.`turma`
 -- -----------------------------------------------------

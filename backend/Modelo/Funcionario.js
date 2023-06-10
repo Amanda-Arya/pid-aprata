@@ -234,4 +234,10 @@ export default class Funcionario {
     const funcionarios = await funcionarioBD.consultar();
     return funcionarios;
   }
+
+  async consultarCargo(termo) {
+    const funcionarioBD = new FuncionarioBD();
+    const funcionarios = await funcionarioBD.consultarCargo(termo);
+    return funcionarios;
+  }
 }

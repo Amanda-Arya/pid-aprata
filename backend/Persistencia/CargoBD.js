@@ -35,7 +35,7 @@ export default class CargoBD {
   async consultar() {
     const conexao = await conectar();
 
-    const sql = "SELECT * FROM cargo";
+    const sql = "SELECT * FROM cargo ORDER BY nome";
     const [response] = await conexao.query(sql);
 
     const listaCargo = [];

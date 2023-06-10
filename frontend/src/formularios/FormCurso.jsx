@@ -151,9 +151,9 @@ export default function FormCurso({
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Carga Horária</Form.Label>
+                <Form.Label>Carga horária</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   name="carga_horas"
                   placeholder="Digite a carga horária do curso"
                   required

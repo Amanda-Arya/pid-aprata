@@ -54,7 +54,7 @@ export default class CursoBD {
   async consultar() {
     const conexao = await conectar();
 
-    const sql = "SELECT * FROM curso";
+    const sql = "SELECT * FROM curso ORDER BY nome ASC";
     const [response] = await conexao.query(sql);
 
     const listaCursos = [];

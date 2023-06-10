@@ -114,7 +114,7 @@ export default class EmpresaBD {
       e.cnpj, e.ie, e.proprietario \
       FROM pessoa p \
       INNER JOIN empresa e \
-      ON e.Pessoa_codigo = p.codigo";
+      ON e.Pessoa_codigo = p.codigo ORDER BY p.nome ASC";
 
     const [rows] = await conexao.query(sql);
     const listaEmpresas = [];

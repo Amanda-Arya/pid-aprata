@@ -1,12 +1,24 @@
 import Pagina from "../templates/Pagina";
 import error from "./img/erro404.jpg";
-import TelaCadastroCursos from "./TelaCadastroCursos";
-import TelaCadastroEmpresas from "./TelaCadastroEmpresas";
-import TelaCadastroCargos from "./TelaCadastroCargos";
-import TelaCadastroFuncionarios from "./TelaCadastroFuncionarios";
+import TelaCadastroCursos from "./TelaCursos";
+import TelaCadastroEmpresas from "./TelaEmpresas";
+import TelaCadastroCargos from "./TelaCargos";
+import TelaCadastroFuncionarios from "./TelaFuncionarios";
 import "./styles/Tela404.css";
+import TelaCadastroAlunos from "./TelaAlunos";
+import TelaCadastroTurmas from "./TelaTurmas";
 
 // PÁGINAS
+
+function PaginaCadastroAluno(props) {
+  const obj = { texto1: "Cadastro", texto2: "Aluno" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroAlunos />
+    </Pagina>
+  );
+}
 
 function PaginaCadastroCargo(props) {
   const obj = { texto1: "Cadastro", texto2: "Cargo" };
@@ -46,6 +58,16 @@ function PaginaCadastroFuncionario(props) {
   );
 }
 
+function PaginaCadastroTurma(props) {
+  const obj = { texto1: "Cadastro", texto2: "Turma" };
+
+  return (
+    <Pagina obj={obj}>
+      <TelaCadastroTurmas />
+    </Pagina>
+  );
+}
+
 function Pagina404(props) {
   return (
     <Pagina>
@@ -75,6 +97,8 @@ export {
   Pagina404,
   PaginaCadastroEmpresa,
   PaginaInicial,
+  PaginaCadastroTurma,
   PaginaCadastroFuncionario,
+  PaginaCadastroAluno,
   PaginaCadastroCargo,
 };

@@ -28,7 +28,7 @@ export default class FuncionarioBD {
         );
         await conn.query(
           "INSERT INTO funcionario (cpf,dt_nasc,dt_admissao,dt_demissao,status,nome_usuario,\
-            senha_usuario,cargo,Pessoa_codigo) VALUES (?,?,?,?,?,?,?,?,?)",
+            senha_usuario,cargo_codigo,Pessoa_codigo) VALUES (?,?,?,?,?,?,?,?,?)",
           [
             funcionario.cpf,
             funcionario.dt_nasc,
@@ -76,7 +76,7 @@ export default class FuncionarioBD {
         );
         await conn.query(
           "UPDATE funcionario SET cpf=?,dt_nasc=?,dt_admissao=?\
-          ,dt_demissao=?,status=?,nome_usuario=?,senha_usuario=?,cargo=? WHERE Pessoa_codigo=?",
+          ,dt_demissao=?,status=?,nome_usuario=?,senha_usuario=?,cargo_codigo=? WHERE Pessoa_codigo=?",
           [
             funcionario.cpf,
             funcionario.dt_nasc,
@@ -131,35 +131,61 @@ export default class FuncionarioBD {
     const conexao = await conectar();
 
     const sql =
-      "SELECT p.codigo, p.nome, p.telefone, p.email, p.endereco, p.bairro, p.cidade, p.cep, p.uf,\
-    e.cpf, e.dt_nasc, e.dt_admissao, e.dt_demissao, e.status, e.nome_usuario, e.senha_usuario, e.cargo \
-    FROM pessoa p \
-    INNER JOIN funcionario e \
-    ON e.Pessoa_codigo = p.codigo";
-    const [rows] = await conexao.query(sql);
-    const listaFuncionario = [];
-    for (const row of rows) {
-      const funcionario = new Funcionario(
-        row["codigo"],
-        row["cpf"],
-        row["dt_nasc"],
-        row["dt_admissao"],
-        row["dt_demissao"],
-        row["status"],
-        row["nome_usuario"],
-        row["senha_usuario"],
-        row["cargo"],
-        row["nome"],
-        row["telefone"],
-        row["email"],
-        row["endereco"],
-        row["bairro"],
-        row["cidade"],
-        row["cep"],
-        row["uf"]
-      );
-      listaFuncionario.push(funcionario);
-    }
-    return listaFuncionario;
+      "select p.codigo, p.nome, p.telefone, p.email, p.endereco, p.bairro, \
+      p.cidade, p.cep, p.uf, f.cpf, f.dt_nasc, f.dt_admissao, f.dt_demissao, \
+      f.status, f.nome_usuario, f.senha_usuario, f.Cargo_codigo, c.nome as cargo_nome \
+      from pessoa p \
+      INNER JOIN funcionario f \
+      ON f.Pessoa_codigo = p.codigo \
+      INNER JOIN cargo c \
+      ON c.codigo = f.Cargo_codigo \
+      ORDER BY p.nome";
+    const [response] = await conexao.query(sql);
+    return response;
+    // const listaFuncionario = [];
+    // for (const row of rows) {
+    //   const funcionario = new Funcionario(
+    //     row["codigo"],
+    //     row["cpf"],
+    //     row["dt_nasc"],
+    //     row["dt_admissao"],
+    //     row["dt_demissao"],
+    //     row["status"],
+    //     row["nome_usuario"],
+    //     row["senha_usuario"],
+    //     row["cargo"],
+    //     row["nome"],
+    //     row["telefone"],
+    //     row["email"],
+    //     row["endereco"],
+    //     row["bairro"],
+    //     row["cidade"],
+    //     row["cep"],
+    //     row["uf"],
+    //     row[""]
+    //   );
+    //   listaFuncionario.push(funcionario);
+    // }
+    // return listaFuncionario;
+  }
+
+  async consultarCargo(termo) {
+    const conexao = await conectar();
+
+    const sql =
+      "select p.codigo, p.nome, p.telefone, p.email, p.endereco, p.bairro, \
+      p.cidade, p.cep, p.uf, f.codigo as codigo_funcionario, f.cpf, f.dt_nasc, f.dt_admissao, f.dt_demissao, \
+      f.status, f.nome_usuario, f.senha_usuario, f.Cargo_codigo, c.nome as cargo_nome \
+      from pessoa p \
+      INNER JOIN funcionario f \
+      ON f.Pessoa_codigo = p.codigo \
+      INNER JOIN cargo c \
+      ON c.codigo = f.Cargo_codigo \
+      WHERE c.nome LIKE (?) \
+      ORDER BY p.nome";
+
+    const params = ["%" + termo + "%"];
+    const [response] = await conexao.query(sql, params);
+    return response;
   }
 }

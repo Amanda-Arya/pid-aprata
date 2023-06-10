@@ -1,18 +1,17 @@
-import Funcionario from "../Modelo/Funcionario.js";
+import Aluno from "../Modelo/Aluno.js";
 
-export default class FuncionarioCTRL {
+export default class AlunoCTRL {
   gravar(req, res) {
     res.type("application/json");
     if (req.method === "POST" && req.is("application/json")) {
       const dados = req.body;
+      const rg = dados.rg;
       const cpf = dados.cpf;
+      const nome_mae = dados.nome_mae;
       const dt_nasc = dados.dt_nasc;
-      const dt_admissao = dados.dt_admissao;
-      const dt_demissao = dados?.dt_demissao;
-      const status = dados.status;
-      const nome_usuario = dados.nome_usuario;
-      const senha_usuario = dados.senha_usuario;
-      const cargo = dados.cargo;
+      const escola = dados.escola;
+      const serie = dados.serie;
+      const periodo = dados.periodo;
       const nome = dados.nome;
       const telefone = dados.telefone;
       const email = dados.email;
@@ -23,13 +22,13 @@ export default class FuncionarioCTRL {
       const uf = dados.uf;
 
       if (
+        rg &&
         cpf &&
+        nome_mae &&
         dt_nasc &&
-        dt_admissao &&
-        status &&
-        nome_usuario &&
-        senha_usuario &&
-        cargo &&
+        escola &&
+        serie &&
+        periodo &&
         nome &&
         telefone &&
         email &&
@@ -39,16 +38,15 @@ export default class FuncionarioCTRL {
         cep &&
         uf
       ) {
-        const funcionario = new Funcionario(
-          null,
+        const aluno = new Aluno(
+          null, //codigo
+          rg,
           cpf,
+          nome_mae,
           dt_nasc,
-          dt_admissao,
-          dt_demissao,
-          status,
-          nome_usuario,
-          senha_usuario,
-          cargo,
+          escola,
+          serie,
+          periodo,
           nome,
           telefone,
           email,
@@ -58,8 +56,7 @@ export default class FuncionarioCTRL {
           cep,
           uf
         );
-
-        funcionario
+        aluno
           .gravar()
           .then(() => {
             res.status(200).json({
@@ -83,7 +80,7 @@ export default class FuncionarioCTRL {
       res.status(400).json({
         status: false,
         mensagem:
-          "Método não permitido ou Funcionario no formato JSON não fornecido! Consulte a documentação da API.",
+          "Método não permitido ou Aluno no formato JSON não fornecido! Consulte a documentação da API.",
       });
     }
   }
@@ -93,14 +90,13 @@ export default class FuncionarioCTRL {
     if (req.method === "PUT" && req.is("application/json")) {
       const dados = req.body;
       const codigo = dados.codigo;
+      const rg = dados.rg;
       const cpf = dados.cpf;
+      const nome_mae = dados.nome_mae;
       const dt_nasc = dados.dt_nasc;
-      const dt_admissao = dados.dt_admissao;
-      const dt_demissao = dados?.dt_demissao;
-      const status = dados.status;
-      const nome_usuario = dados.nome_usuario;
-      const senha_usuario = dados.senha_usuario;
-      const cargo = dados.cargo;
+      const escola = dados.escola;
+      const serie = dados.serie;
+      const periodo = dados.periodo;
       const nome = dados.nome;
       const telefone = dados.telefone;
       const email = dados.email;
@@ -109,15 +105,16 @@ export default class FuncionarioCTRL {
       const cidade = dados.cidade;
       const cep = dados.cep;
       const uf = dados.uf;
+
       if (
         codigo &&
+        rg &&
         cpf &&
+        nome_mae &&
         dt_nasc &&
-        dt_admissao &&
-        status &&
-        nome_usuario &&
-        senha_usuario &&
-        cargo &&
+        escola &&
+        serie &&
+        periodo &&
         nome &&
         telefone &&
         email &&
@@ -127,16 +124,15 @@ export default class FuncionarioCTRL {
         cep &&
         uf
       ) {
-        const funcionario = new Funcionario(
+        const aluno = new Aluno(
           codigo,
+          rg,
           cpf,
+          nome_mae,
           dt_nasc,
-          dt_admissao,
-          dt_demissao,
-          status,
-          nome_usuario,
-          senha_usuario,
-          cargo,
+          escola,
+          serie,
+          periodo,
           nome,
           telefone,
           email,
@@ -146,7 +142,7 @@ export default class FuncionarioCTRL {
           cep,
           uf
         );
-        funcionario
+        aluno
           .atualizar()
           .then(() => {
             res.status(200).json({
@@ -170,15 +166,16 @@ export default class FuncionarioCTRL {
       res.status(400).json({
         status: false,
         mensagem:
-          "Método não permitido ou Funcionário no formato JSON não fornecido! Consulte a documentação da API",
+          "Método não permitido ou Aluno no formato JSON não fornecido! Consulte a documentação da API.",
       });
     }
   }
 
   excluir(req, res) {
     const codigo = req.params.codigo;
-    const funcionario = new Funcionario(codigo);
-    funcionario
+    const aluno = new Aluno(codigo);
+
+    aluno
       .excluir()
       .then(() => {
         res.status(200).json({
@@ -197,11 +194,11 @@ export default class FuncionarioCTRL {
   consultar(req, res) {
     res.type("application/json");
     if (req.method === "GET") {
-      const funcionario = new Funcionario();
-      funcionario
+      const aluno = new Aluno();
+      aluno
         .consultar()
-        .then((funcionarios) => {
-          res.status(200).json(funcionarios);
+        .then((alunos) => {
+          res.status(200).json(alunos);
         })
         .catch((erro) => {
           res.status(500).json({
@@ -212,32 +209,7 @@ export default class FuncionarioCTRL {
     } else {
       res.status(400).json({
         status: false,
-        mensagem: "Método não permitido! Consulte a documentação da API",
-      });
-    }
-  }
-  
-  consultarCargo(req, res) {
-    res.type("application/json");
-    if (req.method === "GET") {
-      const termo = req.params.termo;
-      const funcionario = new Funcionario();
-
-      funcionario
-        .consultarCargo(termo)
-        .then((funcionarios) => {
-          res.status(200).json(funcionarios);
-        })
-        .catch((erro) => {
-          res.status(500).json({
-            status: false,
-            mensagem: erro.message,
-          });
-        });
-    } else {
-      res.status(400).json({
-        status: false,
-        mensagem: "Método não permitido! Consulte a documentação da API",
+        mensagem: "Método não permitido! Consulte a documentação da API.",
       });
     }
   }

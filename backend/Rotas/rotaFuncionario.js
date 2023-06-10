@@ -9,5 +9,6 @@ rotaFuncionario.post('/', funcionarioCtrl.gravar)
 .put('/', funcionarioCtrl.atualizar)
 .delete('/:codigo', funcionarioCtrl.excluir)
 .get('/', funcionarioCtrl.consultar)
+.get('/:termo', funcionarioCtrl.consultarCargo)
 
 export default rotaFuncionario;

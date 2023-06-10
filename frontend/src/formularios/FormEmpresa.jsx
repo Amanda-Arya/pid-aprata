@@ -5,6 +5,7 @@ import Cabecalho2 from "../templates/Cabecalho2";
 import { urlBase } from "../utils/definicoes";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { cep, cnpj, telefone } from "../utils/masks";
 
 export default function FormEmpresa({
   onEdit,
@@ -32,6 +33,18 @@ export default function FormEmpresa({
       empresa.uf.value = onEdit.uf;
     }
   }, [onEdit]);
+
+  const handleCepMask = (e) => {
+    cep(e);
+  };
+
+  const handleCnpjMask = (e) => {
+    cnpj(e);
+  };
+
+  const handleTelMask = (e) => {
+    telefone(e);
+  };
 
   const clearForm = (empresa) => {
     empresa.codigo.value = "";
@@ -107,6 +120,10 @@ export default function FormEmpresa({
           });
       }
 
+      if (setValidated) {
+        setValidated(false);
+      }
+
       getEmpresas();
     } else {
       setValidated(true);
@@ -140,6 +157,7 @@ export default function FormEmpresa({
               <Form.Group>
                 <Form.Label>CNPJ</Form.Label>
                 <Form.Control
+                  onKeyUp={handleCnpjMask}
                   type="text"
                   name="cnpj"
                   placeholder="Digite o CNPJ da empresa"
@@ -156,6 +174,7 @@ export default function FormEmpresa({
                 <Form.Control
                   type="text"
                   name="ie"
+                  maxLength={12}
                   placeholder="Digite a I.E. da empresa"
                   required
                 />
@@ -202,7 +221,7 @@ export default function FormEmpresa({
                 <Form.Control
                   type="text"
                   name="endereco"
-                  placeholder="Digite o longradouro da empresa"
+                  placeholder="Digite o endereço da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -232,7 +251,7 @@ export default function FormEmpresa({
                 <Form.Control
                   type="text"
                   name="cidade"
-                  placeholder="Digite o município da empresa"
+                  placeholder="Digite a cidade da empresa"
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -285,6 +304,7 @@ export default function FormEmpresa({
               <Form.Group>
                 <Form.Label>CEP</Form.Label>
                 <Form.Control
+                  onKeyUp={handleCepMask}
                   type="text"
                   name="cep"
                   placeholder="Digite o CEP da empresa"
@@ -301,6 +321,7 @@ export default function FormEmpresa({
               <Form.Group>
                 <Form.Label>Telefone</Form.Label>
                 <Form.Control
+                  onKeyUp={handleTelMask}
                   type="text"
                   name="telefone"
                   placeholder="Digite o telefone da empresa"
